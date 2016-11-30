@@ -1,0 +1,19 @@
+'Cellendipity' Kadenze NOC edition v0.0 by Richard Brown
+
+Keyboard shortcuts
+==================
+
+1 sets Trail Mode to 'None'
+2 sets Trail Mode to 'Blend'
+3 sets Trail Mode to 'Continuous'
+
+Spacebar  Respawns with current settings
+R         Respawns after randomizing the settings
+P         Pauses/unpauses the main draw-loop (colours can be changed & new cells added while paused)
+C         Toggles between 'centered spawn position' and 'random spawn position'
+N         Toggles between 'show nucleus' and 'don't show nucleus'
+S         Saves a screenshot as .png file
+D         Toggles 'debug mode' on/off
+H         Hides/shows the menu
+
+Github: <link pending>
