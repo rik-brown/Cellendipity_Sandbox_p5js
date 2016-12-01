@@ -1,0 +1,20 @@
+What next?
+
+Possible bugs:
+- Standardize on square format or check for use of width (replace with height)
+
+Could be improved with:
+- A neater way of stopping once the radius gets super-small (or x # frames after start?)
+- bkgCol changes on respawn? 
+- Remove "trails" option
+- Screendump should work
+- Update p5.js version?
+- A way to tweak some of the parameters in the DNA? (max/min values for randomised properties, perhaps?)
+
+Page title in html
+Instructions?
+Naming convention - what is this generator called?
+
+How to go on from here towards being able to use the GUI to tweak the generators (& save presets to JSON?)
+
+This could potentially run as a standalone at Tomra....
