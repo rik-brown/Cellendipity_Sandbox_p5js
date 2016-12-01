@@ -3,6 +3,8 @@ What next?
 Possible bugs:
 - Standardize on square format or check for use of width (replace with height)
 
+- Not allow spawn from mouse just anywhere?
+
 Could be improved with:
 - A neater way of stopping once the radius gets super-small (or x # frames after start?)
 - bkgCol changes on respawn? 
@@ -10,6 +12,9 @@ Could be improved with:
 - Screendump should work
 - Update p5.js version?
 - A way to tweak some of the parameters in the DNA? (max/min values for randomised properties, perhaps?)
+- remove wraparound if it isn't in use (see 'death')
+- is this.colonySize in use? Removed from GUI...
+
 
 Page title in html
 Instructions?

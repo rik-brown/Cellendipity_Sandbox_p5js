@@ -65,45 +65,16 @@ function screenDump() {
 }
 
 function keyTyped() {
-  if (key === '1') { // '1' sets trailMode = 1 (None)
-    gs.trailMode = 1;
-  }
+  //if (key === '1') {gs.trailMode = 1;} // '1' sets trailMode = 1 (None)
+  //if (key === '2') {gs.trailMode = 2;} // '2' sets trailMode = 2 (Blended)
+  //if (key === '3') {gs.trailMode = 3;} // '3' sets trailMode = 3 (Continuous)
+  //if (key === 'd') {gs.debug = !gs.debug;} // D toggles 'cell debug' mode
 
-  if (key === '2') { // '2' sets trailMode = 2 (Blended)
-    gs.trailMode = 2;
-  }
-
-  if (key === '3') { // '3' sets trailMode = 3 (Continuous)
-    gs.trailMode = 3;
-  }
-
-
-  if (key === ' ') { //spacebar respawns with current settings
-    colony.cells = [];
-  }
-
-  if (key === 'c') { // C toggles 'centered' mode
-    gs.centerSpawn = !gs.centerSpawn;
-    colony.cells = [];
-  }
-
-  if (key === 'd') { // D toggles 'cell debug' mode
-    gs.debug = !gs.debug;
-  }
-
-  if (key === 'n') { // N toggles 'show nucleus' mode
-    gs.nucleus = !gs.nucleus;
-  }
-
-  if (key === 's') { // S saves a screenshot
-    screenDump();
-  }
-
-  if (key === 'r') { // R for Randomize
-    randomizer();
-    colony.cells = [];
-  }
-
+  if (key === ' ') {colony.cells = [];}  //spacebar respawns with current settings
+  if (key === 'c') {gs.centerSpawn = !gs.centerSpawn; colony.cells = [];} // C toggles 'centered' mode
+  if (key === 'n') {gs.nucleus = !gs.nucleus;} // N toggles 'show nucleus' mode
+  if (key === 's') {screenDump();} // S saves a screenshot
+  if (key === 'r') {randomizer(); colony.cells = [];} // R for Randomize
 }
 
 var initGUI = function () {
@@ -115,8 +86,19 @@ var initGUI = function () {
     controller.onChange(function(value) {populateColony(); });
   var controller = gui.add(gs, 'centerSpawn').name('Centered [C]').listen();
 	  controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'wraparound').name('Wraparound');
-    controller.onChange(function(value) {populateColony();});
+
+  var controller = gui.add(gs, 'cellSSMin', 1, 100).step(1).name('cellStartSizeMin').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = gui.add(gs, 'cellSSMax', 1, 250).step(1).name('cellStartSizeMax').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = gui.add(gs, 'cellESMin', 1, 100).step(1).name('cellEndSizeMin').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = gui.add(gs, 'cellESMax', 1, 100).step(1).name('cellEndSizeMax').listen();
+    controller.onChange(function(value) {populateColony(); });
+
+
+  //var controller = gui.add(gs, 'wraparound').name('Wraparound');
+  //  controller.onChange(function(value) {populateColony();});
 
   var controller = gui.addColor(gs, 'bkgColHSV').name('Background color').listen();
     controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
@@ -143,7 +125,7 @@ var initGUI = function () {
     f7.add(gs, 'stepSizeN', 0, 100).name('Step (nucleus)').listen();
 
 
-  gui.add(gs, 'trailMode', { None: 1, Blend: 2, Continuous: 3} ).name('Trail Mode [1-2-3]');
+  //gui.add(gs, 'trailMode', { None: 1, Blend: 2, Continuous: 3} ).name('Trail Mode [1-2-3]');
   gui.add(gs, 'restart').name('Respawn [space]');
   gui.add(gs, 'randomRestart').name('Randomize [R]');
   gui.add(gs, 'autoRestart').name('Auto-restart');

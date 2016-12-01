@@ -48,10 +48,12 @@ function DNA(newgenes) {
     this.genes[6] = random(255);        // 6 = stroke Brightness (0-255)
     this.genes[7] = 5;                  // 7 = stroke Alpha (0-255)
 
-    this.genes[8] = random(height*0.05, height*0.12);    // 8 = cellStartSize (10-50) (cellendipity/one uses 0-200)
-    this.genes[9] = random(5, 30);                     // 9 = cellEndSize (5 - 20 %) (cellendipity/one uses 0-50)
+    //this.genes[8] = random(height*0.05, height*0.12);    // 8 = cellStartSize (10-50) (cellendipity/one uses 0-200)
+    //this.genes[8] = random(gs.cellSSMin, gs.cellSSMax) * 0.01 * height;    // 8 = cellStartSize (10-50) (cellendipity/one uses 0-200)
+    this.genes[8] = random(gs.cellSSMin, gs.cellSSMax);    // 8 = cellStartSize (10-50) (cellendipity/one uses 0-200)
+    this.genes[9] = random(gs.cellESMin, gs.cellESMax);                       // 9 = cellEndSize (5 - 20 %) (cellendipity/one uses 0-50)
 
-    this.genes[10] = random(height*0.3,  height*0.6);                               // 10 = lifespan (200-1000)
+    this.genes[10] = random(height*0.3,  height*0.7);    // 10 = lifespan (200-1000)
     if (random(1)>0.5) {this.genes[11] = 100;} else {this.genes[11] = random(75, 150);} // 11 = flatness (50-200 %)
     if (random(1)>0.6) {this.genes[12] = 0;} else {this.genes[12] = random(-75, 75);}   // 12 = spiral screw (-75 - +75 %)
     this.genes[13] = 75;                                                           // 13 = fertility (70-90%)
@@ -60,8 +62,8 @@ function DNA(newgenes) {
     this.genes[15] = random(0, 4);      // 15 = vMax (Noise) (0-5) (cellendipity/one uses 0-4)
     this.genes[16] = random(1, 6);      // 16 = step (Noise) (1 - 6 * 0.001?)  (cellendipity/one uses 0.001-0.006)
     this.genes[17] = random(100);       // 17 = noisePercent (0-100%)
-    if (gs.centerSpawn) {this.genes[18] = width/2;} else {this.genes[18] = random(width*0.5) + (width * 0.25);}     // 18 = seedPosX (0-width)
-    if (gs.centerSpawn) {this.genes[19] = height/2;} else {this.genes[19] = random(height*0.5) + (height * 0.25);}  // 19 = seedPosY (0-height)
+    if (gs.centerSpawn) {this.genes[18] = width/2;} else {this.genes[18] = random(-this.genes[10]*0.4, this.genes[10]*0.4) + (width * 0.5);}     // 18 = seedPosX (0-width)
+    if (gs.centerSpawn) {this.genes[19] = height/2;} else {this.genes[19] = random(-this.genes[10]*0.4, this.genes[10]*0.4) + (height * 0.5);}  // 19 = seedPosY (0-height)
     this.genes[20] = this.genes[18];         // 20 = originX (0-width)
     this.genes[21] = this.genes[19];         // 21 = originY (0-width)
   }

@@ -20,7 +20,6 @@ function Colony(colonySize) {
     var dna = new DNA(); // Get new DNA
     if (i == 0) {dna.genes[1] = 255; dna.genes[2] = 0;} else {dna.genes[1] = 0; dna.genes[2] = 255;}
     for (var j = 0; j < gs.strainSize; j++) {
-      //if (gs.centerSpawn) {var pos = createVector(width/2, height/2);} else {var pos = createVector(random(width), random(height));}
       var vel = p5.Vector.random2D(); // Initial velocity vector is random
       this.cells.push(new Cell(vel, dna)); // Add new Cell with DNA
     }
