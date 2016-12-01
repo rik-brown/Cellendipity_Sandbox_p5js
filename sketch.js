@@ -95,6 +95,10 @@ var initGUI = function () {
     controller.onChange(function(value) {populateColony(); });
   var controller = gui.add(gs, 'cellESMax', 1, 100).step(1).name('cellEndSizeMax').listen();
     controller.onChange(function(value) {populateColony(); });
+  var controller = gui.add(gs, 'lifespanMax', 1, 100).step(1).name('lifespanMin').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = gui.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMax').listen();
+    controller.onChange(function(value) {populateColony(); });
 
 
   //var controller = gui.add(gs, 'wraparound').name('Wraparound');

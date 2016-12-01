@@ -16,6 +16,8 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.cellSSMin = 50;  // Absolute value
   this.cellESMax = 30;  // % of cellStartSize
   this.cellESMin = 5;   // % of cellStartSize
+  this.lifespanMax = 70;
+  this.lifespanMin = 30;
 
   //this.nucleus = false;
   if (random(1) > 0.3) {this.nucleus = true;} else {this.nucleus = false;}

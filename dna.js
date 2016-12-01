@@ -53,7 +53,8 @@ function DNA(newgenes) {
     this.genes[8] = random(gs.cellSSMin, gs.cellSSMax);    // 8 = cellStartSize (10-50) (cellendipity/one uses 0-200)
     this.genes[9] = random(gs.cellESMin, gs.cellESMax);                       // 9 = cellEndSize (5 - 20 %) (cellendipity/one uses 0-50)
 
-    this.genes[10] = random(height*0.3,  height*0.7);    // 10 = lifespan (200-1000)
+    //this.genes[10] = random(height*0.3,  height*0.7);    // 10 = lifespan (200-1000)
+    this.genes[10] = random(gs.lifespanMin,  gs.lifespanMax) * 0.01 * height;    // 10 = lifespan (200-1000)
     if (random(1)>0.5) {this.genes[11] = 100;} else {this.genes[11] = random(75, 150);} // 11 = flatness (50-200 %)
     if (random(1)>0.6) {this.genes[12] = 0;} else {this.genes[12] = random(-75, 75);}   // 12 = spiral screw (-75 - +75 %)
     this.genes[13] = 75;                                                           // 13 = fertility (70-90%)
