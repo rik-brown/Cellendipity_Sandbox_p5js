@@ -6,8 +6,8 @@ function Global_settings() { //These are the initial values, not the randomised 
   if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
 
   this.colonySize = int(random (20,80)); // Max number of cells in the colony
-  this.colonyLifespan = 500;             // Max number of frames a colony can live for
-  this.colonyDuration = 200;             // Max number of frames a colony is active for
+  this.colonyLifespan = 1000;             // Max number of frames a colony can live for
+  this.colonyDuration = 500;             // Max number of frames a colony is active for
   //this.numStrains = int(random(1,1));  // Number of strains (a group of cells sharing the same DNA)
   //this.strainSize = int(random(1,1));  // Number of cells in a strain
   this.numStrains = 2;
