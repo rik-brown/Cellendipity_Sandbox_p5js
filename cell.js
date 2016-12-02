@@ -84,9 +84,9 @@ function Cell(vel, dna) {
     this.updateSize();
     this.updateFertility();
     this.updateColor();
-    if (gs.wraparound) {this.checkBoundaryWraparound();}
+    //if (gs.wraparound) {this.checkBoundaryWraparound();}
     this.display();
-    if (gs.debug) {this.cellDebugger(); }
+    //if (gs.debug) {this.cellDebugger(); }
   }
 
   this.live = function() {
@@ -149,24 +149,24 @@ function Cell(vel, dna) {
     }
   }
 
-    this.checkBoundaryWraparound = function() {
-    if (this.position.x > width + this.r*this.flatness) {
-      this.position.x = -this.r*this.flatness;
-    } else if (this.position.x < -this.r*this.flatness) {
-      this.position.x = width + this.r*this.flatness;
-    } else if (this.position.y > height + this.r*this.flatness) {
-      this.position.y = -this.r*this.flatness;
-    } else if (this.position.y < -this.r*this.flatness) {
-      this.position.y = height + this.r*this.flatness;
-    }
-  }
+  //   this.checkBoundaryWraparound = function() {
+  //   if (this.position.x > width + this.r*this.flatness) {
+  //     this.position.x = -this.r*this.flatness;
+  //   } else if (this.position.x < -this.r*this.flatness) {
+  //     this.position.x = width + this.r*this.flatness;
+  //   } else if (this.position.y > height + this.r*this.flatness) {
+  //     this.position.y = -this.r*this.flatness;
+  //   } else if (this.position.y < -this.r*this.flatness) {
+  //     this.position.y = height + this.r*this.flatness;
+  //   }
+  // }
 
-  // Death
+  // Cell Death
   this.dead = function() {
     //if (this.age >= this.lifespan) {return true;} // Death by old age (regardless of size, which may remain constant)
-    if (this.r <= this.cellEndSize) {console.log("Death by too low r");return true;} // Death by size (only when cell is shrinking)
-    if (this.spawnCount <= 0) {console.log("Death by too low spawnCount");return true;} // Death by too much babies
-    if (this.position.x > width + this.r*this.flatness || this.position.x < -this.r*this.flatness || this.position.y > height + this.r*this.flatness || this.position.y < -this.r*this.flatness) {console.log("Death by off canvas");return true;} // Death if move beyond canvas boundary
+    if (this.r <= this.cellEndSize) {return true;} // Death by size (only when cell is shrinking)
+    if (this.spawnCount <= 0) {return true;} // Death by too much babies
+    if (this.position.x > width + this.r*this.flatness || this.position.x < -this.r*this.flatness || this.position.y > height + this.r*this.flatness || this.position.y < -this.r*this.flatness) {return true;} // Death if move beyond canvas boundary
     else {return false; }
   };
 
