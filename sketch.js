@@ -86,8 +86,8 @@ function keyTyped() {
 }
 
 var initGUI = function () {
-	// var controller = gui.add(gs, 'colonySize', 1, 200).step(1).name('Colony Size').listen();
-	//   controller.onChange(function(value) {populateColony(); });
+	var controller = gui.add(gs, 'colonyMaxSize', 1, 500).step(10).name('Colony Size').listen();
+	  controller.onChange(function(value) {populateColony(); });
   var controller = gui.add(gs, 'colonyLifespan', 500, 10000).step(500).name('MaxFrames').listen();
 	  controller.onChange(function(value) {populateColony(); });
   var controller = gui.add(gs, 'colonyDuration', 100, 5000).step(100).name('MaxActiveFrames').listen();
@@ -100,7 +100,7 @@ var initGUI = function () {
 	  controller.onChange(function(value) {populateColony(); });
 
   var f3 = gui.addFolder("DNA overrides");
-  var controller = f3.add(gs, 'cellSSMin', 1, 100).step(1).name('cellStartSizeMin').listen();
+  var controller = f3.add(gs, 'cellSSMin', 1, 250).step(1).name('cellStartSizeMin').listen();
     controller.onChange(function(value) {populateColony(); });
   var controller = f3.add(gs, 'cellSSMax', 1, 250).step(1).name('cellStartSizeMax').listen();
     controller.onChange(function(value) {populateColony(); });
@@ -108,10 +108,21 @@ var initGUI = function () {
     controller.onChange(function(value) {populateColony(); });
   var controller = f3.add(gs, 'cellESMax', 1, 100).step(1).name('cellEndSizeMax').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'lifespanMax', 1, 100).step(1).name('lifespanMin').listen();
+  var controller = f3.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMin').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMax').listen();
+  var controller = f3.add(gs, 'lifespanMax', 1, 100).step(1).name('lifespanMax').listen();
     controller.onChange(function(value) {populateColony(); });
+  var controller = f3.add(gs, 'noiseMin', 0, 100).step(1).name('noise%Min').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = f3.add(gs, 'noiseMax', 0, 100).step(1).name('noise%Max').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = f3.add(gs, 'spiralMin', -360, 0).step(5).name('SpiralMinDegrees').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = f3.add(gs, 'spiralMax', 0, 360).step(5).name('SpiralMaxDegrees').listen();
+    controller.onChange(function(value) {populateColony(); });
+
+
+
 
   var controller = gui.addColor(gs, 'bkgColHSV').name('Background color').listen();
     controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
@@ -121,6 +132,22 @@ var initGUI = function () {
     f4.add(gs, 'fill_STwist', 0, 255).name('Saturation').listen();
     f4.add(gs, 'fill_BTwist', 0, 255).name('Brightness').listen();
     f4.add(gs, 'fill_ATwist', 0, 255).name('Alpha.').listen();
+    var controller = f4.add(gs, 'fill_H_Min', 0, 360).step(1).name('fillHMin').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f4.add(gs, 'fill_H_Max', 0, 360).step(1).name('fillHMax').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f4.add(gs, 'fill_S_Min', 0, 255).step(1).name('fillSMin').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f4.add(gs, 'fill_S_Max', 0, 255).step(1).name('fillSMax').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f4.add(gs, 'fill_B_Min', 0, 255).step(1).name('fillBMin').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f4.add(gs, 'fill_B_Max', 0, 255).step(1).name('fillBMax').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f4.add(gs, 'fill_A_Min', 0, 255).step(1).name('fillAMin').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f4.add(gs, 'fill_A_Max', 0, 255).step(1).name('fillAMax').listen();
+      controller.onChange(function(value) {populateColony(); });
     f4.add(gs, 'fillDisable').name('Fill OFF');
 
   var f5 = gui.addFolder("Stroke Color Tweaks");
@@ -166,4 +193,22 @@ function randomizer() { // Parameters are randomized (more than in the initial c
   if (random(1) > 0.7) {gs.nucleus = true;} else {gs.nucleus = false;}
   if (random(1) > 0.5) {gs.stepSize = int(random(20,60)); gs.stepSizeN = gs.stepSize;} else {gs.stepSize = 0; gs.stepSizeN = int(random(20, 50));}
   if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true}
+  gs.cellSSMax = random(1,250); // Absolute value
+  gs.cellSSMin = random(1,250);  // Absolute value
+  gs.cellESMax = random(100);  // % of cellStartSize
+  gs.cellESMin = random(100);   // % of cellStartSize
+  gs.lifespanMax = random(70);
+  gs.lifespanMin = random(70);
+  gs.noiseMax = random(100);
+  gs.noiseMin = random(100);
+  gs.spiralMin = random(-360,0);
+  gs.spiralMax = random(360);
+  gs.fill_H_Min = random(360);
+  gs.fill_H_Max = random(360);
+  gs.fill_S_Min = random(255);
+  gs.fill_S_Max = random(255);
+  gs.fill_B_Min = random(255);
+  gs.fill_B_Max = random(255);
+  gs.fill_A_Min = random(255);
+  gs.fill_A_Max = random(255);
 }

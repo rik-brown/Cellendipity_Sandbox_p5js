@@ -1,13 +1,12 @@
 // Colony class
 
 // CONSTRUCTOR: Create a 'Colony' object, initially populated with 'colonySize' cells
-function Colony(colonySize) {
+function Colony() {
   // Start with an array for all cells and one for all DNA
   this.cells = [];
   //this.genepool = []; //Do I need a genepool??
 
   // VARIABLES
-  var colonyMaxSize = 200; // This could be varied in the GUI but 200 is copied from .pde
   this.colonyAge = gs.colonyLifespan;
 
   // Here is the code which fills the 'genepool' arraylist with a given number (gs.numStrains) of different DNA-strains.
@@ -55,7 +54,7 @@ function Colony(colonySize) {
       if (c.dead()) {this.cells.splice(i, 1); } // If the cell has died, remove it from the array
 
       // Iteration to check for a collision-conception event between current cell(i) (if it's fertile) and the rest of the colony
-      if (this.cells.length <= colonyMaxSize && c.fertile) { // Don't check for collisons if there are too many cells (wait until some die off)
+      if (this.cells.length <= gs.colonyMaxSize && c.fertile) { // Don't check for collisons if there are too many cells (wait until some die off)
         for (var others = i - 1; others >= 0; others--) { // Since main iteration (i) goes backwards, this one needs to too
           var other = this.cells[others]; // Get the other cells, one by one
           if (other.fertile) {c.checkCollision(other);} // Only check for collisions when both cells are fertile
@@ -69,6 +68,6 @@ function Colony(colonySize) {
     rect(0,0,300,20);
     fill(360);
     textSize(16);
-    text("Nr. cells: " + this.cells.length + " MaxLimit:" + colonyMaxSize + " Age:" + this.colonyAge, 10, 18);
+    text("Nr. cells: " + this.cells.length + " MaxLimit:" + gs.colonyMaxSize + " Age:" + this.colonyAge, 10, 18);
   };
 }

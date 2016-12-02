@@ -5,7 +5,7 @@ function Global_settings() { //These are the initial values, not the randomised 
 
   if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
 
-  this.colonySize = int(random (20,80)); // Max number of cells in the colony
+  this.colonyMaxSize = 200; // Max number of cells in the colony
   this.colonyLifespan = 1000;             // Max number of frames a colony can live for
   this.colonyDuration = 500;             // Max number of frames a colony is active for
   //this.numStrains = int(random(1,1));  // Number of strains (a group of cells sharing the same DNA)
@@ -19,6 +19,21 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.cellESMin = 5;   // % of cellStartSize
   this.lifespanMax = 70;
   this.lifespanMin = 30;
+  this.noiseMax = 100;
+  this.noiseMin = 0;
+  this.spiralMin = 0;
+  this.spiralMax = 180;
+  this.fill_H_Min = 0;
+  this.fill_H_Max = 360;
+  this.fill_S_Min = 128;
+  this.fill_S_Max = 255;
+  this.fill_B_Min = 196;
+  this.fill_B_Max = 255;
+  this.fill_A_Min = 5;
+  this.fill_A_Max = 5;
+
+
+
 
   //this.nucleus = false;
   if (random(1) > 0.3) {this.nucleus = true;} else {this.nucleus = false;}
