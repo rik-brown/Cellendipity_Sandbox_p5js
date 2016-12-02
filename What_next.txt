@@ -1,19 +1,31 @@
 What next?
 
 Possible bugs:
-- Standardize on square format or check for use of width (replace with height)
+
 
 - Not allow spawn from mouse just anywhere?
 
-Could be improved with:
+Could be IMPROVED with:
+=======================
 - A neater way of stopping once the radius gets super-small (or x # frames after start?)
 - bkgCol changes on respawn? 
-- Remove "trails" option
 - Screendump should work
 - Update p5.js version?
-- A way to tweak some of the parameters in the DNA? (max/min values for randomised properties, perhaps?)
-- remove wraparound if it isn't in use (see 'death')
 - is this.colonySize in use? Removed from GUI...
+
+- New bkgCol on colony respawn
+
+- GUI folders for DNA overrides
+	+ spiral max/min
+	+ noise% max/min
+
+REMEMBER! Scaling is important: use relative sizes IMPORTANT!!
+
+If (key = '1') {gs = new Global_settings_1}
+If (key = '2') {gs = new Global_settings_2}
+If (key = '3') {gs = new Global_settings_3}
+If (key = '4') {gs = new Global_settings_4}
+To select a predefined set of global_settings
 
 
 Page title in html
