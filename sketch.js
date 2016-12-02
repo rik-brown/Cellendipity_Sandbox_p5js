@@ -99,35 +99,36 @@ var initGUI = function () {
   var controller = gui.add(gs, 'centerSpawn').name('Centered [C]').listen();
 	  controller.onChange(function(value) {populateColony(); });
 
-  var controller = gui.add(gs, 'cellSSMin', 1, 100).step(1).name('cellStartSizeMin').listen();
+  var f3 = gui.addFolder("DNA overrides");
+  var controller = f3.add(gs, 'cellSSMin', 1, 100).step(1).name('cellStartSizeMin').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'cellSSMax', 1, 250).step(1).name('cellStartSizeMax').listen();
+  var controller = f3.add(gs, 'cellSSMax', 1, 250).step(1).name('cellStartSizeMax').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'cellESMin', 1, 100).step(1).name('cellEndSizeMin').listen();
+  var controller = f3.add(gs, 'cellESMin', 1, 100).step(1).name('cellEndSizeMin').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'cellESMax', 1, 100).step(1).name('cellEndSizeMax').listen();
+  var controller = f3.add(gs, 'cellESMax', 1, 100).step(1).name('cellEndSizeMax').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'lifespanMax', 1, 100).step(1).name('lifespanMin').listen();
+  var controller = f3.add(gs, 'lifespanMax', 1, 100).step(1).name('lifespanMin').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMax').listen();
+  var controller = f3.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMax').listen();
     controller.onChange(function(value) {populateColony(); });
 
   var controller = gui.addColor(gs, 'bkgColHSV').name('Background color').listen();
     controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
 
-	var f3 = gui.addFolder("Fill Color Tweaks");
-	  f3.add(gs, 'fill_HTwist', 0, 360).step(1).name('Hue').listen();
-    f3.add(gs, 'fill_STwist', 0, 255).name('Saturation').listen();
-    f3.add(gs, 'fill_BTwist', 0, 255).name('Brightness').listen();
-    f3.add(gs, 'fill_ATwist', 0, 255).name('Alpha.').listen();
-    f3.add(gs, 'fillDisable').name('Fill OFF');
+	var f4 = gui.addFolder("Fill Color Tweaks");
+	  f4.add(gs, 'fill_HTwist', 0, 360).step(1).name('Hue').listen();
+    f4.add(gs, 'fill_STwist', 0, 255).name('Saturation').listen();
+    f4.add(gs, 'fill_BTwist', 0, 255).name('Brightness').listen();
+    f4.add(gs, 'fill_ATwist', 0, 255).name('Alpha.').listen();
+    f4.add(gs, 'fillDisable').name('Fill OFF');
 
-  var f4 = gui.addFolder("Stroke Color Tweaks");
-  	  f4.add(gs, 'stroke_HTwist', 0, 360).step(1).name('Hue').listen();
-      f4.add(gs, 'stroke_STwist', 0, 255).name('Saturation').listen();
-      f4.add(gs, 'stroke_BTwist', 0, 255).name('Brightness').listen();
-      f4.add(gs, 'stroke_ATwist', 0, 255).name('Alpha').listen();
-      f4.add(gs, 'strokeDisable').name('Stroke OFF');
+  var f5 = gui.addFolder("Stroke Color Tweaks");
+  	f5.add(gs, 'stroke_HTwist', 0, 360).step(1).name('Hue').listen();
+    f5.add(gs, 'stroke_STwist', 0, 255).name('Saturation').listen();
+    f5.add(gs, 'stroke_BTwist', 0, 255).name('Brightness').listen();
+    f5.add(gs, 'stroke_ATwist', 0, 255).name('Alpha').listen();
+    f5.add(gs, 'strokeDisable').name('Stroke OFF');
 
   var controller =gui.add(gs, 'stepSize', 0, 100).name('Step Size').listen();
    controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.trailMode = 3;};});

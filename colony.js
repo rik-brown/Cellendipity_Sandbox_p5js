@@ -62,16 +62,6 @@ function Colony(colonySize) {
         }
       }
     }
-
-    // If there are too many cells, remove some by 'culling'
-    if (this.cells.length > colonyMaxSize) {
-      this.cull(colonyMaxSize);
-    }
-  };
-
-  this.cull = function(div) { // To remove a proportion of the cells from (the oldest part of) the colony
-    var cull = (this.cells.length / div);
-    for (var i = cull; i >= 0; i--) { this.cells.splice(i,1); }
   };
 
   this.colonyDebugger = function() { // Displays some values as text at the top left corner (for debug only)

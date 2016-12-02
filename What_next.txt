@@ -3,17 +3,17 @@ What next?
 Possible bugs:
 
 
-- Not allow spawn from mouse just anywhere?
-
 Could be IMPROVED with:
 =======================
 - A neater way of stopping once the radius gets super-small (or x # frames after start?)
-- bkgCol changes on respawn? 
+- bkgCol changes on respawn?
 - Screendump should work
 - Update p5.js version?
 - is this.colonySize in use? Removed from GUI...
 
 - New bkgCol on colony respawn
+
+- Reset colony lifespan on mouseclick
 
 - GUI folders for DNA overrides
 	+ spiral max/min
