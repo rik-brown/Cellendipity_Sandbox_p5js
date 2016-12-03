@@ -185,10 +185,10 @@ function Cell(vel, dna) {
 
       if (gs.nucleus && this.drawStepN < 1) {
         if (this.fertile) {
-          fill(0); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          fill(gs.nucleusColorF); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
         }
         else {
-          fill(255); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          fill(gs.nucleusColorU); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
         }
       }
     }
@@ -196,10 +196,10 @@ function Cell(vel, dna) {
       ellipse(0, 0, this.r, this.r*this.flatness);
       if (gs.nucleus && this.drawStepN < 1) { // Nucleus is always drawn when cell is drawn (no step-counter for nucleus)
         if (this.fertile) {
-          fill(0); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          fill(gs.nucleusColorF); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
         }
         else {
-          fill(255); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          fill(gs.nucleusColorU); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
         }
       }
     }

@@ -97,6 +97,8 @@ var initGUI = function () {
 	  controller.onChange(function(value) {populateColony(); });
   var controller = gui.add(gs, 'strainSize', 1, 20).step(1).name('Cells in Strain').listen();
     controller.onChange(function(value) {populateColony(); });
+  var controller = gui.add(gs, 'blackStrain').name('blackStrain');
+    controller.onChange(function(value) {populateColony(); });
   var controller = gui.add(gs, 'centerSpawn').name('Centered [C]').listen();
 	  controller.onChange(function(value) {populateColony(); });
 
@@ -121,12 +123,12 @@ var initGUI = function () {
     controller.onChange(function(value) {populateColony(); });
   var controller = f3.add(gs, 'spiralMax', 0, 360).step(5).name('SpiralMaxDegrees').listen();
     controller.onChange(function(value) {populateColony(); });
-
-
-
-
   var controller = gui.addColor(gs, 'bkgColHSV').name('Background color').listen();
     controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
+  var controller = gui.addColor(gs, 'nucleusColHSVU').name('NucleusU color').listen();
+    controller.onChange(function(value) {gs.nucleusColorU = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
+  var controller = gui.addColor(gs, 'nucleusColHSVF').name('NucleusF color').listen();
+    controller.onChange(function(value) {gs.nucleusColorF = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
 
 	var f4 = gui.addFolder("Fill Color Tweaks");
 	  f4.add(gs, 'fill_HTwist', 0, 360).step(1).name('Hue').listen();

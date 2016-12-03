@@ -18,7 +18,7 @@ function Colony() {
   //var strainSize = floor(gs.colonySize/gs.numStrains);
   for (var i = 0; i < gs.numStrains; i++) {
     var dna = new DNA(); // Get new DNA
-    if (i == 0) {dna.genes[1] = 255; dna.genes[2] = 0;} else {dna.genes[1] = 0; dna.genes[2] = 255;}
+    if (gs.blackStrain && i == 0) {dna.genes[1] = 255; dna.genes[2] = 0;}
     for (var j = 0; j < gs.strainSize; j++) {
       var vel = p5.Vector.random2D(); // Initial velocity vector is random
       this.cells.push(new Cell(vel, dna)); // Add new Cell with DNA

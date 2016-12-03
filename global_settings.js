@@ -2,6 +2,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.debug = false;
   this.autoRestart = true; // If true, will not wait for keypress before starting anew
   this.trailMode = 3; // 1=none, 2 = blend, 3 = continuous
+  this.blackStrain = true;
 
   if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
 
@@ -24,6 +25,9 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.spiralMin = 0;
   this.spiralMax = 180;
 
+  this.bkgColHSV = { h: random(360), s: random(64, 128), v: random(128, 255) };
+  this.bkgColor = color(this.bkgColHSV.h, this.bkgColHSV.s*255, this.bkgColHSV.v*255); // Background colour
+
   this.fill_H_Min = 0;
   this.fill_H_Max = 360;
   this.fill_S_Min = 128;
@@ -42,6 +46,16 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.stroke_A_Min = 5;
   this.stroke_A_Max = 5;
 
+  //this.nucleusHue = this.bkgColHSV.h + 180;
+  //if (this.nucleusHue > 360) {this.nucleusHue -= 360;}
+  this.nucleusColHSVU = { h: 255, s: 0, v: 255 };  // White
+  this.nucleusColorU = color(this.nucleusColHSVU.h, this.nucleusColHSVU.s*255, this.nucleusColHSVU.v*255); // Background colour
+  this.nucleusColHSVF = { h: 0, s: 255, v: 0 };    // Black
+  this.nucleusColorF = color(this.nucleusColHSVF.h, this.nucleusColHSVF.s*255, this.nucleusColHSVF.v*255); // Background colour
+  //this.nucleusColorU = color(this.nucleusHue, 255, 255); // White
+  //this.nucleusColorF = color(0, 255, 0); // Black
+
+
   //this.nucleus = false;
   if (random(1) > 0.3) {this.nucleus = true;} else {this.nucleus = false;}
 
@@ -49,9 +63,6 @@ function Global_settings() { //These are the initial values, not the randomised 
   if (random(1) > 0.5) {this.stepSize = int(random(20,60)); this.stepSizeN = this.stepSize;} else {this.stepSize = 0; this.stepSizeN = int(random(20, 50));}
   //this.stepSize = 0;
   //this.stepSizeN = 0;
-
-  this.bkgColHSV = { h: random(360), s: random(64, 128), v: random(128, 255) };
-  this.bkgColor = color(this.bkgColHSV.h, this.bkgColHSV.s*255, this.bkgColHSV.v*255); // Background colour
 
   this.fillDisable = false;
   this.fill_HTwist = 0;
