@@ -19,7 +19,8 @@ function setup() {
 }
 
 function draw() {
-  fill(0);
+  noStroke();
+  fill(0, 255);
   rect(0, 0, width*0.25, height);     // Left border
   rect(width*0.75, 0, width, height); // Right border
   //if (gs.trailMode == 1 || gs.debug) {background(gs.bkgColor);}
@@ -155,6 +156,22 @@ var initGUI = function () {
     f5.add(gs, 'stroke_STwist', 0, 255).name('Saturation').listen();
     f5.add(gs, 'stroke_BTwist', 0, 255).name('Brightness').listen();
     f5.add(gs, 'stroke_ATwist', 0, 255).name('Alpha').listen();
+    var controller = f5.add(gs, 'stroke_H_Min', 0, 360).step(1).name('strokeHMin').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f5.add(gs, 'stroke_H_Max', 0, 360).step(1).name('strokeHMax').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f5.add(gs, 'stroke_S_Min', 0, 255).step(1).name('strokeSMin').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f5.add(gs, 'stroke_S_Max', 0, 255).step(1).name('strokeSMax').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f5.add(gs, 'stroke_B_Min', 0, 255).step(1).name('strokeBMin').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f5.add(gs, 'stroke_B_Max', 0, 255).step(1).name('strokeBMax').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f5.add(gs, 'stroke_A_Min', 0, 255).step(1).name('strokeAMin').listen();
+      controller.onChange(function(value) {populateColony(); });
+    var controller = f5.add(gs, 'stroke_A_Max', 0, 255).step(1).name('strokeAMax').listen();
+      controller.onChange(function(value) {populateColony(); });
     f5.add(gs, 'strokeDisable').name('Stroke OFF');
 
   var controller =gui.add(gs, 'stepSize', 0, 100).name('Step Size').listen();
@@ -211,4 +228,12 @@ function randomizer() { // Parameters are randomized (more than in the initial c
   gs.fill_B_Max = random(255);
   gs.fill_A_Min = random(255);
   gs.fill_A_Max = random(255);
+  gs.stroke_H_Min = random(360);
+  gs.stroke_H_Max = random(360);
+  gs.stroke_S_Min = random(255);
+  gs.stroke_S_Max = random(255);
+  gs.stroke_B_Min = random(255);
+  gs.stroke_B_Max = random(255);
+  gs.stroke_A_Min = random(255);
+  gs.stroke_A_Max = random(255);
 }

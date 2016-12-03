@@ -23,6 +23,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.noiseMin = 0;
   this.spiralMin = 0;
   this.spiralMax = 180;
+
   this.fill_H_Min = 0;
   this.fill_H_Max = 360;
   this.fill_S_Min = 128;
@@ -32,8 +33,14 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.fill_A_Min = 5;
   this.fill_A_Max = 5;
 
-
-
+  this.stroke_H_Min = 0;
+  this.stroke_H_Max = 360;
+  this.stroke_S_Min = 0;
+  this.stroke_S_Max = 255;
+  this.stroke_B_Min = 0;
+  this.stroke_B_Max = 255;
+  this.stroke_A_Min = 5;
+  this.stroke_A_Max = 5;
 
   //this.nucleus = false;
   if (random(1) > 0.3) {this.nucleus = true;} else {this.nucleus = false;}
