@@ -11,7 +11,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.colonyDuration = 500;             // Max number of frames a colony is active for
   //this.numStrains = int(random(1,1));  // Number of strains (a group of cells sharing the same DNA)
   //this.strainSize = int(random(1,1));  // Number of cells in a strain
-  this.numStrains = 2;
+  this.numStrains = 3;
   this.strainSize = int(random(6, 16)/this.numStrains); // Number of cells in a strain
 
   this.cellSSMax = 100; // Absolute value
@@ -45,6 +45,18 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.stroke_B_Max = 255;
   this.stroke_A_Min = 5;
   this.stroke_A_Max = 5;
+
+this.strain0Fill = { h: 0, s: 255, v: 255};
+this.strain1Fill = { h: 120, s: 255, v: 255};
+this.strain2Fill = { h: 240, s: 255, v: 255};
+this.strain3Fill = { h: 0, s: 255, v: 255};
+
+
+  // this.strain0Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  // this.strain1Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  // this.strain2Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  // this.strain3Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  // this.strain4Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
 
   //this.nucleusHue = this.bkgColHSV.h + 180;
   //if (this.nucleusHue > 360) {this.nucleusHue -= 360;}

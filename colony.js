@@ -4,20 +4,38 @@
 function Colony() {
   // Start with an array for all cells and one for all DNA
   this.cells = [];
-  //this.genepool = []; //Do I need a genepool??
+  this.genepool = [];
 
   // VARIABLES
   this.colonyAge = gs.colonyLifespan;
 
   // Here is the code which fills the 'genepool' arraylist with a given number (gs.numStrains) of different DNA-strains.
-  //for (var g = 0; g < gs.numStrains; g++) {
-  //this.genepool.push(new DNA()); // Add new Cell with DNA
-  //}
+  for (var g = 0; g < gs.numStrains; g++) {
+  this.genepool.push(new DNA()); // Add new Cell with DNAgenepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+  }
+
+  this.genepool[0].genes[0] = gs.strain0Fill.h;
+  this.genepool[0].genes[1] = gs.strain0Fill.s * 255;
+  this.genepool[0].genes[2] = gs.strain0Fill.v * 255;
+  if (gs.numStrains > 1) {
+    this.genepool[1].genes[0] = gs.strain1Fill.h;
+    this.genepool[1].genes[1] = gs.strain1Fill.s * 255;
+    this.genepool[1].genes[2] = gs.strain1Fill.v * 255;
+  }
+    if (gs.numStrains > 2) {
+      this.genepool[2].genes[0] = gs.strain2Fill.h;
+      this.genepool[2].genes[1] = gs.strain2Fill.s * 255;
+      this.genepool[2].genes[2] = gs.strain2Fill.v * 255;
+
+    }
+
+
 
   // Create initial population of cells
   //var strainSize = floor(gs.colonySize/gs.numStrains);
   for (var i = 0; i < gs.numStrains; i++) {
-    var dna = new DNA(); // Get new DNA
+    //var dna = new DNA(); // Get new DNA
+    var dna = this.genepool[i];
     if (gs.blackStrain && i == 0) {dna.genes[1] = 255; dna.genes[2] = 0;}
     for (var j = 0; j < gs.strainSize; j++) {
       var vel = p5.Vector.random2D(); // Initial velocity vector is random

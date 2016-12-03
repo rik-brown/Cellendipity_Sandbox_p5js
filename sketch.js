@@ -21,9 +21,9 @@ function setup() {
 function draw() {
   noStroke();
   fill(0, 255);
-  rect(0, 0, width*0.25, height);     // Left border
-  rect(width*0.75, 0, width, height); // Right border
-  //if (gs.trailMode == 1 || gs.debug) {background(gs.bkgColor);}
+  rect(0, 0, (width-height)*0.5, height);     // Left border
+  rect((width+height)*0.5, 0, width, height); // Right border
+  if (gs.trailMode == 1 || gs.debug) {background(gs.bkgColor);}
   //if (gs.trailMode == 2) {trails();}
   colony.run();
   if (colony.dead()) {if (keyIsPressed || gs.autoRestart) {populateColony(); } }
@@ -48,25 +48,23 @@ function populateColony() {
 // }
 
 function mousePressed() {
-  var mousePos = createVector(mouseX, mouseY);
   var vel = p5.Vector.random2D();
   var dna = new DNA();
   dna.genes[10] = height * 0.75;
-  dna.genes[18] = mousePos.x;
-  dna.genes[19] = mousePos.y;
+  dna.genes[18] = mouseX;
+  dna.genes[19] = mouseY;
   //if (mousePos.x < (width-270)) {colony.spawn(vel, dna);}
-  if (mousePos.x > (width*0.25) || mousePos.x < (width*0.75)) {colony.spawn(vel, dna);}
+  if (mouseX > (width-height)*0.5 && mouseX < (width+height)*0.5) {colony.spawn(vel, dna);}
 }
 
 function mouseDragged() {
-  var mousePos = createVector(mouseX, mouseY);
   var vel = p5.Vector.random2D();
   var dna = new DNA();
   dna.genes[10] = height * 0.75;
-  dna.genes[18] = mousePos.x;
-  dna.genes[19] = mousePos.y;
+  dna.genes[18] = mouseX;
+  dna.genes[19] = mouseY;
   //if (mousePos.x < (width-270)) {colony.spawn(vel, dna);}
-  if (mousePos.x > (width*0.25) || mousePos.x < (width*0.75)) {colony.spawn(vel, dna);}
+  if (mouseX > (width-height)*0.5 && mouseX < (width+height)*0.5) {colony.spawn(vel, dna);}
 }
 
 function screenDump() {
@@ -183,6 +181,18 @@ var initGUI = function () {
     f7.add(gs, 'nucleus').name('Nucleus [N]').listen();
     f7.add(gs, 'stepSizeN', 0, 100).name('Step (nucleus)').listen();
 
+  var f8 = gui.addFolder("StrainColors");
+    var controller = f8.addColor(gs, 'strain0Fill').name('fillCol1').listen();
+      //controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
+      controller.onChange(function(value) {colony.genepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+    if (gs.numStrains > 1) {
+      var controller = f8.addColor(gs, 'strain1Fill').name('fillCol2').listen();
+      controller.onChange(function(value) {colony.genepool[1].genes[0] = value.h; colony.genepool[1].genes[1] = value.s*255; colony.genepool[1].genes[2] =value.v*255; populateColony();});
+    }
+    if (gs.numStrains > 2) {
+      var controller = f8.addColor(gs, 'strain2Fill').name('fillCol3').listen();
+      controller.onChange(function(value) {colony.genepool[2].genes[0] = value.h; colony.genepool[2].genes[1] = value.s*255; colony.genepool[2].genes[2] =value.v*255; populateColony();});
+    }
 
   //gui.add(gs, 'trailMode', { None: 1, Blend: 2, Continuous: 3} ).name('Trail Mode [1-2-3]');
   gui.add(gs, 'restart').name('Respawn [space]');

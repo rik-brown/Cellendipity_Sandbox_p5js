@@ -2,15 +2,22 @@ What next?
 
 Known BUGS:
 ===========
-- Screendump should work (Chrome)
+Fill colour for DNA in genepool was not working - just turned BLACK on change in GUI.
+Think I know what this could've been caused by (not * 255 on s & v).
+This whole structure seems vastly overcomplicated!
+Colour > DNA > Colour etc. SIMPLIFY IT!
+I'm not even 100% sure I like the result - selecting colours rather than random just leads to a lot of fiddling around.
+Maybe just keep everything randomised?
+
+Black borders are not refreshed often enough to hide all "escapees"
+
 
 Suspected BUGS: (needs investigation)
 =====================================
+- Screendump [S] sometimes doesn't work (Chrome)
 
 Possible IMPROVEMENTS:
 =======================
-
-- is 'this.colonySize' in use? Removed from GUI...
 
 - New bkgCol on colony respawn? - bkgCol changes on respawn? (duplicate?)
 

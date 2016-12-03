@@ -86,7 +86,7 @@ function Cell(vel, dna) {
     this.updateColor();
     //if (gs.wraparound) {this.checkBoundaryWraparound();}
     this.display();
-    //if (gs.debug) {this.cellDebugger(); }
+    if (gs.debug) {this.cellDebugger(); }
   }
 
   this.live = function() {
@@ -283,10 +283,10 @@ function Cell(vel, dna) {
 
     // GROWTH
     //text("growth:" + this.growth, this.position.x, this.position.y + rowHeight*5);
-    text("maturity:" + this.maturity, this.position.x, this.position.y + rowHeight*5);
-    text("lifespan:" + this.lifespan, this.position.x, this.position.y + rowHeight*4);
-    text("remoteness:" + this.remoteness, this.position.x, this.position.y + rowHeight*2);
-    text("range:" + this.range, this.position.x, this.position.y + rowHeight*3);
+    //text("maturity:" + this.maturity, this.position.x, this.position.y + rowHeight*5);
+    //text("lifespan:" + this.lifespan, this.position.x, this.position.y + rowHeight*4);
+    //text("remoteness:" + this.remoteness, this.position.x, this.position.y + rowHeight*2);
+    //text("range:" + this.range, this.position.x, this.position.y + rowHeight*3);
     //text("age:" + this.age, this.position.x, this.position.y + rowHeight*3);
     //text("fertility:" + this.fertility, this.position.x, this.position.y + rowHeight*4);
     //text("fertile:" + this.fertile, this.position.x, this.position.y + rowHeight*3);
@@ -300,7 +300,9 @@ function Cell(vel, dna) {
     //text("screw amount:" + gs.spiral, this.position.x, this.position.y + rowHeight*2);
 
     // DNA
-    //text("gene [13]:" + this.dna.genes[13], this.position.x, this.position.y + rowHeight*0);
+    text("gene [0]:" + this.dna.genes[0], this.position.x, this.position.y + rowHeight*0);
+    text("gene [1]:" + this.dna.genes[1], this.position.x, this.position.y + rowHeight*1);
+    text("gene [2]:" + this.dna.genes[2], this.position.x, this.position.y + rowHeight*2);
   }
 
 }
