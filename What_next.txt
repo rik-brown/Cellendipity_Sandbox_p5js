@@ -1,25 +1,30 @@
 What next?
 
-Possible bugs:
+Known BUGS:
+===========
+- Screendump should work (Chrome)
 
+Suspected BUGS: (needs investigation)
+=====================================
 
-Could be IMPROVED with:
+Possible IMPROVEMENTS:
 =======================
-- A neater way of stopping once the radius gets super-small (or x # frames after start?)
-- bkgCol changes on respawn?
-- Screendump should work
-- Update p5.js version?
-- is this.colonySize in use? Removed from GUI...
 
-- New bkgCol on colony respawn
+- is 'this.colonySize' in use? Removed from GUI...
+
+- New bkgCol on colony respawn? - bkgCol changes on respawn? (duplicate?)
 
 - Reset colony lifespan on mouseclick
 
+- Better alternative for Max/Min in GUI? Typed values?
+
 - GUI folders for DNA overrides
-	+ spiral max/min
-	+ noise% max/min
+- General GUI tidy-up / declutter
 
 REMEMBER! Scaling is important: use relative sizes IMPORTANT!!
+
+Ideas for NEW FEATURES:
+=======================
 
 If (key = '1') {gs = new Global_settings_1}
 If (key = '2') {gs = new Global_settings_2}
@@ -27,10 +32,13 @@ If (key = '3') {gs = new Global_settings_3}
 If (key = '4') {gs = new Global_settings_4}
 To select a predefined set of global_settings
 
+TASKS:
+======
+- Update p5.js version?
+- Decide on new TITLE in html
+- Instructions? .txt or on-screen text()? (did I make this already?)
 
-Page title in html
-Instructions?
-Naming convention - what is this generator called?
+- Naming convention - what is this generator called?
 
 How to go on from here towards being able to use the GUI to tweak the generators (& save presets to JSON?)
 
