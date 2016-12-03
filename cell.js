@@ -50,7 +50,7 @@ function Cell(vel, dna) {
   // MOVEMENT
   //this.position = pos.copy(); //cell has position
   this.position =new p5.Vector(this.dna.genes[18], this.dna.genes[19]); //cell has position
-  this.home =new p5.Vector(width/2, height/2); //cell has origin
+  this.home = new p5.Vector(gs.homeX, gs.homeY); //cell has origin
   //this.range = 0;
   //this.remoteness = 0;
 
@@ -112,6 +112,7 @@ function Cell(vel, dna) {
     this.velocity.rotate(screwAngle);
     this.position.add(this.velocity);
     //line(this.position.x, this.position.y, this.home.x, this.home.y);
+    this.home = new p5.Vector(gs.homeX, gs.homeY);
     this.toHome = p5.Vector.sub(this.home, this.position); // static vector pointing from cell to home
     this.range = this.toHome.mag();
     this.remoteness = map(this.range, 0, this.lifespan, 0, 1);

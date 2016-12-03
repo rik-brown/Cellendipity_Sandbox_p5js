@@ -46,17 +46,20 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.stroke_A_Min = 5;
   this.stroke_A_Max = 5;
 
-this.strain0Fill = { h: 0, s: 255, v: 255};
-this.strain1Fill = { h: 120, s: 255, v: 255};
-this.strain2Fill = { h: 240, s: 255, v: 255};
-this.strain3Fill = { h: 0, s: 255, v: 255};
+// this.strain0Fill = { h: 0, s: 255, v: 255};
+// this.strain1Fill = { h: 120, s: 255, v: 255};
+// this.strain2Fill = { h: 240, s: 255, v: 255};
+// this.strain3Fill = { h: 0, s: 255, v: 255};
+
+this.homeX = width*0.5;
+this.homeY = height*0.5;
 
 
-  // this.strain0Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
-  // this.strain1Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
-  // this.strain2Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
-  // this.strain3Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
-  // this.strain4Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain0Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain1Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain2Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain3Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain4Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
 
   //this.nucleusHue = this.bkgColHSV.h + 180;
   //if (this.nucleusHue > 360) {this.nucleusHue -= 360;}

@@ -49,20 +49,26 @@ function populateColony() {
 
 function mousePressed() {
   var vel = p5.Vector.random2D();
-  var dna = new DNA();
+  // var dna = new DNA(); // creates a new DNA with randomised values
+  var dna = colony.genepool[int(random(gs.numStrains-1))];
   dna.genes[10] = height * 0.75;
   dna.genes[18] = mouseX;
   dna.genes[19] = mouseY;
+  // gs.homeX = mouseX;
+  // gs.homeY = mouseY;
   //if (mousePos.x < (width-270)) {colony.spawn(vel, dna);}
   if (mouseX > (width-height)*0.5 && mouseX < (width+height)*0.5) {colony.spawn(vel, dna);}
 }
 
 function mouseDragged() {
   var vel = p5.Vector.random2D();
-  var dna = new DNA();
+  //var dna = new DNA(); // creates a new DNA with randomised values
+  var dna = colony.genepool[int(random(gs.numStrains-1))];
   dna.genes[10] = height * 0.75;
   dna.genes[18] = mouseX;
   dna.genes[19] = mouseY;
+  // gs.homeX = mouseX;
+  // gs.homeY = mouseY;
   //if (mousePos.x < (width-270)) {colony.spawn(vel, dna);}
   if (mouseX > (width-height)*0.5 && mouseX < (width+height)*0.5) {colony.spawn(vel, dna);}
 }
