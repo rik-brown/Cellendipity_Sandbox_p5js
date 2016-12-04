@@ -159,7 +159,6 @@ var initGUI = function () {
       controller.onChange(function(value) {populateColony(); });
     var controller = f4.add(gs, 'fill_A_Max', 0, 255).step(1).name('fillAMax').listen();
       controller.onChange(function(value) {populateColony(); });
-    f4.add(gs, 'fillDisable').name('Fill OFF');
 
   var f5 = gui.addFolder("Stroke Color Tweaks");
   	f5.add(gs, 'stroke_HTwist', 0, 360).step(1).name('Hue').listen();
@@ -182,10 +181,9 @@ var initGUI = function () {
       controller.onChange(function(value) {populateColony(); });
     var controller = f5.add(gs, 'stroke_A_Max', 0, 255).step(1).name('strokeAMax').listen();
       controller.onChange(function(value) {populateColony(); });
-    f5.add(gs, 'strokeDisable').name('Stroke OFF');
 
   var controller =gui.add(gs, 'stepSize', 0, 100).name('Step Size').listen();
-   controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.trailMode = 3;};});
+   controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.stepSizeN = gs.stepSize; gs.trailMode = 3;};});
 
 	var f7 = gui.addFolder("Nucleus");
     f7.add(gs, 'nucleus').name('Nucleus [N]').listen();

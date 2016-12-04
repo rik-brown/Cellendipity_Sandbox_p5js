@@ -77,13 +77,11 @@ this.homeY = height*0.5;
   //this.stepSize = 0;
   //this.stepSizeN = 0;
 
-  this.fillDisable = false;
   this.fill_HTwist = 0;
   this.fill_STwist = 200;
   this.fill_BTwist = 0;
   this.fill_ATwist = 0;
 
-  this.strokeDisable = false;
   this.stroke_HTwist = 0;
   this.stroke_STwist = 0;
   this.stroke_BTwist = 0;
