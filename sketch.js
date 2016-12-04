@@ -130,12 +130,12 @@ var initGUI = function () {
   var controller = dnaMenu.add(gs, 'spiralMax', 0, 360).step(5).name('SpiralMaxDegrees').listen();
     controller.onChange(function(value) {populateColony(); });
 
-    
-  var controller = gui.addColor(gs, 'bkgColHSV').name('Background color').listen();
+  var colourMenu = gui.addFolder("Colour");
+  var controller = colourMenu.addColor(gs, 'bkgColHSV').name('Background').listen();
     controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
-  var controller = gui.addColor(gs, 'nucleusColHSVU').name('NucleusU color').listen();
+  var controller = colourMenu.addColor(gs, 'nucleusColHSVU').name('Nucleus (child)').listen();
     controller.onChange(function(value) {gs.nucleusColorU = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
-  var controller = gui.addColor(gs, 'nucleusColHSVF').name('NucleusF color').listen();
+  var controller = colourMenu.addColor(gs, 'nucleusColHSVF').name('Nucleus (adult)').listen();
     controller.onChange(function(value) {gs.nucleusColorF = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
 
 	var f4 = gui.addFolder("Fill Color Tweaks");

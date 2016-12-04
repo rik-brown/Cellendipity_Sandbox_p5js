@@ -19,6 +19,7 @@ Suspected BUGS: (needs investigation)
 
 Possible IMPROVEMENTS:
 =======================
+- Can remove 'fill disable' and 'stroke disable' and simply set Transparency = 0
 - New bkgCol on colony respawn? - bkgCol changes on respawn? (duplicate?)
 - Reset colony lifespan on mouseclick
 
@@ -50,8 +51,8 @@ To select a predefined set of global_settings
 
 TASKS:
 ======
-- Update p5.js version?
-- Decide on new TITLE in html
+
+- Decide on new TITLE in html Cellendipity Composer?
 - Instructions? .txt or on-screen text()? (did I make this already?)
 
 - Naming convention - what is this generator called?
