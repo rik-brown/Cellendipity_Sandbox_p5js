@@ -1,10 +1,10 @@
-What next?
+WHAT NEXT????
+-------------
 
 Known BUGS:
 ===========
-Fill colour for DNA in genepool was not working - just turned BLACK on change in GUI.
-Think I know what this could've been caused by (not * 255 on s & v).
-This whole structure seems vastly overcomplicated!
+
+The overall structure seems vastly overcomplicated!
 Colour > DNA > Colour etc. SIMPLIFY IT!
 I'm not even 100% sure I like the result - selecting colours rather than random just leads to a lot of fiddling around.
 Maybe just keep everything randomised?
@@ -15,19 +15,29 @@ Black borders are not refreshed often enough to hide all "escapees"
 Suspected BUGS: (needs investigation)
 =====================================
 - Screendump [S] sometimes doesn't work (Chrome)
+- Hide menu with [H] doesn't seem to work
 
 Possible IMPROVEMENTS:
 =======================
 - New bkgCol on colony respawn? - bkgCol changes on respawn? (duplicate?)
 - Reset colony lifespan on mouseclick
+
 - Better alternative for Max/Min in GUI? Typed values?
+
+- General GUI tidy-up / declutter
 - GUI folders for DNA overrides
   > Overrides could be 1-9) Setting value 0) "Diversity" "Variance" - scaling value for all DNA?
   Would reduce the need for both Max & Min variables too :-)
-  
-- General GUI tidy-up / declutter
+  Like http://rik-brown.github.io/Cellendipity/
+- Look at aybe_sea - it runs smooth, the GUI is not over-complex. Could I just rebuild that to make a 'mandala' pattern?
+- It has a nice 'randomize on restart' function
+
+
 REMEMBER! Scaling is important: use relative sizes IMPORTANT!!
-- 2 x GUI - one for colours only, one for other stuff?
+REMEMBER! populateColony() does not refresh Global_settings!!
+
+- 2 x GUI - one for colours only, one for other stuff? Hopefully not...
+- If stepped, stepSizeN = stepSize
 
 Ideas for NEW FEATURES:
 =======================
