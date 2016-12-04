@@ -18,11 +18,13 @@ Suspected BUGS: (needs investigation)
 
 Possible IMPROVEMENTS:
 =======================
-
 - New bkgCol on colony respawn? - bkgCol changes on respawn? (duplicate?)
 - Reset colony lifespan on mouseclick
 - Better alternative for Max/Min in GUI? Typed values?
 - GUI folders for DNA overrides
+  > Overrides could be 1-9) Setting value 0) "Diversity" "Variance" - scaling value for all DNA?
+  Would reduce the need for both Max & Min variables too :-)
+  
 - General GUI tidy-up / declutter
 REMEMBER! Scaling is important: use relative sizes IMPORTANT!!
 - 2 x GUI - one for colours only, one for other stuff?

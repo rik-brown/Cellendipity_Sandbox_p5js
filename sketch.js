@@ -20,9 +20,9 @@ function setup() {
 
 function draw() {
   noStroke();
-  fill(0, 32);
-  rect(0, 0, (width-height)*0.5, height);     // Left border
-  rect((width+height)*0.5, 0, width, height); // Right border
+  // fill(0, 255);
+  // rect(0, 0, (width-height)*0.5, height);     // Left border
+  // rect((width+height)*0.5, 0, width, height); // Right border
   if (gs.trailMode == 1 || gs.debug) {background(gs.bkgColor);}
   //if (gs.trailMode == 2) {trails();}
   colony.run();
@@ -91,42 +91,46 @@ function keyTyped() {
 }
 
 var initGUI = function () {
-	var controller = gui.add(gs, 'colonyMaxSize', 1, 500).step(10).name('Colony Size').listen();
+
+  var colonyMenu = gui.addFolder('Colony');
+  var controller = colonyMenu.add(gs, 'colonyLifespan', 100, 10000).step(100).name('Duration (total)').listen();
 	  controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'colonyLifespan', 500, 10000).step(500).name('MaxFrames').listen();
+  var controller = colonyMenu.add(gs, 'colonyDuration', 100, 10000).step(100).name('Duration (active)').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = colonyMenu.add(gs, 'numStrains', 1, 10).step(1).name('Strains').listen();
 	  controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'colonyDuration', 100, 5000).step(100).name('MaxActiveFrames').listen();
+  var controller = colonyMenu.add(gs, 'strainSize', 1, 20).step(1).name('Cells per strain').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'numStrains', 1, 10).step(1).name('Strains').listen();
+  var controller = colonyMenu.add(gs, 'colonyMaxSize', 1, 500).step(10).name('Cells (max)').listen();
 	  controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'strainSize', 1, 20).step(1).name('Cells in Strain').listen();
+  var controller = colonyMenu.add(gs, 'blackStrain').name('Strain.1 fill=black');
     controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'blackStrain').name('blackStrain');
-    controller.onChange(function(value) {populateColony(); });
-  var controller = gui.add(gs, 'centerSpawn').name('Centered [C]').listen();
+  var controller = colonyMenu.add(gs, 'centerSpawn').name('Centered [C]').listen();
 	  controller.onChange(function(value) {populateColony(); });
 
-  var f3 = gui.addFolder("DNA overrides");
-  var controller = f3.add(gs, 'cellSSMin', 1, 250).step(1).name('cellStartSizeMin').listen();
+  var dnaMenu = gui.addFolder("DNA overrides");
+  var controller = dnaMenu.add(gs, 'cellSSMin', 1, 250).step(1).name('cellStartSizeMin').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'cellSSMax', 1, 250).step(1).name('cellStartSizeMax').listen();
+  var controller = dnaMenu.add(gs, 'cellSSMax', 1, 250).step(1).name('cellStartSizeMax').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'cellESMin', 1, 100).step(1).name('cellEndSizeMin').listen();
+  var controller = dnaMenu.add(gs, 'cellESMin', 1, 100).step(1).name('cellEndSizeMin').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'cellESMax', 1, 100).step(1).name('cellEndSizeMax').listen();
+  var controller = dnaMenu.add(gs, 'cellESMax', 1, 100).step(1).name('cellEndSizeMax').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMin').listen();
+  var controller = dnaMenu.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMin').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'lifespanMax', 1, 100).step(1).name('lifespanMax').listen();
+  var controller = dnaMenu.add(gs, 'lifespanMax', 1, 100).step(1).name('lifespanMax').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'noiseMin', 0, 100).step(1).name('noise%Min').listen();
+  var controller = dnaMenu.add(gs, 'noiseMin', 0, 100).step(1).name('noise%Min').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'noiseMax', 0, 100).step(1).name('noise%Max').listen();
+  var controller = dnaMenu.add(gs, 'noiseMax', 0, 100).step(1).name('noise%Max').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'spiralMin', -360, 0).step(5).name('SpiralMinDegrees').listen();
+  var controller = dnaMenu.add(gs, 'spiralMin', -360, 0).step(5).name('SpiralMinDegrees').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = f3.add(gs, 'spiralMax', 0, 360).step(5).name('SpiralMaxDegrees').listen();
+  var controller = dnaMenu.add(gs, 'spiralMax', 0, 360).step(5).name('SpiralMaxDegrees').listen();
     controller.onChange(function(value) {populateColony(); });
+
+    
   var controller = gui.addColor(gs, 'bkgColHSV').name('Background color').listen();
     controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
   var controller = gui.addColor(gs, 'nucleusColHSVU').name('NucleusU color').listen();
