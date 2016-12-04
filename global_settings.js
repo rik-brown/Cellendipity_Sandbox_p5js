@@ -2,15 +2,13 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.debug = false;
   this.autoRestart = true; // If true, will not wait for keypress before starting anew
   this.trailMode = 3; // 1=none, 2 = blend, 3 = continuous
-  this.blackStrain = true;
+  this.blackStrain = false;
 
   if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
 
   this.colonyMaxSize = 200; // Max number of cells in the colony
-  this.colonyLifespan = 1000;             // Max number of frames a colony can live for
-  this.colonyDuration = 500;             // Max number of frames a colony is active for
-  //this.numStrains = int(random(1,1));  // Number of strains (a group of cells sharing the same DNA)
-  //this.strainSize = int(random(1,1));  // Number of cells in a strain
+  this.colonyLifespan = 2000;             // Max number of frames a colony can live for
+  this.colonyDuration = 1500;             // Max number of frames a colony is active for
   this.numStrains = 3;
   this.strainSize = int(random(6, 16)/this.numStrains); // Number of cells in a strain
 

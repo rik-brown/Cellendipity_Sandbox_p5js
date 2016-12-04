@@ -20,7 +20,7 @@ function setup() {
 
 function draw() {
   noStroke();
-  fill(0, 255);
+  fill(0, 32);
   rect(0, 0, (width-height)*0.5, height);     // Left border
   rect((width+height)*0.5, 0, width, height); // Right border
   if (gs.trailMode == 1 || gs.debug) {background(gs.bkgColor);}
@@ -50,12 +50,12 @@ function populateColony() {
 function mousePressed() {
   var vel = p5.Vector.random2D();
   // var dna = new DNA(); // creates a new DNA with randomised values
-  var dna = colony.genepool[int(random(gs.numStrains-1))];
-  dna.genes[10] = height * 0.75;
+  var dna = colony.genepool[floor(random(gs.numStrains))];
+  dna.genes[10] = height * 0.75; // workaround: overrides the Lifespan value for the strain to avoid spawning outside
   dna.genes[18] = mouseX;
   dna.genes[19] = mouseY;
-  // gs.homeX = mouseX;
-  // gs.homeY = mouseY;
+  //gs.homeX = mouseX; // experiment to allow home to be moved around the screen
+  //gs.homeY = mouseY; // experiment to allow home to be moved around the screen
   //if (mousePos.x < (width-270)) {colony.spawn(vel, dna);}
   if (mouseX > (width-height)*0.5 && mouseX < (width+height)*0.5) {colony.spawn(vel, dna);}
 }
@@ -63,8 +63,8 @@ function mousePressed() {
 function mouseDragged() {
   var vel = p5.Vector.random2D();
   //var dna = new DNA(); // creates a new DNA with randomised values
-  var dna = colony.genepool[int(random(gs.numStrains-1))];
-  dna.genes[10] = height * 0.75;
+  var dna = colony.genepool[floor(random(gs.numStrains))];
+  dna.genes[10] = height * 0.75; // workaround: overrides the Lifespan value for the strain to avoid spawning outside
   dna.genes[18] = mouseX;
   dna.genes[19] = mouseY;
   // gs.homeX = mouseX;

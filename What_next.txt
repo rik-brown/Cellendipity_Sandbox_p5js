@@ -20,19 +20,16 @@ Possible IMPROVEMENTS:
 =======================
 
 - New bkgCol on colony respawn? - bkgCol changes on respawn? (duplicate?)
-
 - Reset colony lifespan on mouseclick
-
 - Better alternative for Max/Min in GUI? Typed values?
-
 - GUI folders for DNA overrides
 - General GUI tidy-up / declutter
-
 REMEMBER! Scaling is important: use relative sizes IMPORTANT!!
+- 2 x GUI - one for colours only, one for other stuff?
 
 Ideas for NEW FEATURES:
 =======================
-
++ Instead of specifying individual Strain colors, specify ANGULAR HUE OFFSET between strains?
 If (key = '1') {gs = new Global_settings_1}
 If (key = '2') {gs = new Global_settings_2}
 If (key = '3') {gs = new Global_settings_3}
