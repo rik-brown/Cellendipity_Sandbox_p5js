@@ -1,25 +1,26 @@
 function Global_settings() { //These are the initial values, not the randomised ones
+  // Not in GUI menu:
   this.debug = false;
-  this.autoRestart = true; // If true, will not wait for keypress before starting anew
   this.trailMode = 3; // 1=none, 2 = blend, 3 = continuous
-  this.blackStrain = false;
 
-  if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
-
-  this.colonyMaxSize = 200; // Max number of cells in the colony
+  // COLONY GUI menu:
   this.colonyLifespan = 2000;             // Max number of frames a colony can live for
   this.colonyDuration = 1500;             // Max number of frames a colony is active for
   this.numStrains = 3;
   this.strainSize = int(random(6, 16)/this.numStrains); // Number of cells in a strain
+  this.colonyMaxSize = 200; // Max number of cells in the colony
+  this.blackStrain = false;
+  if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
 
-  this.cellSSMax = 100; // Absolute value
+
   this.cellSSMin = 50;  // Absolute value
-  this.cellESMax = 30;  // % of cellStartSize
+  this.cellSSMax = 100; // Absolute value
   this.cellESMin = 5;   // % of cellStartSize
-  this.lifespanMax = 70;
+  this.cellESMax = 30;  // % of cellStartSize
   this.lifespanMin = 30;
-  this.noiseMax = 100;
+  this.lifespanMax = 70;
   this.noiseMin = 0;
+  this.noiseMax = 100;
   this.spiralMin = 0;
   this.spiralMax = 180;
 
@@ -87,7 +88,9 @@ this.homeY = height*0.5;
   this.stroke_BTwist = 0;
   this.stroke_ATwist = 0;
 
-  this.restart = function() {populateColony();};
-  this.randomRestart = function() {randomizer(); colony.cells = []; populateColony();};
+  this.restart = function() {populateColony();}; // Action-button to respawn a new colony [R] key
+  this.restartRandomized = function() {randomize(); populateColony();};
 
+  this.autoRestart = true; // If true, will not wait for keypress before starting anew
+  this.randomizeOnRestart = false; // If true, parameters will be randomized on restart
 }
