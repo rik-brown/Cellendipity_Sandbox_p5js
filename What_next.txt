@@ -10,6 +10,10 @@ I'm not even 100% sure I like the result - selecting colours rather than random 
 Maybe just keep everything randomised?
 That said, if the GUI is well-organised & tidy, the main side-effect is to slow things down,
 and the running-speed doesn't necessarily need to be too high (lava-lamp)
+LATEST IMPRESSION (07/12 08:02) is that selecting strain colour for upto 5 strains (the upper 5 are random?) is OK
+Maybe seperate menus for cell & membrane?
+With the inclusion of a "variance %" or "Strain diversity%" there should be sufficient variation without the need for Max/Min limits on each colour parameter.
+Variance is a (upto random X% modifier) across all color parameters (or even a global variance?) Maybe one "variance%" per menu?
 
 Black borders are not refreshed often enough to hide all "escapees"
 

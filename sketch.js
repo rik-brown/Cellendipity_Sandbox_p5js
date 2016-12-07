@@ -91,30 +91,33 @@ function keyTyped() {
 var initGUI = function () {
 
   var colonyMenu = gui.addFolder('Colony');
-  var controller = colonyMenu.add(gs, 'colonyLifespan', 100, 10000).step(100).name('Duration (total)').listen();
-	  controller.onChange(function(value) {populateColony(); });
-  var controller = colonyMenu.add(gs, 'colonyDuration', 100, 10000).step(100).name('Duration (active)').listen();
-    controller.onChange(function(value) {populateColony(); });
   var controller = colonyMenu.add(gs, 'numStrains', 1, 10).step(1).name('Strains').listen();
 	  controller.onChange(function(value) {populateColony(); });
   var controller = colonyMenu.add(gs, 'strainSize', 1, 20).step(1).name('Cells per strain').listen();
     controller.onChange(function(value) {populateColony(); });
   var controller = colonyMenu.add(gs, 'colonyMaxSize', 1, 500).step(10).name('Cells (max)').listen();
 	  controller.onChange(function(value) {populateColony(); });
-  var controller = colonyMenu.add(gs, 'blackStrain').name('Strain.1 fill=black');
-    controller.onChange(function(value) {populateColony(); });
-  var controller = colonyMenu.add(gs, 'centerSpawn').name('Centered [C]').listen();
-	  controller.onChange(function(value) {populateColony(); });
+
 
     var colourMenu = gui.addFolder("Colour");
-    var controller = colourMenu.addColor(gs, 'bkgColHSV').name('Background').listen();
-      controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
-    var controller = colourMenu.addColor(gs, 'nucleusColHSVU').name('Nucleus (child)').listen();
+    var controller = colourMenu.addColor(gs, 'bkgColHSV').name('Dish').listen();
+    controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
+    var controller = colourMenu.addColor(gs, 'strain0Fill').name('Strain 001').listen();
+    controller.onChange(function(value) {colony.genepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+    if (gs.numStrains > 1) {
+      var controller = colourMenu.addColor(gs, 'strain1Fill').name('Strain 002').listen();
+      controller.onChange(function(value) {colony.genepool[1].genes[0] = value.h; colony.genepool[1].genes[1] = value.s*255; colony.genepool[1].genes[2] =value.v*255; populateColony();});
+    }
+    if (gs.numStrains > 2) {
+      var controller = colourMenu.addColor(gs, 'strain2Fill').name('Strain 003').listen();
+      controller.onChange(function(value) {colony.genepool[2].genes[0] = value.h; colony.genepool[2].genes[1] = value.s*255; colony.genepool[2].genes[2] =value.v*255; populateColony();});
+    }
+    var controller = colourMenu.addColor(gs, 'nucleusColHSVU').name('Nucleus').listen();
       controller.onChange(function(value) {gs.nucleusColorU = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
-    var controller = colourMenu.addColor(gs, 'nucleusColHSVF').name('Nucleus (adult)').listen();
+    var controller = colourMenu.addColor(gs, 'nucleusColHSVF').name('Nucleus (fertile)').listen();
       controller.onChange(function(value) {gs.nucleusColorF = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
 
-	var fillColTweaksMenu = gui.addFolder("Cell Colour Tweaks");
+	var fillColTweaksMenu = gui.addFolder("Cell Colour Mods");
 	  fillColTweaksMenu.add(gs, 'fill_HTwist', 0, 360).step(1).name('Hue').listen();
     fillColTweaksMenu.add(gs, 'fill_STwist', 0, 255).name('Saturation').listen();
     fillColTweaksMenu.add(gs, 'fill_BTwist', 0, 255).name('Brightness').listen();
@@ -184,28 +187,23 @@ var initGUI = function () {
       nucleusMenu.add(gs, 'nucleus').name('Nucleus [N]').listen();
       nucleusMenu.add(gs, 'stepSizeN', 0, 100).name('Step (nucleus)').listen();
 
-
-
   var controller =gui.add(gs, 'stepSize', 0, 100).name('Step Size').listen();
    controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.stepSizeN = gs.stepSize; gs.trailMode = 3;};});
 
-
-  var strainColMenu = gui.addFolder("Strain Colours");
-    var controller = strainColMenu.addColor(gs, 'strain0Fill').name('fillCol1').listen();
-      //controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
-      controller.onChange(function(value) {colony.genepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
-    if (gs.numStrains > 1) {
-      var controller = strainColMenu.addColor(gs, 'strain1Fill').name('fillCol2').listen();
-      controller.onChange(function(value) {colony.genepool[1].genes[0] = value.h; colony.genepool[1].genes[1] = value.s*255; colony.genepool[1].genes[2] =value.v*255; populateColony();});
-    }
-    if (gs.numStrains > 2) {
-      var controller = strainColMenu.addColor(gs, 'strain2Fill').name('fillCol3').listen();
-      controller.onChange(function(value) {colony.genepool[2].genes[0] = value.h; colony.genepool[2].genes[1] = value.s*255; colony.genepool[2].genes[2] =value.v*255; populateColony();});
-    }
-
   var optionsMenu = gui.addFolder("Options");
+  var controller = optionsMenu.add(gs, 'colonyLifespan', 100, 10000).step(100).name('Duration (total)').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = optionsMenu.add(gs, 'colonyDuration', 100, 10000).step(100).name('Duration (active)').listen();
+    controller.onChange(function(value) {populateColony(); });
+  optionsMenu.add(gs, 'nucleus').name('Nucleus [N]').listen();
+  var controller = optionsMenu.add(gs, 'blackStrain').name('Strain.1 fill=black');
+    controller.onChange(function(value) {populateColony(); });
+
+
   optionsMenu.add(gs, 'autoRestart').name('Auto-restart');
   optionsMenu.add(gs, 'randomizeOnRestart').name('Randomize@start');
+  var controller = optionsMenu.add(gs, 'centerSpawn').name('Centered [C]').listen();
+    controller.onChange(function(value) {populateColony(); });
 
   gui.add(gs, 'restart').name('Restart [space]');
   gui.add(gs, 'restartRandomized').name('Randomize [R]');
