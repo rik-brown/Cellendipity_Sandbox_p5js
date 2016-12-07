@@ -16,36 +16,37 @@ function Colony() {
   this.genepool.push(new DNA()); // Add new Cell with DNAgenepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
   }
   // This is a very messy solution! Needs replacing with a more efficient solution later....
-  this.genepool[0].genes[0] = gs.strain0Fill.h;
-  this.genepool[0].genes[1] = gs.strain0Fill.s * 255;
-  this.genepool[0].genes[2] = gs.strain0Fill.v * 255;
-  this.genepool[1].genes[0] = gs.strain1Fill.h;
-  this.genepool[1].genes[1] = gs.strain1Fill.s * 255;
-  this.genepool[1].genes[2] = gs.strain1Fill.v * 255;
-  this.genepool[2].genes[0] = gs.strain2Fill.h;
-  this.genepool[2].genes[1] = gs.strain2Fill.s * 255;
-  this.genepool[2].genes[2] = gs.strain2Fill.v * 255;
-  this.genepool[3].genes[0] = gs.strain3Fill.h;
-  this.genepool[3].genes[1] = gs.strain3Fill.s * 255;
-  this.genepool[3].genes[2] = gs.strain3Fill.v * 255;
-  this.genepool[4].genes[0] = gs.strain4Fill.h;
-  this.genepool[4].genes[1] = gs.strain4Fill.s * 255;
-  this.genepool[4].genes[2] = gs.strain4Fill.v * 255;
-  this.genepool[5].genes[0] = gs.strain5Fill.h;
-  this.genepool[5].genes[1] = gs.strain5Fill.s * 255;
-  this.genepool[5].genes[2] = gs.strain5Fill.v * 255;
-  this.genepool[6].genes[0] = gs.strain6Fill.h;
-  this.genepool[6].genes[1] = gs.strain6Fill.s * 255;
-  this.genepool[6].genes[2] = gs.strain6Fill.v * 255;
-  this.genepool[7].genes[0] = gs.strain7Fill.h;
-  this.genepool[7].genes[1] = gs.strain7Fill.s * 255;
-  this.genepool[7].genes[2] = gs.strain7Fill.v * 255;
-  this.genepool[8].genes[0] = gs.strain8Fill.h;
-  this.genepool[8].genes[1] = gs.strain8Fill.s * 255;
-  this.genepool[8].genes[2] = gs.strain8Fill.v * 255;
-  this.genepool[9].genes[0] = gs.strain9Fill.h;
-  this.genepool[9].genes[1] = gs.strain9Fill.s * 255;
-  this.genepool[9].genes[2] = gs.strain9Fill.v * 255;
+  this.genepool[0].genes[0] = gs.strain1Fill.h;
+  this.genepool[0].genes[1] = gs.strain1Fill.s * 255;
+  this.genepool[0].genes[2] = gs.strain1Fill.v * 255;
+  this.genepool[1].genes[0] = gs.strain2Fill.h;
+  this.genepool[1].genes[1] = gs.strain2Fill.s * 255;
+  this.genepool[1].genes[2] = gs.strain2Fill.v * 255;
+  this.genepool[2].genes[0] = gs.strain3Fill.h;
+  this.genepool[2].genes[1] = gs.strain3Fill.s * 255;
+  this.genepool[2].genes[2] = gs.strain3Fill.v * 255;
+  this.genepool[3].genes[0] = gs.strain4Fill.h;
+  this.genepool[3].genes[1] = gs.strain4Fill.s * 255;
+  this.genepool[3].genes[2] = gs.strain4Fill.v * 255;
+  this.genepool[4].genes[0] = gs.strain5Fill.h;
+  this.genepool[4].genes[1] = gs.strain5Fill.s * 255;
+  this.genepool[4].genes[2] = gs.strain5Fill.v * 255;
+
+  this.genepool[0].genes[4] = gs.strain1Stroke.h;
+  this.genepool[0].genes[5] = gs.strain1Stroke.s * 255;
+  this.genepool[0].genes[6] = gs.strain1Stroke.v * 255;
+  this.genepool[1].genes[4] = gs.strain2Stroke.h;
+  this.genepool[1].genes[5] = gs.strain2Stroke.s * 255;
+  this.genepool[1].genes[6] = gs.strain2Stroke.v * 255;
+  this.genepool[2].genes[4] = gs.strain3Stroke.h;
+  this.genepool[2].genes[5] = gs.strain3Stroke.s * 255;
+  this.genepool[2].genes[6] = gs.strain3Stroke.v * 255;
+  this.genepool[3].genes[4] = gs.strain4Stroke.h;
+  this.genepool[3].genes[5] = gs.strain4Stroke.s * 255;
+  this.genepool[3].genes[6] = gs.strain4Stroke.v * 255;
+  this.genepool[4].genes[4] = gs.strain5Stroke.h;
+  this.genepool[4].genes[5] = gs.strain5Stroke.s * 255;
+  this.genepool[4].genes[6] = gs.strain5Stroke.v * 255;
 
 
 
