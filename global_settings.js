@@ -9,7 +9,6 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.numStrains = 3;
   this.strainSize = int(random(6, 16)/this.numStrains); // Number of cells in a strain
   this.colonyMaxSize = 200; // Max number of cells in the colony
-  this.blackStrain = false;
   if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
 
 
@@ -59,6 +58,11 @@ this.homeY = height*0.5;
   this.strain2Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
   this.strain3Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
   this.strain4Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain5Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain6Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain7Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain8Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain9Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
 
   //this.nucleusHue = this.bkgColHSV.h + 180;
   //if (this.nucleusHue > 360) {this.nucleusHue -= 360;}

@@ -196,9 +196,6 @@ var initGUI = function () {
   var controller = optionsMenu.add(gs, 'colonyDuration', 100, 10000).step(100).name('Duration (active)').listen();
     controller.onChange(function(value) {populateColony(); });
   optionsMenu.add(gs, 'nucleus').name('Nucleus [N]').listen();
-  var controller = optionsMenu.add(gs, 'blackStrain').name('Strain.1 fill=black');
-    controller.onChange(function(value) {populateColony(); });
-
 
   optionsMenu.add(gs, 'autoRestart').name('Auto-restart');
   optionsMenu.add(gs, 'randomizeOnRestart').name('Randomize@start');
