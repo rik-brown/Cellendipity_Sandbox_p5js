@@ -34,6 +34,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.fill_B_Max = 255;
   this.fill_A_Min = 5;
   this.fill_A_Max = 5;
+  this.fill_A = 5;
 
   this.stroke_H_Min = 0;
   this.stroke_H_Max = 360;
@@ -43,11 +44,8 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.stroke_B_Max = 255;
   this.stroke_A_Min = 5;
   this.stroke_A_Max = 5;
+  this.stroke_A = 5;
 
-// this.strain0Fill = { h: 0, s: 255, v: 255};
-// this.strain1Fill = { h: 120, s: 255, v: 255};
-// this.strain2Fill = { h: 240, s: 255, v: 255};
-// this.strain3Fill = { h: 0, s: 255, v: 255};
 
 this.homeX = width*0.5;
 this.homeY = height*0.5;
@@ -98,4 +96,5 @@ this.homeY = height*0.5;
 
   this.autoRestart = true; // If true, will not wait for keypress before starting anew
   this.randomizeOnRestart = false; // If true, parameters will be randomized on restart
+  this.hide = function () {};
 }
