@@ -94,11 +94,10 @@ var initGUI = function () {
     controller.onChange(function(value) {populateColony(); });
   var controller = optionsMenu.add(gs, 'colonyDuration', 100, 10000).step(100).name('Active duration').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = optionsMenu.addColor(gs, 'bkgColHSV').name('Agar type').listen();
+  var controller =optionsMenu.add(gs, 'stepSize', 0, 100).name('Step size').listen();
+   controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.stepSizeN = gs.stepSize; gs.trailMode = 3;}; populateColony();});
+  var controller = optionsMenu.addColor(gs, 'bkgColHSV').name('Agar colour').listen();
     controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
-  var controller = optionsMenu.add(gs, 'nucleus').name('Show nucleus [N]').listen();
-    controller.onChange(function(value) {populateColony(); });
-
   optionsMenu.add(gs, 'autoRestart').name('Auto-restart');
   optionsMenu.add(gs, 'randomizeOnRestart').name('Randomizer');
 
@@ -113,48 +112,48 @@ var initGUI = function () {
     controller.onChange(function(value) {populateColony(); });
 
   var strain1Menu = gui.addFolder("Strain A");
-    var controller = strain1Menu.addColor(gs, 'strain1Fill').name('Cytoplasm').listen();
+    var controller = strain1Menu.addColor(gs, 'strain1Fill').name('Fill').listen();
       controller.onChange(function(value) {colony.genepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
     var controller = strain1Menu.addColor(gs, 'strain1Stroke').name('Membrane').listen();
       controller.onChange(function(value) {colony.genepool[0].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
 
     var strain2Menu = gui.addFolder("Strain B");
-      var controller = strain2Menu.addColor(gs, 'strain2Fill').name('Cytoplasm').listen();
+      var controller = strain2Menu.addColor(gs, 'strain2Fill').name('Fill').listen();
         controller.onChange(function(value) {colony.genepool[1].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
       var controller = strain2Menu.addColor(gs, 'strain2Stroke').name('Membrane').listen();
         controller.onChange(function(value) {colony.genepool[1].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
 
       var strain3Menu = gui.addFolder("Strain C");
-        var controller = strain3Menu.addColor(gs, 'strain3Fill').name('Cytoplasm').listen();
+        var controller = strain3Menu.addColor(gs, 'strain3Fill').name('Fill').listen();
           controller.onChange(function(value) {colony.genepool[2].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
         var controller = strain3Menu.addColor(gs, 'strain3Stroke').name('Membrane').listen();
           controller.onChange(function(value) {colony.genepool[2].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
 
         var strain4Menu = gui.addFolder("Strain D");
-          var controller = strain4Menu.addColor(gs, 'strain4Fill').name('Cytoplasm').listen();
+          var controller = strain4Menu.addColor(gs, 'strain4Fill').name('Fill').listen();
             controller.onChange(function(value) {colony.genepool[3].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
           var controller = strain4Menu.addColor(gs, 'strain4Stroke').name('Membrane').listen();
             controller.onChange(function(value) {colony.genepool[3].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
 
         var strain5Menu = gui.addFolder("Strain E");
-          var controller = strain5Menu.addColor(gs, 'strain5Fill').name('Cytoplasm').listen();
+          var controller = strain5Menu.addColor(gs, 'strain5Fill').name('Fill').listen();
             controller.onChange(function(value) {colony.genepool[4].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
           var controller = strain5Menu.addColor(gs, 'strain5Stroke').name('Membrane').listen();
             controller.onChange(function(value) {colony.genepool[4].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
 
   var nucleusMenu = gui.addFolder("Nucleus");
-    var controller = nucleusMenu.add(gs, 'nucleus').name('Nucleus [N]').listen();
+    var controller = nucleusMenu.add(gs, 'nucleus').name('Show [N]').listen();
+//      controller.onChange(function(value) {populateColony(); });
+    var controller = nucleusMenu.add(gs, 'stepSizeN', 0, 100).name('Step size').listen();
       controller.onChange(function(value) {populateColony(); });
-    var controller = nucleusMenu.add(gs, 'stepSizeN', 0, 100).name('Step (nucleus)').listen();
-      controller.onChange(function(value) {populateColony(); });
-    var controller = nucleusMenu.addColor(gs, 'nucleusColHSVU').name('Nucleus (unripe)').listen();
+    var controller = nucleusMenu.addColor(gs, 'nucleusColHSVU').name('Unripe colour').listen();
       controller.onChange(function(value) {gs.nucleusColorU = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
-    var controller = nucleusMenu.addColor(gs, 'nucleusColHSVF').name('Nucleus (ripe)').listen();
+    var controller = nucleusMenu.addColor(gs, 'nucleusColHSVF').name('Ripe colour').listen();
       controller.onChange(function(value) {gs.nucleusColorF = color(value.h, value.s*255, value.v*255); background(gs.bkgColor);});
 
 
 
-	var fillColTweaksMenu = gui.addFolder("Cell Colour Mods");
+	var fillColTweaksMenu = gui.addFolder("Fill Colour Modifiers");
 	  fillColTweaksMenu.add(gs, 'fill_HTwist', 0, 360).step(1).name('Hue').listen();
     fillColTweaksMenu.add(gs, 'fill_STwist', 0, 255).name('Saturation').listen();
     fillColTweaksMenu.add(gs, 'fill_BTwist', 0, 255).name('Brightness').listen();
@@ -176,7 +175,7 @@ var initGUI = function () {
     var controller = fillColTweaksMenu.add(gs, 'fill_A_Max', 0, 255).step(1).name('fillAMax').listen();
       controller.onChange(function(value) {populateColony(); });
 
-  var strokeColTweaksMenu = gui.addFolder("Membrane Colour Tweaks");
+  var strokeColTweaksMenu = gui.addFolder("Membrane Colour Modifiers");
   	strokeColTweaksMenu.add(gs, 'stroke_HTwist', 0, 360).step(1).name('Hue').listen();
     strokeColTweaksMenu.add(gs, 'stroke_STwist', 0, 255).name('Saturation').listen();
     strokeColTweaksMenu.add(gs, 'stroke_BTwist', 0, 255).name('Brightness').listen();
@@ -198,7 +197,7 @@ var initGUI = function () {
     var controller = strokeColTweaksMenu.add(gs, 'stroke_A_Max', 0, 255).step(1).name('strokeAMax').listen();
       controller.onChange(function(value) {populateColony(); });
 
-      var dnaMenu = gui.addFolder("Cell DNA settings");
+      var dnaMenu = gui.addFolder("DNA tweaks");
       var controller = dnaMenu.add(gs, 'cellSSMin', 1, 100).step(1).name('cellStartSizeMin').listen();
         controller.onChange(function(value) {populateColony(); });
       var controller = dnaMenu.add(gs, 'cellSSMax', 1, 100).step(1).name('cellStartSizeMax').listen();
@@ -219,12 +218,6 @@ var initGUI = function () {
         controller.onChange(function(value) {populateColony(); });
       var controller = dnaMenu.add(gs, 'spiralMax', 0, 360).step(5).name('SpiralMaxDegrees').listen();
         controller.onChange(function(value) {populateColony(); });
-
-
-
-
-  var controller =gui.add(gs, 'stepSize', 0, 100).name('Step Size').listen();
-   controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.stepSizeN = gs.stepSize; gs.trailMode = 3;};});
 
   gui.add(gs, 'restart').name('Restart [space]');
   gui.add(gs, 'restartRandomized').name('Randomize [R]');

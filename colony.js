@@ -8,10 +8,10 @@ function Colony() {
 
   // VARIABLES
   this.colonyAge = gs.colonyLifespan;
-  this.maxStrains = 10;
+  this.maxStrains = 5;
 
   // Here is the code which fills the 'genepool' arraylist with a given number (gs.numStrains) of different DNA-strains.
-  // I think I will always create 10 strains, but only the first 0-numStrains will actually be used.
+  // I think I will always create 5 strains, but only the first 0-numStrains will actually be used.
   for (var g = 0; g < this.maxStrains; g++) {
   this.genepool.push(new DNA()); // Add new Cell with DNAgenepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
   }
