@@ -1,7 +1,8 @@
 function Global_settings() { //These are the initial values, not the randomised ones
   // Not in GUI menu:
   this.debug = false;
-  this.trailMode = 3; // 1=none, 2 = blend, 3 = continuous
+  this.paused = false; // If true, colony will not be run on draw-cycle
+  this.trailMode = 3;  // 1=none, 2 = blend, 3 = continuous
 
   // COLONY GUI menu:
   this.colonyLifespan = 4000;             // Max number of frames a colony can live for

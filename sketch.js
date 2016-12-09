@@ -25,7 +25,8 @@ function draw() {
   // rect((width+height)*0.5, 0, width, height); // Right border
   if (gs.trailMode == 1 || gs.debug) {background(gs.bkgColor);}
   //if (gs.trailMode == 2) {trails();}
-  colony.run();
+  if (!gs.paused) {colony.run();}
+  // colony.run();
   if (colony.dead()) {if (keyIsPressed || gs.autoRestart) {populateColony(); } }
   //if (colony.colonyAge < 0) {populateColony(); }
   //if (colony.cells.length === 0 || colony.colonyAge < 0) {if (keyIsPressed || gs.autoRestart) {populateColony(); } } // Repopulate the colony when all the cells have died
@@ -89,6 +90,7 @@ function keyTyped() {
   if (key === 'n') {gs.nucleus = !gs.nucleus; populateColony();} // N toggles 'show nucleus' mode
   if (key === 's') {screenDump();} // S saves a screenshot
   if (key === 'r') {randomize(); populateColony();} // R for Randomize
+  if (key === 'p') {gs.paused = !gs.paused;} // P toggles 'paused' mode
 }
 
 var initGUI = function () {
@@ -109,7 +111,7 @@ var initGUI = function () {
 	  controller.onChange(function(value) {populateColony(); });
   var controller = seedMenu.add(gs, 'strainSize', 1, 40).step(1).name('Cells per strain').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = seedMenu.add(gs, 'colonyMaxSize', 1, 500).step(10).name('Cells (max)').listen();
+  var controller = seedMenu.add(gs, 'colonyMaxSize', 10, 500).step(10).name('Cells (max)').listen();
 	  controller.onChange(function(value) {populateColony(); });
   var controller = seedMenu.add(gs, 'centerSpawn').name('Centered [C]').listen();
     controller.onChange(function(value) {populateColony(); });
@@ -145,32 +147,32 @@ var initGUI = function () {
             controller.onChange(function(value) {colony.genepool[4].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
 
 	var fillColTweaksMenu = gui.addFolder("Cytoplasm mods");
-    var controller = fillColTweaksMenu.add(gs, 'fill_A', 0, 255).step(1).name('Alpha').listen();
-      controller.onChange(function(value) {populateColony(); });
     var controller = fillColTweaksMenu.add(gs, 'fill_HTwist', 0, 360).step(1).name('Hue').listen();
       controller.onChange(function(value) {populateColony(); });
     var controller = fillColTweaksMenu.add(gs, 'fill_STwist', 0, 255).name('Saturation').listen();
       controller.onChange(function(value) {populateColony(); });
     var controller = fillColTweaksMenu.add(gs, 'fill_BTwist', 0, 255).name('Brightness').listen();
       controller.onChange(function(value) {populateColony(); });
-    var controller = fillColTweaksMenu.add(gs, 'fill_ATwist', 0, 255).name('AlphaMod.').listen();
+    var controller = fillColTweaksMenu.add(gs, 'fill_A', 0, 255).step(1).name('Alpha').listen();
       controller.onChange(function(value) {populateColony(); });
+    // var controller = fillColTweaksMenu.add(gs, 'fill_ATwist', 0, 255).name('AlphaMod.').listen();
+    //   controller.onChange(function(value) {populateColony(); });
     // var controller = fillColTweaksMenu.add(gs, 'fill_A_Min', 0, 255).step(1).name('fillAMin').listen();
     //   controller.onChange(function(value) {populateColony(); });
     // var controller = fillColTweaksMenu.add(gs, 'fill_A_Max', 0, 255).step(1).name('fillAMax').listen();
     //   controller.onChange(function(value) {populateColony(); });
 
   var strokeColTweaksMenu = gui.addFolder("Membrane mods");
-    var controller = strokeColTweaksMenu.add(gs, 'stroke_A', 0, 255).step(1).name('Alpha').listen();
-      controller.onChange(function(value) {populateColony(); });
   	var controller = strokeColTweaksMenu.add(gs, 'stroke_HTwist', 0, 360).step(1).name('Hue').listen();
       controller.onChange(function(value) {populateColony(); });
     var controller = strokeColTweaksMenu.add(gs, 'stroke_STwist', 0, 255).name('Saturation').listen();
       controller.onChange(function(value) {populateColony(); });
     var controller = strokeColTweaksMenu.add(gs, 'stroke_BTwist', 0, 255).name('Brightness').listen();
       controller.onChange(function(value) {populateColony(); });
-    var controller = strokeColTweaksMenu.add(gs, 'stroke_ATwist', 0, 255).name('AlphaMod').listen();
+    var controller = strokeColTweaksMenu.add(gs, 'stroke_A', 0, 255).step(1).name('Alpha').listen();
       controller.onChange(function(value) {populateColony(); });
+    // var controller = strokeColTweaksMenu.add(gs, 'stroke_ATwist', 0, 255).name('AlphaMod').listen();
+    //   controller.onChange(function(value) {populateColony(); });
     // var controller = strokeColTweaksMenu.add(gs, 'stroke_A_Min', 0, 255).step(1).name('strokeAMin').listen();
     //   controller.onChange(function(value) {populateColony(); });
     // var controller = strokeColTweaksMenu.add(gs, 'stroke_A_Max', 0, 255).step(1).name('strokeAMax').listen();
@@ -210,6 +212,7 @@ var initGUI = function () {
 
   gui.add(gs, 'restart').name('Restart [space]');
   gui.add(gs, 'restartRandomized').name('Randomize [R]');
+  gui.add(gs, 'paused').name('Pause [P]');
   var controller = gui.add(gs, 'showInstructions').name('Instructions [ I ]').listen();
     controller.onChange(function(value) {populateColony(); });
   gui.add(gs, 'hide').name('Hide/show [H]');
@@ -301,15 +304,16 @@ function instructions() { // Displays some brief guidelines about the menu & key
   text("H       Toggles menu", 10, 242);
   text("I       Toggles Instructions", 10, 260);
   text("S       Screenshot (.png)", 10, 278);
+  text("P       Pause", 10, 296);
 
   //textSize(20);
   textStyle(BOLD);
-  text("Menu:", 10, 310);
+  text("Menu:", 10, 320);
 
   textSize(15);
   textStyle(NORMAL);
-  text("Try things out!", 10, 328);
-  text("(you can't break anything)", 10, 346);
+  text("Try things out!", 10, 338);
+  text("(you can't break anything)", 10, 356);
 
   textStyle(BOLD);
   text("Follow @Cellendipity on:", 10, 390);

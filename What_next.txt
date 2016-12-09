@@ -20,8 +20,6 @@ One 'variance' to determine the amount of 'random variation' around that value, 
 - 100% = *0.5
 Variance will apply to all variables in 'DNA tweaks': startsize/endsize/lifespan/noise/twist/transparency?
 
-Do I want to be able to adjust Transparency per strain?
-
 Suspected BUGS: (needs investigation)
 =====================================
 
