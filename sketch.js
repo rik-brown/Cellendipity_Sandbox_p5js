@@ -24,6 +24,7 @@ function draw() {
   // rect(0, 0, (width-height)*0.5, height);     // Left border
   // rect((width+height)*0.5, 0, width, height); // Right border
   if (gs.trailMode == 1 || gs.debug) {background(gs.bkgColor);}
+  if (gs.showInstructions) {instructions();}
   //if (gs.trailMode == 2) {trails();}
   colony.run();
   if (colony.dead()) {if (keyIsPressed || gs.autoRestart) {populateColony(); } }
@@ -80,7 +81,7 @@ function screenDump() {
 
 function keyTyped() {
   if (key === 'd') {gs.debug = !gs.debug;} // D toggles 'cell debug' mode
-
+  if (key === 'i') {gs.showInstructions = !gs.showInstructions; populateColony();} // I toggles 'show instructions' mode
   if (key === ' ') {populateColony();}  //spacebar respawns with current settings
   if (key === 'c') {gs.centerSpawn = !gs.centerSpawn; colony.cells = [];} // C toggles 'centered' mode
   if (key === 'n') {gs.nucleus = !gs.nucleus;} // N toggles 'show nucleus' mode
@@ -207,6 +208,8 @@ var initGUI = function () {
 
   gui.add(gs, 'restart').name('Restart [space]');
   gui.add(gs, 'restartRandomized').name('Randomize [R]');
+  var controller = gui.add(gs, 'showInstructions').name('Instructions [ I ]').listen();
+    controller.onChange(function(value) {populateColony(); });
   gui.add(gs, 'hide').name('Hide/show [H]');
 
   gui.close(); // GUI starts in closed state
@@ -263,4 +266,21 @@ function randomize() { // Parameters are randomized (more than in the initial co
   gs.stroke_B_Max = random(255);
   gs.stroke_A_Min = random(255);
   gs.stroke_A_Max = random(255);
+}
+
+function instructions() { // Displays some brief guidelines about the menu & keyboard shortcuts
+  if (gs.bkgColHSV.v > 0.6) {fill(0);} else {fill(360);}
+  textSize(18);
+  strokeWeight(1);
+  text("Hello, welcome to the instructions!", 10, 20);
+  text("Keyboard shortcuts", 10, 40);
+text("==================", 10, 60);
+text("", 10, 80);
+text("Spacebar  Respawns with current settings", 10, 400);
+text("R         Respawns after randomizing most of the settings", 10, 420);
+text("C         Toggles between 'centered spawn position' and 'random spawn position'", 10, 460);
+text("N         Toggles between 'show nucleus' and 'don't show nucleus'", 10, 480);
+text("S         Saves a screenshot as .png file", 10, 500);
+text("D         Toggles 'debug mode' on/off", 10, 520);
+text("H         Hides/shows the menu", 10, 540);
 }
