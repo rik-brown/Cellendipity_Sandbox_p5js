@@ -24,7 +24,6 @@ function draw() {
   // rect(0, 0, (width-height)*0.5, height);     // Left border
   // rect((width+height)*0.5, 0, width, height); // Right border
   if (gs.trailMode == 1 || gs.debug) {background(gs.bkgColor);}
-  if (gs.showInstructions) {instructions();}
   //if (gs.trailMode == 2) {trails();}
   colony.run();
   if (colony.dead()) {if (keyIsPressed || gs.autoRestart) {populateColony(); } }
@@ -36,6 +35,7 @@ function draw() {
 function populateColony() {
   if (gs.randomizeOnRestart) {randomize();}
   background(gs.bkgColor); // Refresh the background
+  if (gs.showInstructions) {instructions();}
   colony.cells = [];
   colony = new Colony(gs.colonySize);
 }
@@ -84,7 +84,7 @@ function keyTyped() {
   if (key === 'i') {gs.showInstructions = !gs.showInstructions; populateColony();} // I toggles 'show instructions' mode
   if (key === ' ') {populateColony();}  //spacebar respawns with current settings
   if (key === 'c') {gs.centerSpawn = !gs.centerSpawn; colony.cells = [];} // C toggles 'centered' mode
-  if (key === 'n') {gs.nucleus = !gs.nucleus;} // N toggles 'show nucleus' mode
+  if (key === 'n') {gs.nucleus = !gs.nucleus; populateColony();} // N toggles 'show nucleus' mode
   if (key === 's') {screenDump();} // S saves a screenshot
   if (key === 'r') {randomize(); populateColony();} // R for Randomize
 }
@@ -176,7 +176,7 @@ var initGUI = function () {
 
     var nucleusMenu = gui.addFolder("Nucleus mods");
       var controller = nucleusMenu.add(gs, 'nucleus').name('Show [N]').listen();
-  //      controller.onChange(function(value) {populateColony(); });
+        controller.onChange(function(value) {populateColony(); });
       var controller = nucleusMenu.add(gs, 'stepSizeN', 0, 100).name('Step size').listen();
         controller.onChange(function(value) {populateColony(); });
       var controller = nucleusMenu.addColor(gs, 'nucleusColHSVU').name('Immature').listen();
@@ -269,18 +269,58 @@ function randomize() { // Parameters are randomized (more than in the initial co
 }
 
 function instructions() { // Displays some brief guidelines about the menu & keyboard shortcuts
-  if (gs.bkgColHSV.v > 0.6) {fill(0);} else {fill(360);}
-  textSize(18);
-  strokeWeight(1);
-  text("Hello, welcome to the instructions!", 10, 20);
-  text("Keyboard shortcuts", 10, 40);
-text("==================", 10, 60);
-text("", 10, 80);
-text("Spacebar  Respawns with current settings", 10, 400);
-text("R         Respawns after randomizing most of the settings", 10, 420);
-text("C         Toggles between 'centered spawn position' and 'random spawn position'", 10, 460);
-text("N         Toggles between 'show nucleus' and 'don't show nucleus'", 10, 480);
-text("S         Saves a screenshot as .png file", 10, 500);
-text("D         Toggles 'debug mode' on/off", 10, 520);
-text("H         Hides/shows the menu", 10, 540);
+  if (gs.bkgColHSV.v > 0.7) {fill(0);} else {fill(360);}
+  textFont("Courier New");
+
+  textSize(32);
+  textStyle(BOLD);
+  text("Cellendipity Explorer", 10, 35);
+
+  textSize(12);
+  textStyle(NORMAL);
+  text("by Richard Brown", 10, 50);
+
+  textSize(15);
+  text("Cells move about,", 10, 80);
+  text("have brief encounters,", 10, 98);
+  text("spawn more cells & die.", 10, 116);
+
+  textSize(20);
+  textStyle(BOLD);
+  text("Keys:", 10, 150);
+
+  textSize(15);
+  textStyle(NORMAL);
+  text("Space   Restart (keep settings)", 10, 170);
+  text("R       Restart (randomize settings)", 10, 188);
+  text("C       Toggles center/random seed", 10, 206);
+  text("N       Toggles cell nucleus", 10, 224);
+  text("H       Toggles menu", 10, 242);
+  text("I       Toggles Instructions", 10, 260);
+  text("S       Screenshot (.png)", 10, 278);
+
+  textSize(20);
+  textStyle(BOLD);
+  text("Menu:", 10, 310);
+
+  textSize(15);
+  textStyle(NORMAL);
+  text("Try things out!", 10, 328);
+  text("(you can't break anything)", 10, 346);
+
+  textStyle(BOLD);
+  text("Follow @Cellendipity on:", 10, 390);
+
+  textStyle(NORMAL);
+  text("Twitter, Tumblr, Instagram", 10, 408);
+  text("Share the cellular love,", 10, 426);
+  text("tag your screenshots with #cellendipity", 10, 444);
+  textStyle(BOLD);
+  text("Contact: cellendipity@gmail.com", 10, 476);
+
+  textSize(12);
+  textStyle(NORMAL);
+  text("© Richard Brown, December 9th 2016", 10, 500);
+
+
 }

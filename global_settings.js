@@ -96,6 +96,6 @@ this.homeY = height*0.5;
 
   this.autoRestart = true;         // If true, will not wait for keypress before starting anew
   this.randomizeOnRestart = false; // If true, parameters will be randomized on restart
-  this.showInstructions = true;   // If true, will display on-screen instructions
+  this.showInstructions = false;   // If true, will display on-screen instructions
   this.hide = function () {};
 }
