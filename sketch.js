@@ -100,7 +100,8 @@ var initGUI = function () {
   var controller = optionsMenu.add(gs, 'colonyDuration', 100, 10000).step(100).name('Active duration').listen();
     controller.onChange(function(value) {populateColony(); });
   var controller =optionsMenu.add(gs, 'stepSize', 0, 100).name('Step size').listen();
-   controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.stepSizeN = gs.stepSize; gs.trailMode = 3;}; populateColony();});
+  //  controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.stepSizeN = gs.stepSize; gs.trailMode = 3;}; populateColony();});
+   controller.onChange(function(value) {if (gs.stepSize > 0) {gs.stepSizeN = gs.stepSize;} populateColony();});
   var controller = optionsMenu.addColor(gs, 'bkgColHSV').name('Agar colour').listen();
     controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
   optionsMenu.add(gs, 'autoRestart').name('Auto-restart');
@@ -222,55 +223,59 @@ var initGUI = function () {
 
 
 function randomize() { // Parameters are randomized (more than in the initial configuration)
-  // COLONY GUI menu:
-  if (random(1) > 0.5) {gs.centerSpawn = true;} else {gs.centerSpawn = false;}
-
-  gs.numStrains = floor(random(1, 5));
-  gs.strainSize = floor(random(1, 40)); // Number of cells in a strain
-  gs.colonyMaxSize = random((gs.numStrains*gs.strainSize), 300);
-
+  //optionsMenu---Experiment
+  if (random(1) > 0.5) {gs.stepSize = int(random(20,60)); gs.stepSizeN = gs.stepSize;} else {gs.stepSize = 0; gs.stepSizeN = int(random(20, 50));}
   gs.bkgColHSV = { h: random(360), s: random(), v: random() };
   gs.bkgColor = color(gs.bkgColHSV.h, gs.bkgColHSV.s*255, gs.bkgColHSV.v*255);
 
+  //seedMenu---Seed Cultures
+  gs.numStrains = floor(random(1, 5));
+  gs.strainSize = floor(random(1, 20)); // Number of cells in a strain
+  gs.colonyMaxSize = random((gs.numStrains*gs.strainSize), 300);
+  if (random(1) > 0.5) {gs.centerSpawn = true;} else {gs.centerSpawn = false;}
+
+  gs.strain1Fill = { h: random(360), s: random(), v: random() };
+  gs.strain2Fill = { h: random(360), s: random(), v: random() };
+  gs.strain3Fill = { h: random(360), s: random(), v: random() };
+  gs.strain4Fill = { h: random(360), s: random(), v: random() };
+  gs.strain5Fill = { h: random(360), s: random(), v: random() };
+
+  gs.strain1Stroke = { h: random(360), s: random(), v: random() };
+  gs.strain2Stroke = { h: random(360), s: random(), v: random() };
+  gs.strain3Stroke = { h: random(360), s: random(), v: random() };
+  gs.strain4Stroke = { h: random(360), s: random(), v: random() };
+  gs.strain5Stroke = { h: random(360), s: random(), v: random() };
+
+  //fillColTweaksMenu---Cytoplasm mods
   if (random(1) > 0.5) {gs.fill_HTwist = floor(random(1, 360));} else {gs.fill_HTwist = 0;}
   if (random(1) > 0.5) {gs.fill_STwist = floor(random (1,255));} else {gs.fill_STwist = 0;}
   if (random(1) > 0.5) {gs.fill_BTwist = floor(random (1,255));} else {gs.fill_BTwist = 0;}
-  if (random(1) > 0.5) {gs.fill_ATwist = floor(random (1,255));} else {gs.fill_ATwist = 0;}
+  if (random(1) > 0.5) {gs.fill_A = floor(random (1,255));} else {gs.fill_A = 0;}
+
+  //strokeColTweaksMenu---Membrane mods
   if (random(1) > 0.5) {gs.stroke_HTwist = floor(random(1, 360));} else {gs.stroke_HTwist = 0;}
   if (random(1) > 0.5) {gs.stroke_STwist = floor(random (1,255));} else {gs.stroke_STwist = 0;}
   if (random(1) > 0.5) {gs.stroke_BTwist = floor(random (1,255));} else {gs.stroke_BTwist = 0;}
-  if (random(1) > 0.5) {gs.stroke_ATwist = floor(random (1,255));} else {gs.stroke_ATwist = 0;}
+  if (random(1) > 0.5) {gs.stroke_A = floor(random (1,255));} else {gs.stroke_A = 0;}
 
+  //nucleusMenu---Nucleus mods
   if (random(1) > 0.7) {gs.nucleus = true;} else {gs.nucleus = false;}
-  if (random(1) > 0.5) {gs.stepSize = int(random(20,60)); gs.stepSizeN = gs.stepSize;} else {gs.stepSize = 0; gs.stepSizeN = int(random(20, 50));}
-  if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true}
+  gs.nucleusColHSVU = { h: random(360), s: random(), v: random() };
+  gs.nucleusColorU = color(gs.nucleusColHSVU.h, gs.nucleusColHSVU.s*255, gs.nucleusColHSVU.v*255);
+  gs.nucleusColHSVF = { h: random(360), s: random(), v: random() };
+  gs.nucleusColorF = color(gs.nucleusColHSVF.h, gs.nucleusColHSVF.s*255, gs.nucleusColHSVF.v*255);
 
+  //dnaMenu---Behavioral modifiers
   gs.cellSSMax = random(1,100); // Absolute value
   gs.cellSSMin = random(1,100);  // Absolute value
   gs.cellESMax = random(100);  // % of cellStartSize
   gs.cellESMin = random(100);   // % of cellStartSize
-  gs.lifespanMax = random(70);
-  gs.lifespanMin = random(70);
+  gs.lifespanMax = random(30, 70);
+  gs.lifespanMin = random(30, 70);
   gs.noiseMax = random(100);
   gs.noiseMin = random(100);
   gs.spiralMin = random(-360,0);
   gs.spiralMax = random(360);
-  gs.fill_H_Min = random(360);
-  gs.fill_H_Max = random(360);
-  gs.fill_S_Min = random(255);
-  gs.fill_S_Max = random(255);
-  gs.fill_B_Min = random(255);
-  gs.fill_B_Max = random(255);
-  gs.fill_A_Min = random(255);
-  gs.fill_A_Max = random(255);
-  gs.stroke_H_Min = random(360);
-  gs.stroke_H_Max = random(360);
-  gs.stroke_S_Min = random(255);
-  gs.stroke_S_Max = random(255);
-  gs.stroke_B_Min = random(255);
-  gs.stroke_B_Max = random(255);
-  gs.stroke_A_Min = random(255);
-  gs.stroke_A_Max = random(255);
 }
 
 function instructions() { // Displays some brief guidelines about the menu & keyboard shortcuts

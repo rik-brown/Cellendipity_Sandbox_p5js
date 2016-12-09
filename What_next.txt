@@ -28,6 +28,9 @@ Possible IMPROVEMENTS:
 =======================
 
 - this.remoteness : Is it actually needed, or is this.maturity (mapped to range) sufficient?
+- gs.stepped - Is it needed, or is this covered by stepSize = 0? Should it be true to start with?
+  I think I have fixed it now so it never becomes false, and all is running normally
+  Remove at a later stage (in a fork)
 
 - Better alternative for Max/Min in GUI? Typed values?
 
