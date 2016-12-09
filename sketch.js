@@ -60,6 +60,7 @@ function mousePressed() {
   //gs.homeY = mouseY; // experiment to allow home to be moved around the screen
   //if (mousePos.x < (width-270)) {colony.spawn(vel, dna);}
   if (mouseX > (width-height)*0.5 && mouseX < (width+height)*0.5) {colony.spawn(vel, dna);}
+  colony.colonyAge = gs.colonyLifespan;
 }
 
 function mouseDragged() {
@@ -73,6 +74,7 @@ function mouseDragged() {
   // gs.homeY = mouseY;
   //if (mousePos.x < (width-270)) {colony.spawn(vel, dna);}
   if (mouseX > (width-height)*0.5 && mouseX < (width+height)*0.5) {colony.spawn(vel, dna);}
+  colony.colonyAge = gs.colonyLifespan;
 }
 
 function screenDump() {
@@ -276,16 +278,17 @@ function instructions() { // Displays some brief guidelines about the menu & key
   textStyle(BOLD);
   text("Cellendipity Explorer", 10, 35);
 
-  textSize(12);
-  textStyle(NORMAL);
-  text("by Richard Brown", 10, 50);
+  // textSize(12);
+  // textStyle(NORMAL);
+  // text("by Richard Brown", 10, 50);
 
   textSize(15);
-  text("Cells move about,", 10, 80);
-  text("have brief encounters,", 10, 98);
-  text("spawn more cells & die.", 10, 116);
+  textStyle(NORMAL);
+  text("Cells move about,", 10, 60);
+  text("have brief encounters,", 10, 78);
+  text("spawn more cells & die.", 10, 96);
 
-  textSize(20);
+  //textSize(20);
   textStyle(BOLD);
   text("Keys:", 10, 150);
 
@@ -299,7 +302,7 @@ function instructions() { // Displays some brief guidelines about the menu & key
   text("I       Toggles Instructions", 10, 260);
   text("S       Screenshot (.png)", 10, 278);
 
-  textSize(20);
+  //textSize(20);
   textStyle(BOLD);
   text("Menu:", 10, 310);
 

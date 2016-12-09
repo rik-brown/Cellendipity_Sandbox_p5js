@@ -84,7 +84,6 @@ function Cell(vel, dna) {
     this.updateSize();
     this.updateFertility();
     this.updateColor();
-    //if (gs.wraparound) {this.checkBoundaryWraparound();}
     this.display();
     if (gs.debug) {this.cellDebugger(); }
   }
@@ -149,18 +148,6 @@ function Cell(vel, dna) {
       this.strokeColor = color(this.stroke_Htwisted, this.stroke_S, this.stroke_B); //stroke colour is updated with new hue value
     }
   }
-
-  //   this.checkBoundaryWraparound = function() {
-  //   if (this.position.x > width + this.r*this.flatness) {
-  //     this.position.x = -this.r*this.flatness;
-  //   } else if (this.position.x < -this.r*this.flatness) {
-  //     this.position.x = width + this.r*this.flatness;
-  //   } else if (this.position.y > height + this.r*this.flatness) {
-  //     this.position.y = -this.r*this.flatness;
-  //   } else if (this.position.y < -this.r*this.flatness) {
-  //     this.position.y = height + this.r*this.flatness;
-  //   }
-  // }
 
   // Cell Death
   this.dead = function() {
