@@ -41,13 +41,14 @@ function DNA(newgenes) {
     this.genes[0] = random(gs.fill_H_Min, gs.fill_H_Max);        // 0 = fill Hue (0-360)
     this.genes[1] = random(gs.fill_S_Min, gs.fill_S_Max);        // 1 = fill Saturation (0-255)
     this.genes[2] = random(gs.fill_B_Min, gs.fill_B_Max);        // 2 = fill Brightness (0-255)
-    this.genes[3] = random(gs.fill_A_Min, gs.fill_A_Max);        // 3 = fill Alpha (0-255)
+    //this.genes[3] = random(gs.fill_A_Min, gs.fill_A_Max);        // 3 = fill Alpha (0-255)
+    this.genes[3] = gs.fill_A;
 
     this.genes[4] = random(gs.stroke_H_Min, gs.stroke_H_Max);    // 4 = stroke Hue (0-360)
     this.genes[5] = random(gs.stroke_S_Min, gs.stroke_S_Max);    // 5 = stroke Saturation (0-255)
     this.genes[6] = random(gs.stroke_B_Min, gs.stroke_B_Max);    // 6 = stroke Brightness (0-255)
-    this.genes[7] = random(gs.stroke_A_Min, gs.stroke_A_Max);    // 7 = stroke Alpha (0-255)
-
+    //this.genes[7] = random(gs.stroke_A_Min, gs.stroke_A_Max);    // 7 = stroke Alpha (0-255)
+    this.genes[7] = gs.stroke_A;
 
     //this.genes[8] = random(height*0.05, height*0.12);                      // 8 = cellStartSize (10-50) (cellendipity/one uses 0-200)
     //this.genes[8] = random(gs.cellSSMin, gs.cellSSMax) * 0.01 * height;    // 8 = cellStartSize (10-50) (cellendipity/one uses 0-200)

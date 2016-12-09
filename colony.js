@@ -8,26 +8,46 @@ function Colony() {
 
   // VARIABLES
   this.colonyAge = gs.colonyLifespan;
+  this.maxStrains = 5;
 
   // Here is the code which fills the 'genepool' arraylist with a given number (gs.numStrains) of different DNA-strains.
-  for (var g = 0; g < gs.numStrains; g++) {
+  // I think I will always create 5 strains, but only the first 0-numStrains will actually be used.
+  for (var g = 0; g < this.maxStrains; g++) {
   this.genepool.push(new DNA()); // Add new Cell with DNAgenepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
   }
+  // This is a very messy solution! Needs replacing with a more efficient solution later....
+  this.genepool[0].genes[0] = gs.strain1Fill.h;
+  this.genepool[0].genes[1] = gs.strain1Fill.s * 255;
+  this.genepool[0].genes[2] = gs.strain1Fill.v * 255;
+  this.genepool[1].genes[0] = gs.strain2Fill.h;
+  this.genepool[1].genes[1] = gs.strain2Fill.s * 255;
+  this.genepool[1].genes[2] = gs.strain2Fill.v * 255;
+  this.genepool[2].genes[0] = gs.strain3Fill.h;
+  this.genepool[2].genes[1] = gs.strain3Fill.s * 255;
+  this.genepool[2].genes[2] = gs.strain3Fill.v * 255;
+  this.genepool[3].genes[0] = gs.strain4Fill.h;
+  this.genepool[3].genes[1] = gs.strain4Fill.s * 255;
+  this.genepool[3].genes[2] = gs.strain4Fill.v * 255;
+  this.genepool[4].genes[0] = gs.strain5Fill.h;
+  this.genepool[4].genes[1] = gs.strain5Fill.s * 255;
+  this.genepool[4].genes[2] = gs.strain5Fill.v * 255;
 
-  this.genepool[0].genes[0] = gs.strain0Fill.h;
-  this.genepool[0].genes[1] = gs.strain0Fill.s * 255;
-  this.genepool[0].genes[2] = gs.strain0Fill.v * 255;
-  if (gs.numStrains > 1) {
-    this.genepool[1].genes[0] = gs.strain1Fill.h;
-    this.genepool[1].genes[1] = gs.strain1Fill.s * 255;
-    this.genepool[1].genes[2] = gs.strain1Fill.v * 255;
-  }
-    if (gs.numStrains > 2) {
-      this.genepool[2].genes[0] = gs.strain2Fill.h;
-      this.genepool[2].genes[1] = gs.strain2Fill.s * 255;
-      this.genepool[2].genes[2] = gs.strain2Fill.v * 255;
+  this.genepool[0].genes[4] = gs.strain1Stroke.h;
+  this.genepool[0].genes[5] = gs.strain1Stroke.s * 255;
+  this.genepool[0].genes[6] = gs.strain1Stroke.v * 255;
+  this.genepool[1].genes[4] = gs.strain2Stroke.h;
+  this.genepool[1].genes[5] = gs.strain2Stroke.s * 255;
+  this.genepool[1].genes[6] = gs.strain2Stroke.v * 255;
+  this.genepool[2].genes[4] = gs.strain3Stroke.h;
+  this.genepool[2].genes[5] = gs.strain3Stroke.s * 255;
+  this.genepool[2].genes[6] = gs.strain3Stroke.v * 255;
+  this.genepool[3].genes[4] = gs.strain4Stroke.h;
+  this.genepool[3].genes[5] = gs.strain4Stroke.s * 255;
+  this.genepool[3].genes[6] = gs.strain4Stroke.v * 255;
+  this.genepool[4].genes[4] = gs.strain5Stroke.h;
+  this.genepool[4].genes[5] = gs.strain5Stroke.s * 255;
+  this.genepool[4].genes[6] = gs.strain5Stroke.v * 255;
 
-    }
 
 
 
@@ -36,7 +56,6 @@ function Colony() {
   for (var i = 0; i < gs.numStrains; i++) {
     //var dna = new DNA(); // Get new DNA
     var dna = this.genepool[i];
-    if (gs.blackStrain && i == 0) {dna.genes[1] = 255; dna.genes[2] = 0;}
     for (var j = 0; j < gs.strainSize; j++) {
       var vel = p5.Vector.random2D(); // Initial velocity vector is random
       this.cells.push(new Cell(vel, dna)); // Add new Cell with DNA

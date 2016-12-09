@@ -4,12 +4,11 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.trailMode = 3; // 1=none, 2 = blend, 3 = continuous
 
   // COLONY GUI menu:
-  this.colonyLifespan = 2000;             // Max number of frames a colony can live for
-  this.colonyDuration = 1500;             // Max number of frames a colony is active for
+  this.colonyLifespan = 4000;             // Max number of frames a colony can live for
+  this.colonyDuration = 2500;             // Max number of frames a colony is active for
   this.numStrains = 3;
   this.strainSize = int(random(6, 16)/this.numStrains); // Number of cells in a strain
   this.colonyMaxSize = 200; // Max number of cells in the colony
-  this.blackStrain = false;
   if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
 
 
@@ -35,6 +34,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.fill_B_Max = 255;
   this.fill_A_Min = 5;
   this.fill_A_Max = 5;
+  this.fill_A = 5;
 
   this.stroke_H_Min = 0;
   this.stroke_H_Max = 360;
@@ -44,21 +44,24 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.stroke_B_Max = 255;
   this.stroke_A_Min = 5;
   this.stroke_A_Max = 5;
+  this.stroke_A = 5;
 
-// this.strain0Fill = { h: 0, s: 255, v: 255};
-// this.strain1Fill = { h: 120, s: 255, v: 255};
-// this.strain2Fill = { h: 240, s: 255, v: 255};
-// this.strain3Fill = { h: 0, s: 255, v: 255};
 
 this.homeX = width*0.5;
 this.homeY = height*0.5;
 
 
-  this.strain0Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
   this.strain1Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
   this.strain2Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
   this.strain3Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
   this.strain4Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain5Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+
+  this.strain1Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+  this.strain2Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+  this.strain3Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+  this.strain4Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+  this.strain5Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
 
   //this.nucleusHue = this.bkgColHSV.h + 180;
   //if (this.nucleusHue > 360) {this.nucleusHue -= 360;}
@@ -91,6 +94,8 @@ this.homeY = height*0.5;
   this.restart = function() {populateColony();}; // Action-button to respawn a new colony [R] key
   this.restartRandomized = function() {randomize(); populateColony();};
 
-  this.autoRestart = true; // If true, will not wait for keypress before starting anew
+  this.autoRestart = true;         // If true, will not wait for keypress before starting anew
   this.randomizeOnRestart = false; // If true, parameters will be randomized on restart
+  this.showInstructions = false;   // If true, will display on-screen instructions
+  this.hide = function () {};
 }
