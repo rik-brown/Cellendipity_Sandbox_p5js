@@ -20,8 +20,8 @@ var numGenes = 20
 // 10 = lifespan (1-100% height)    gs.lifespanMin / gs.lifespanMax
 // 11 = flatness (75-150%)          gs.flatnessMax
 // 12 = spiral screw (-360/+360)    gs.spiralMin / gs.spiralMax
-// 13 = fertility (70-90%)(75)
-// 14 = spawnCount (1-5)(3)
+// 13 = fertility (70-90%)(75)      gs.fertility
+// 14 = spawnCount (1-5)(3)         gs.spawnCount
 // 15 = vMax (Noise) (0-4)
 // 16 = step (Noise) (1-6 * 0.001)
 // 17 = noisePercent (0-100%)       gs.noiseMin / gs.noiseMax
@@ -64,8 +64,10 @@ function DNA(newgenes) {
     if (random(1)>0.6) {this.genes[12] = 0;} else {this.genes[12] = gs.spiralMax * (1-(random(gs.variance*0.01)));} // 12 = spiral screw (-75 - +75 %)
     // if (random(1)>0.6) {this.genes[12] = 0;} else {this.genes[12] = random(gs.spiralMin, gs.spiralMax);} // 12 = spiral screw (-75 - +75 %)
 
-    this.genes[13] = 75;                                                           // 13 = fertility (70-90%)
-    this.genes[14] = 3;                                                            // 14 = spawnCount (1-5)
+    //this.genes[13] = 75;                                                           // 13 = fertility (70-90%)
+    this.genes[13] = gs.fertility;                                                 // 13 = fertility (70-90%)
+    // this.genes[14] = 3;                                                            // 14 = spawnCount (1-5)
+    this.genes[14] = gs.spawnCount;                                                            // 14 = spawnCount (1-5)
 
     this.genes[15] = random(0, 4);      // 15 = vMax (Noise) (0-5) (cellendipity/one uses 0-4)
     this.genes[16] = random(1, 6);      // 16 = step (Noise) (1 - 6 * 0.001?)  (cellendipity/one uses 0.001-0.006)

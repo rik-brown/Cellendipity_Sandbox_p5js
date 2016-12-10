@@ -122,7 +122,8 @@ function Cell(vel, dna) {
     //this.r = ((sin(map(this.maturity, 1, 0, 0, PI)))+0)*this.cellStartSize
     //this.r = ((cos(map(this.maturity, 1, 0, PI, PI*3)))+1)*this.cellStartSize
     //this.r -= this.growth;
-    this.r = map(this.remoteness, 0, 1, this.cellStartSize, this.cellEndSize);
+    //this.r = map(this.remoteness, 0, 1, this.cellStartSize, this.cellEndSize);
+    this.r = map(this.maturity, 1, 0, this.cellStartSize, this.cellEndSize);
   }
 
   this.updateFertility = function() {
@@ -153,7 +154,7 @@ function Cell(vel, dna) {
   this.dead = function() {
     //if (this.age >= this.lifespan) {return true;} // Death by old age (regardless of size, which may remain constant)
     if (this.r <= this.cellEndSize) {return true;} // Death by size (only when cell is shrinking)
-    if (this.spawnCount <= 0) {return true;} // Death by too much babies
+    if (this.spawnCount < 0) {return true;} // Death by too much babies
     //if (this.position.x > (((width+height)*0.5) + this.r*this.flatness) || this.position.x < (((width-height)*0.5)-this.r*this.flatness) || this.position.y > height + this.r*this.flatness || this.position.y < -this.r*this.flatness) {return true;} // Death if move beyond canvas boundary
     else {return false; }
   };

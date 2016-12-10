@@ -80,7 +80,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.nucleusColHSVF = { h: 0, s: 1, v: 0 };    // Black
   this.nucleusColorF = color(this.nucleusColHSVF.h, this.nucleusColHSVF.s*255, this.nucleusColHSVF.v*255); // Background colour
 
-  //dnaMenu---Behavioral modifiers
+  //dnaMenu---DNA mods
   this.variance = 0;    // 0-100 where 100 = 100% or max. variance
   //this.cellSSMin = 50;  // Absolute value
   this.cellSSMax = random(20, 80); // Absolute value
@@ -93,6 +93,8 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.noiseMax = 70;
   this.spiralMin = 0;
   this.spiralMax = 90;
+  this.fertility = 75;
+  this.spawnCount = 3;
 
   this.restart = function() {populateColony();}; // Action-button to respawn a new colony [R] key
   this.restartRandomized = function() {randomize(); populateColony();};

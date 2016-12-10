@@ -8,15 +8,8 @@ The overall structure seems vastly overcomplicated!
 Colour > DNA > Colour etc. SIMPLIFY IT!
 Rather than each cell having their own dna, could they in theory pick up their local values directly from the genepool?
 (would require the genepool being additively populated as new combinations arise, which could be ineffective, but still maybe less inefficient than 1 dna per cell)
+Maybe there is a way to include a color variable directly in the DNA?
 
-
-With the inclusion of a "variance %" or "Strain diversity%" there should be sufficient variation without the need for Max/Min limits on each colour parameter.
-Variance is a (upto random X% modifier) across all color parameters (or even a global variance?) Maybe one "variance%" per menu?
-
-this.cellStartSize = lerp(cellStartSize_, (cellStartSize_ * map(this.dna.genes[1], 0, 1, 0.8, 1.0)), p.variance*0.01)
-
-Variance is used to determine the fader-position in a LERP from (original value) to (value +/- variance)
-I want:
 One slider per variable to determine the 'middle value'
 One 'variance' to determine the amount of 'random variation' around that value, which could be 100% upto 200% (x2) or (*0.5/*2.0) or +/- 50%
 + 100% = x2
@@ -45,9 +38,13 @@ Suspected BUGS: (needs investigation)
 
 
 Possible IMPROVEMENTS:
-=======================
+======================
+
+If you change the colour of a strain (A-E) then that strain is the one you spawn with next mouseclick
+
 - Optimalisation: DNA genes that never change, could they be replaced by simple local variable in the cell? (or lookup to genepool?)
-Current examples: Fertility, SpawnCount, Flatness,
+Current examples: SpawnCount
+
 - this.remoteness : Is it actually needed, or is this.maturity (mapped to range) sufficient?
 - gs.stepped - Is it needed, or is this covered by stepSize = 0? Should it be true to start with?
   I think I have fixed it now so it never becomes false, and all is running normally

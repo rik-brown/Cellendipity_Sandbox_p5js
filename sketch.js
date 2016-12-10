@@ -216,6 +216,11 @@ var initGUI = function () {
       //   controller.onChange(function(value) {populateColony(); });
       var controller = dnaMenu.add(gs, 'spiralMax', 0, 360).step(5).name('Swirl').listen();
         controller.onChange(function(value) {populateColony(); });
+      var controller = dnaMenu.add(gs, 'fertility', 0, 90).step(1).name('Fertility').listen();
+        controller.onChange(function(value) {populateColony(); });
+      var controller = dnaMenu.add(gs, 'spawnCount', 0, 5).step(1).name('Children').listen();
+        controller.onChange(function(value) {populateColony(); });
+
 
   gui.add(gs, 'restart').name('Restart [space]');
   gui.add(gs, 'restartRandomized').name('Randomize [R]');
