@@ -53,7 +53,7 @@ function populateColony() {
 function mousePressed() {
   var vel = p5.Vector.random2D();
   // var dna = new DNA(); // creates a new DNA with randomised values
-  var dna = colony.genepool[floor(random(gs.numStrains))];
+  var dna = colony.genepool[floor(random(gs.numStrains))]; //get a random DNA from the genepool
   dna.genes[10] = height * 0.75; // workaround: overrides the Lifespan value for the strain to avoid spawning outside
   dna.genes[18] = mouseX;
   dna.genes[19] = mouseY;
@@ -67,7 +67,7 @@ function mousePressed() {
 function mouseDragged() {
   var vel = p5.Vector.random2D();
   //var dna = new DNA(); // creates a new DNA with randomised values
-  var dna = colony.genepool[floor(random(gs.numStrains))];
+  var dna = colony.genepool[floor(random(gs.numStrains))]; //get a random DNA from the genepool
   dna.genes[10] = height * 0.75; // workaround: overrides the Lifespan value for the strain to avoid spawning outside
   dna.genes[18] = mouseX;
   dna.genes[19] = mouseY;

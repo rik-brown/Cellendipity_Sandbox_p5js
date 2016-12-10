@@ -77,6 +77,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.nucleusColorF = color(this.nucleusColHSVF.h, this.nucleusColHSVF.s*255, this.nucleusColHSVF.v*255); // Background colour
 
   //dnaMenu---Behavioral modifiers
+  this.variance = 0;    // 0-100 where 100 = 100% or max. variance
   this.cellSSMin = 50;  // Absolute value
   this.cellSSMax = 100; // Absolute value
   this.cellESMin = 5;   // % of cellStartSize

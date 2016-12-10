@@ -5,7 +5,7 @@ function Cell(vel, dna) {
 
   this.dna = dna;
 
-  // DNA gene mapping (18 genes)
+  // DNA gene mapping (22 genes)
   // 0 = fill Hue (0-360)
   // 1 = fill Saturation (0-255)
   // 2 = fill Brightness (0-255)
@@ -21,8 +21,8 @@ function Cell(vel, dna) {
   // 12 = spiral screw (-75 - +75 %)
   // 13 = fertility (70-90%)
   // 14 = spawnCount (1-5)
-  // 15 = vMax (Noise) (0-5) (cellendipity/one uses 0-4)
-  // 16 = step (Noise) (1 - 6 * 0.001?)  (cellendipity/one uses 0.001-0.006)
+  // 15 = vMax (Noise) (0-4)
+  // 16 = step (Noise) (1 - 6 * 0.001)
   // 17 = noisePercent (0-100%)
   // 18 = seedPosX (0-width)
   // 19 = seedPosY (0-height)
@@ -231,8 +231,8 @@ function Cell(vel, dna) {
     childDNA.genes[18] = this.position.x; // Child starts at mother's current position
     childDNA.genes[19] = this.position.y; // Child starts at mother's current position
 
-    childDNA.genes[20] = this.dna.genes[20]; // Child remembers origin of the mother
-    childDNA.genes[21] = this.dna.genes[21]; // Child remembers origin of the mother
+    //childDNA.genes[20] = this.dna.genes[20]; // Child remembers origin of the mother
+    //childDNA.genes[21] = this.dna.genes[21]; // Child remembers origin of the mother
     //childDNA.mutate(0.01); // Child DNA can mutate. HACKED! Mutation is temporarily disabled!
 
     // Call spawn method (in Colony) with the new parameters for position, velocity, colour & starting radius)
