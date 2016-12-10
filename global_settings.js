@@ -9,8 +9,12 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.colonyLifespan = 4000;             // Max number of frames a colony can live for
   this.colonyDuration = 2500;             // Max number of frames a colony is active for
   this.stepped = true;
-  if (random(1) > 0.5) {this.stepSize = int(random(20,60)); this.stepSizeN = this.stepSize;} else {this.stepSize = 0; this.stepSizeN = int(random(20, 50));}
+  this.stepSize = 0;
+  this.stepSizeN = int(random(20, 50));
+  // if (random(1) > 0.5) {this.stepSize = int(random(20,60)); this.stepSizeN = this.stepSize;} else {this.stepSize = 0; this.stepSizeN = int(random(20, 50));}
   this.bkgColHSV = { h: random(360), s: random(0.25, 0.5), v: random(0.5, 1) };
+  this.bkgColor = color(this.bkgColHSV.h, this.bkgColHSV.s*255, this.bkgColHSV.v*255); // Background colour
+
   this.bkgColor = color(this.bkgColHSV.h, this.bkgColHSV.s*255, this.bkgColHSV.v*255); // Background colour
   this.autoRestart = true;         // If true, will not wait for keypress before starting anew
   this.randomizeOnRestart = false; // If true, parameters will be randomized on restart
@@ -50,11 +54,11 @@ function Global_settings() { //These are the initial values, not the randomised 
 
   //fillColTweaksMenu---Cytoplasm mods
   this.fill_HTwist = 0;
-  this.fill_STwist = 200;
+  this.fill_STwist = 0; // Last: 200
   this.fill_BTwist = 0;
   // this.fill_A_Min = 5;
   // this.fill_A_Max = 5;
-  this.fill_A = 5;
+  this.fill_A = 240;
   // this.fill_ATwist = 0;
 
   //strokeColTweaksMenu---Membrane mods
@@ -63,7 +67,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.stroke_BTwist = 0;
   // this.stroke_A_Min = 5;
   // this.stroke_A_Max = 5;
-  this.stroke_A = 5;
+  this.stroke_A = 240;
   // this.stroke_ATwist = 0;
 
   //nucleusMenu---Nucleus mods
@@ -79,15 +83,16 @@ function Global_settings() { //These are the initial values, not the randomised 
   //dnaMenu---Behavioral modifiers
   this.variance = 0;    // 0-100 where 100 = 100% or max. variance
   //this.cellSSMin = 50;  // Absolute value
-  this.cellSSMax = 100; // Absolute value
+  this.cellSSMax = random(20, 80); // Absolute value
   //this.cellESMin = 5;   // % of cellStartSize
   this.cellESMax = 30;  // % of cellStartSize
   this.lifespanMin = 30;
   this.lifespanMax = 70;
+  this.flatnessMax = 100;
   this.noiseMin = 0;
-  this.noiseMax = 100;
+  this.noiseMax = 70;
   this.spiralMin = 0;
-  this.spiralMax = 180;
+  this.spiralMax = 90;
 
   this.restart = function() {populateColony();}; // Action-button to respawn a new colony [R] key
   this.restartRandomized = function() {randomize(); populateColony();};
