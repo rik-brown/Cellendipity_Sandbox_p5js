@@ -10,11 +10,11 @@ function Colony() {
   this.colonyAge = gs.colonyLifespan;
   this.maxStrains = 5;
 
-  // Here is the code which fills the 'genepool' arraylist with a given number (gs.numStrains) of different DNA-strains.
-  // I think I will always create 5 strains, but only the first 0-numStrains will actually be used.
+  // This code  populates the 'genepool' arraylist with <maxStrains> different DNA-strains.
   for (var g = 0; g < this.maxStrains; g++) {
-  this.genepool.push(new DNA()); // Add new Cell with DNAgenepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+  this.genepool.push(new DNA()); // Add new DNA to the genepool. Individual genes will be generated within the limits in the constructor
   }
+  // Now the genes for fillColor and strokeColor need to be overwritten according to the GUI settings.
   // This is a very messy solution! Needs replacing with a more efficient solution later....
   this.genepool[0].genes[0] = gs.strain1Fill.h;
   this.genepool[0].genes[1] = gs.strain1Fill.s * 255;
@@ -48,15 +48,10 @@ function Colony() {
   this.genepool[4].genes[5] = gs.strain5Stroke.s * 255;
   this.genepool[4].genes[6] = gs.strain5Stroke.v * 255;
 
-
-
-
   // Create initial population of cells
-  //var strainSize = floor(gs.colonySize/gs.numStrains);
   for (var i = 0; i < gs.numStrains; i++) {
-    //var dna = new DNA(); // Get new DNA
-    var dna = this.genepool[i];
-    for (var j = 0; j < gs.strainSize; j++) {
+    var dna = this.genepool[i]; // Get the corresponding dna from the genepool
+    for (var j = 0; j < gs.strainSize; j++) { // Create a spawn of identical cells
       var vel = p5.Vector.random2D(); // Initial velocity vector is random
       this.cells.push(new Cell(vel, dna)); // Add new Cell with DNA
     }

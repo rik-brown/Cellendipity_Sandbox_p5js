@@ -6,6 +6,9 @@ Known BUGS:
 
 The overall structure seems vastly overcomplicated!
 Colour > DNA > Colour etc. SIMPLIFY IT!
+Rather than each cell having their own dna, could they in theory pick up their local values directly from the genepool?
+(would require the genepool being additively populated as new combinations arise, which could be ineffective, but still maybe less inefficient than 1 dna per cell)
+
 
 With the inclusion of a "variance %" or "Strain diversity%" there should be sufficient variation without the need for Max/Min limits on each colour parameter.
 Variance is a (upto random X% modifier) across all color parameters (or even a global variance?) Maybe one "variance%" per menu?
@@ -20,14 +23,38 @@ One 'variance' to determine the amount of 'random variation' around that value, 
 - 100% = *0.5
 Variance will apply to all variables in 'DNA tweaks': startsize/endsize/lifespan/noise/twist/transparency?
 
+I NEED A WAY TO MAKE VARIANCE RANGE EXTEND BOTH ABOVE AND BELOW THE SELECTED VALUE (WITHIN LIMITS)
+MAYBE I CAN USE 'CONSTRAIN'?
+
+Now:
+Each Cell has it's own DNA.
+In the initial spawn, cell DNA is picked from a set of 5 DNA in a prepopulated 'genepool' array.
+In cells spawned from a conception-event, dna is recombined to make a new, unique individual (though this is not currently added to the genepool)
+Gene-values for the genepool-DNA are assigned (in dna.js constructor) within limits given by variables in global_settings (& editable in the GUI)
+The goal is for random variation within controllable limits (as full-scale random often results in a mess)
+Currently, the limits can be specified as Min-Max but this is clumsy in the GUI (due to lack of 'from-to' slider)
+
+I will therefore keep the 'Min' value (& slider) but add a general 'Diversity' or 'Variance' slider which affects all values across the board.
+The expression of this 'variance' will be within the DNA constructor.
+
+Do I expect there to be some degree of random variation within a strain?
+If so, this will need to occur in the individual cell constructor.
+
 Suspected BUGS: (needs investigation)
 =====================================
 
 
 Possible IMPROVEMENTS:
 =======================
-
+- Optimalisation: DNA genes that never change, could they be replaced by simple local variable in the cell? (or lookup to genepool?)
+Current examples: Fertility, SpawnCount, Flatness,
 - this.remoteness : Is it actually needed, or is this.maturity (mapped to range) sufficient?
+- gs.stepped - Is it needed, or is this covered by stepSize = 0? Should it be true to start with?
+  I think I have fixed it now so it never becomes false, and all is running normally
+  Remove at a later stage (in a fork)
+
+  Can remove 2 genes (20 & 21) since home is given directly from gs variables:
+  this.home = new p5.Vector(gs.homeX, gs.homeY); //cell has origin
 
 - Better alternative for Max/Min in GUI? Typed values?
 
@@ -39,14 +66,8 @@ Possible IMPROVEMENTS:
 - Look at aybe_sea - it runs smooth, the GUI is not over-complex. Could I just rebuild that to make a 'mandala' pattern?
 - It has a nice 'randomize on restart' function
 
-- TIDYING: Order variables in the same sequence in gs, dat.gui & randomize. GUI is master?
-- Align value ranges in gs, dat.gui & randomize()
-
-
 REMEMBER! Scaling is important: use relative sizes IMPORTANT!!
 REMEMBER! populateColony() does not refresh Global_settings!!
-
-- If stepped, stepSizeN = stepSize
 
 Ideas for NEW FEATURES:
 =======================
@@ -59,10 +80,7 @@ To select a predefined set of global_settings
 
 TASKS:
 ======
-
-- Decide on new TITLE in html Cellendipity Composer?
-- Instructions? .txt or on-screen text()? (did I make this already?)
-
+- Window resize?
 - Naming convention - what is this generator called?
 
 How to go on from here towards being able to use the GUI to tweak the generators (& save presets to JSON?)

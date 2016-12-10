@@ -5,7 +5,7 @@ function Cell(vel, dna) {
 
   this.dna = dna;
 
-  // DNA gene mapping (18 genes)
+  // DNA gene mapping (22 genes)
   // 0 = fill Hue (0-360)
   // 1 = fill Saturation (0-255)
   // 2 = fill Brightness (0-255)
@@ -21,8 +21,8 @@ function Cell(vel, dna) {
   // 12 = spiral screw (-75 - +75 %)
   // 13 = fertility (70-90%)
   // 14 = spawnCount (1-5)
-  // 15 = vMax (Noise) (0-5) (cellendipity/one uses 0-4)
-  // 16 = step (Noise) (1 - 6 * 0.001?)  (cellendipity/one uses 0.001-0.006)
+  // 15 = vMax (Noise) (0-4)
+  // 16 = step (Noise) (1 - 6 * 0.001)
   // 17 = noisePercent (0-100%)
   // 18 = seedPosX (0-width)
   // 19 = seedPosY (0-height)
@@ -154,29 +154,29 @@ function Cell(vel, dna) {
     //if (this.age >= this.lifespan) {return true;} // Death by old age (regardless of size, which may remain constant)
     if (this.r <= this.cellEndSize) {return true;} // Death by size (only when cell is shrinking)
     if (this.spawnCount <= 0) {return true;} // Death by too much babies
-    if (this.position.x > (((width+height)*0.5) + this.r*this.flatness) || this.position.x < (((width-height)*0.5)-this.r*this.flatness) || this.position.y > height + this.r*this.flatness || this.position.y < -this.r*this.flatness) {return true;} // Death if move beyond canvas boundary
+    //if (this.position.x > (((width+height)*0.5) + this.r*this.flatness) || this.position.x < (((width-height)*0.5)-this.r*this.flatness) || this.position.y > height + this.r*this.flatness || this.position.y < -this.r*this.flatness) {return true;} // Death if move beyond canvas boundary
     else {return false; }
   };
 
   this.display = function() {
-    //strokeWeight(2);
     stroke(hue(this.strokeColor), saturation(this.strokeColor), brightness(this.strokeColor), this.strokeAlpha);
+    if (this.strokeAlpha == 0) {noStroke();}
     fill(hue(this.fillColor), saturation(this.fillColor), brightness(this.fillColor), this.fillAlpha);
+    if (this.fillAlpha == 0) {noFill();}
 
     var angle = this.velocity.heading();
     push();
     translate(this.position.x, this.position.y);
     rotate(angle);
     if (!gs.stepped) { // No step-counter for Cell
-      //line(-this.r,0,-this.r*2,0);
       ellipse(0, 0, this.r, this.r * this.flatness);
 
       if (gs.nucleus && this.drawStepN < 1) {
         if (this.fertile) {
-          fill(gs.nucleusColorF); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          noStroke(); fill(gs.nucleusColorF); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
         }
         else {
-          fill(gs.nucleusColorU); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          noStroke; fill(gs.nucleusColorU); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
         }
       }
     }
@@ -184,10 +184,10 @@ function Cell(vel, dna) {
       ellipse(0, 0, this.r, this.r*this.flatness);
       if (gs.nucleus && this.drawStepN < 1) { // Nucleus is always drawn when cell is drawn (no step-counter for nucleus)
         if (this.fertile) {
-          fill(gs.nucleusColorF); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          noStroke(); fill(gs.nucleusColorF); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
         }
         else {
-          fill(gs.nucleusColorU); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          noStroke(); fill(gs.nucleusColorU); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
         }
       }
     }
@@ -233,8 +233,8 @@ function Cell(vel, dna) {
     childDNA.genes[18] = this.position.x; // Child starts at mother's current position
     childDNA.genes[19] = this.position.y; // Child starts at mother's current position
 
-    childDNA.genes[20] = this.dna.genes[20]; // Child remembers origin of the mother
-    childDNA.genes[21] = this.dna.genes[21]; // Child remembers origin of the mother
+    //childDNA.genes[20] = this.dna.genes[20]; // Child remembers origin of the mother
+    //childDNA.genes[21] = this.dna.genes[21]; // Child remembers origin of the mother
     //childDNA.mutate(0.01); // Child DNA can mutate. HACKED! Mutation is temporarily disabled!
 
     // Call spawn method (in Colony) with the new parameters for position, velocity, colour & starting radius)
