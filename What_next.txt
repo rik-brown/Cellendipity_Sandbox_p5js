@@ -42,14 +42,8 @@ Possible IMPROVEMENTS:
 - Look at aybe_sea - it runs smooth, the GUI is not over-complex. Could I just rebuild that to make a 'mandala' pattern?
 - It has a nice 'randomize on restart' function
 
-- TIDYING: Order variables in the same sequence in gs, dat.gui & randomize. GUI is master?
-- Align value ranges in gs, dat.gui & randomize()
-
-
 REMEMBER! Scaling is important: use relative sizes IMPORTANT!!
 REMEMBER! populateColony() does not refresh Global_settings!!
-
-- If stepped, stepSizeN = stepSize
 
 Ideas for NEW FEATURES:
 =======================
