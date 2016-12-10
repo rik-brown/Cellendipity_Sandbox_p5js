@@ -23,6 +23,9 @@ One 'variance' to determine the amount of 'random variation' around that value, 
 - 100% = *0.5
 Variance will apply to all variables in 'DNA tweaks': startsize/endsize/lifespan/noise/twist/transparency?
 
+I NEED A WAY TO MAKE VARIANCE RANGE EXTEND BOTH ABOVE AND BELOW THE SELECTED VALUE (WITHIN LIMITS)
+MAYBE I CAN USE 'CONSTRAIN'?
+
 Now:
 Each Cell has it's own DNA.
 In the initial spawn, cell DNA is picked from a set of 5 DNA in a prepopulated 'genepool' array.

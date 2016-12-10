@@ -3,6 +3,7 @@
   colonyDuration  100-10 000
   stepSize 0-100
   bkgColHSV { h: random(360), s: random(64, 128), v: random(128, 255) }
+  centerSpawn 50/50
   autoRestart true
   randomizeOnRestart false
 
@@ -10,7 +11,8 @@
   numStrains 1-5
   strainSize 1-40
   colonyMaxSize 10-500
-  centerSpawn 50/50
+  variance
+
 
 //strain1Menu---Strain A
   strain1Fill   { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
@@ -51,15 +53,16 @@
   nucleusColHSVF { h: random(0, 360), s: random(0, 255), v: random(0, 255) }
 
 //dnaMenu---Behavioral modifiers
-cellSSMin 1-100
+//cellSSMin 1-100
 cellSSMax 1-100
-cellESMin 1-100
+//cellESMin 1-100
 cellESMax 1-100
-lifespanMin 1-100
+//lifespanMin 1-100
 lifespanMax 1-100
-noiseMin 0-100
+flatnessMax 50-200
+//noiseMin 0-100
 noiseMax 0-100
-spiralMin -360-0
+//spiralMin -360-0
 spiralMax 0-360
 
 //no folder

@@ -88,7 +88,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.cellESMax = 30;  // % of cellStartSize
   this.lifespanMin = 30;
   this.lifespanMax = 70;
-  this.flatnessMax = 100;
+  this.flatnessMax = 0;
   this.noiseMin = 0;
   this.noiseMax = 70;
   this.spiralMin = 0;

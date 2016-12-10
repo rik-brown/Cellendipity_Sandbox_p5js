@@ -205,7 +205,7 @@ var initGUI = function () {
       //   controller.onChange(function(value) {populateColony(); });
       var controller = dnaMenu.add(gs, 'lifespanMax', 1, 100).step(1).name('Range').listen();
         controller.onChange(function(value) {populateColony(); });
-      var controller = dnaMenu.add(gs, 'flatnessMax', 50, 200).step(1).name('Flatness').listen();
+      var controller = dnaMenu.add(gs, 'flatnessMax', 0, 100).step(1).name('Flatness').listen();
         controller.onChange(function(value) {populateColony(); });
 
       // var controller = dnaMenu.add(gs, 'noiseMin', 0, 100).step(1).name('noise%Min').listen();
@@ -214,7 +214,7 @@ var initGUI = function () {
         controller.onChange(function(value) {populateColony(); });
       // var controller = dnaMenu.add(gs, 'spiralMin', -360, 0).step(5).name('SpiralMinDegrees').listen();
       //   controller.onChange(function(value) {populateColony(); });
-      var controller = dnaMenu.add(gs, 'spiralMax', 0, 360).step(5).name('SpiralMaxDegrees').listen();
+      var controller = dnaMenu.add(gs, 'spiralMax', 0, 360).step(5).name('Swirl').listen();
         controller.onChange(function(value) {populateColony(); });
 
   gui.add(gs, 'restart').name('Restart [space]');

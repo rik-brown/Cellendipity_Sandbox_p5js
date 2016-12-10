@@ -18,7 +18,7 @@ var numGenes = 20
 // 8 = cellStartSize (1-100)        gs.cellSSMin / gs.cellSSMax WARNING! Should be relative to window size, not absolute, or???
 // 9 = cellEndSize (1-100% cellSS)  gs.cellESMin / gs.cellESMax
 // 10 = lifespan (1-100% height)    gs.lifespanMin / gs.lifespanMax
-// 11 = flatness (75-150%)
+// 11 = flatness (75-150%)          gs.flatnessMax
 // 12 = spiral screw (-360/+360)    gs.spiralMin / gs.spiralMax
 // 13 = fertility (70-90%)(75)
 // 14 = spawnCount (1-5)(3)
@@ -59,7 +59,7 @@ function DNA(newgenes) {
     this.genes[10] = gs.lifespanMax * (1-(random(gs.variance*0.01))) * 0.01 * height;    // 10 = lifespan (200-1000)
 
     // if (random(1)>0.5) {this.genes[11] = 100;} else {this.genes[11] = random(75, 150);}                  // 11 = flatness (75-150 %)
-    this.genes[11] = gs.flatnessMax * (1-(random(gs.variance*0.01)));
+    this.genes[11] = (gs.flatnessMax * (1-(random(gs.variance*0.01)))) + 100;
 
     if (random(1)>0.6) {this.genes[12] = 0;} else {this.genes[12] = gs.spiralMax * (1-(random(gs.variance*0.01)));} // 12 = spiral screw (-75 - +75 %)
     // if (random(1)>0.6) {this.genes[12] = 0;} else {this.genes[12] = random(gs.spiralMin, gs.spiralMax);} // 12 = spiral screw (-75 - +75 %)
