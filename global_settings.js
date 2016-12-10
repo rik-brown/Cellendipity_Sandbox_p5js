@@ -78,9 +78,9 @@ function Global_settings() { //These are the initial values, not the randomised 
 
   //dnaMenu---Behavioral modifiers
   this.variance = 0;    // 0-100 where 100 = 100% or max. variance
-  this.cellSSMin = 50;  // Absolute value
+  //this.cellSSMin = 50;  // Absolute value
   this.cellSSMax = 100; // Absolute value
-  this.cellESMin = 5;   // % of cellStartSize
+  //this.cellESMin = 5;   // % of cellStartSize
   this.cellESMax = 30;  // % of cellStartSize
   this.lifespanMin = 30;
   this.lifespanMax = 70;

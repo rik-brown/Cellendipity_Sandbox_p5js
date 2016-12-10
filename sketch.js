@@ -190,12 +190,14 @@ var initGUI = function () {
         controller.onChange(function(value) {gs.nucleusColorF = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
 
       var dnaMenu = gui.addFolder("Behavioral modifiers");
-      var controller = dnaMenu.add(gs, 'cellSSMin', 1, 100).step(1).name('cellStartSizeMin').listen();
+      // var controller = dnaMenu.add(gs, 'cellSSMin', 1, 100).step(1).name('cellStartSizeMin').listen();
+      //   controller.onChange(function(value) {populateColony(); });
+      var controller = dnaMenu.add(gs, 'variance', 0, 100).step(1).name('Diversity').listen();
         controller.onChange(function(value) {populateColony(); });
       var controller = dnaMenu.add(gs, 'cellSSMax', 1, 100).step(1).name('cellStartSizeMax').listen();
         controller.onChange(function(value) {populateColony(); });
-      var controller = dnaMenu.add(gs, 'cellESMin', 1, 100).step(1).name('cellEndSizeMin').listen();
-        controller.onChange(function(value) {populateColony(); });
+      // var controller = dnaMenu.add(gs, 'cellESMin', 1, 100).step(1).name('cellEndSizeMin').listen();
+      //   controller.onChange(function(value) {populateColony(); });
       var controller = dnaMenu.add(gs, 'cellESMax', 1, 100).step(1).name('cellEndSizeMax').listen();
         controller.onChange(function(value) {populateColony(); });
       var controller = dnaMenu.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMin').listen();
@@ -266,10 +268,11 @@ function randomize() { // Parameters are randomized (more than in the initial co
   gs.nucleusColorF = color(gs.nucleusColHSVF.h, gs.nucleusColHSVF.s*255, gs.nucleusColHSVF.v*255);
 
   //dnaMenu---Behavioral modifiers
+  gs.variance = random(1);
   gs.cellSSMax = random(1,100); // Absolute value
-  gs.cellSSMin = random(1,100);  // Absolute value
+  // gs.cellSSMin = random(1,100);  // Absolute value
   gs.cellESMax = random(100);  // % of cellStartSize
-  gs.cellESMin = random(100);   // % of cellStartSize
+  // gs.cellESMin = random(100);   // % of cellStartSize
   gs.lifespanMax = random(30, 70);
   gs.lifespanMin = random(30, 70);
   gs.noiseMax = random(100);

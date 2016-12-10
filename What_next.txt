@@ -42,7 +42,8 @@ Suspected BUGS: (needs investigation)
 
 Possible IMPROVEMENTS:
 =======================
-
+- Optimalisation: DNA genes that never change, could they be replaced by simple local variable in the cell? (or lookup to genepool?)
+Current examples: Fertility, SpawnCount, Flatness, 
 - this.remoteness : Is it actually needed, or is this.maturity (mapped to range) sufficient?
 - gs.stepped - Is it needed, or is this covered by stepSize = 0? Should it be true to start with?
   I think I have fixed it now so it never becomes false, and all is running normally

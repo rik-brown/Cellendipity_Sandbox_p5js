@@ -160,7 +160,9 @@ function Cell(vel, dna) {
 
   this.display = function() {
     stroke(hue(this.strokeColor), saturation(this.strokeColor), brightness(this.strokeColor), this.strokeAlpha);
+    if (this.strokeAlpha == 0) {noStroke();}
     fill(hue(this.fillColor), saturation(this.fillColor), brightness(this.fillColor), this.fillAlpha);
+    if (this.fillAlpha == 0) {noFill();}
 
     var angle = this.velocity.heading();
     push();
