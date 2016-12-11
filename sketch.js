@@ -227,6 +227,10 @@ var initGUI = function () {
       var controller = colModsMenu.add(gs, 'globalBrightness', 0, 100).step(1).name('Brightness%').listen();
         controller.onChange(function(value) {populateColony(); });
 
+      var controller = colModsMenu.add(gs, 'bkgHueOffset', 0, 360).step(1).name('Strain A H-shift').listen();
+        controller.onChange(function(value) {populateColony(); });
+
+
   gui.add(gs, 'restart').name('Restart [space]');
   gui.add(gs, 'restartRandomized').name('Randomize [R]');
   gui.add(gs, 'paused').name('Pause [P]');
