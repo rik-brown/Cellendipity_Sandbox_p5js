@@ -16,11 +16,12 @@ function Colony() {
   }
   // Now the genes for fillColor and strokeColor need to be overwritten according to the GUI settings.
   // This is a very messy solution! Needs replacing with a more efficient solution later....
-  if (gs.bkgHueOffset >0) {
-    this.genepool[0].genes[0] = gs.bkgColHSV.h + gs.bkgHueOffset;
-    if (this.genepool[0].genes[0] > 360) {this.genepool[0].genes[0] -= 360;}
-  }
-  else {this.genepool[0].genes[0] = gs.strain1Fill.h;}
+  // if (gs.bkgHueOffset >0) {
+  //   this.genepool[0].genes[0] = gs.bkgColHSV.h + gs.bkgHueOffset;
+  //   if (this.genepool[0].genes[0] > 360) {this.genepool[0].genes[0] -= 360;}
+  // }
+  // else {this.genepool[0].genes[0] = gs.strain1Fill.h;}
+  this.genepool[0].genes[0] = gs.strain1Fill.h;
   this.genepool[0].genes[1] = gs.strain1Fill.s * 2.55 * gs.globalSaturation;
   this.genepool[0].genes[2] = gs.strain1Fill.v * 2.55 * gs.globalBrightness;
   this.genepool[1].genes[0] = gs.strain2Fill.h;

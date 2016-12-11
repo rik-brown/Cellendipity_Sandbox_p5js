@@ -123,8 +123,13 @@ var initGUI = function () {
   var strain1Menu = gui.addFolder("Strain A");
     var controller = strain1Menu.addColor(gs, 'strain1Fill').name('Cytoplasm').listen();
       controller.onChange(function(value) {colony.genepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+    var controller = strain1Menu.add(gs, 'bkgHueFillOffset', 0, 360).step(1).name('Agar offset').listen();
+      controller.onChange(function(value) {updateStrainAHue(); populateColony(); });
     var controller = strain1Menu.addColor(gs, 'strain1Stroke').name('Membrane').listen();
       controller.onChange(function(value) {colony.genepool[0].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+    var controller = strain1Menu.add(gs, 'bkgHueStrokeOffset', 0, 360).step(1).name('Agar offset').listen();
+      controller.onChange(function(value) {updateStrainAHue(); populateColony(); });
+
 
     var strain2Menu = gui.addFolder("Strain B");
       var controller = strain2Menu.addColor(gs, 'strain2Fill').name('Cytoplasm').listen();
@@ -227,10 +232,6 @@ var initGUI = function () {
       var controller = colModsMenu.add(gs, 'globalBrightness', 0, 100).step(1).name('Brightness%').listen();
         controller.onChange(function(value) {populateColony(); });
 
-      var controller = colModsMenu.add(gs, 'bkgHueOffset', 0, 360).step(1).name('Strain A H-shift').listen();
-        controller.onChange(function(value) {populateColony(); });
-
-
   gui.add(gs, 'restart').name('Restart [space]');
   gui.add(gs, 'restartRandomized').name('Randomize [R]');
   gui.add(gs, 'paused').name('Pause [P]');
@@ -239,6 +240,14 @@ var initGUI = function () {
   gui.add(gs, 'hide').name('Hide/show [H]');
 
   gui.close(); // GUI starts in closed state
+}
+
+function updateStrainAHue() { //update the gs.HSV color object for strain A so it shows correctly in the meny
+  gs.strain1Fill.h = gs.bkgColHSV.h + gs.bkgHueFillOffset;
+  gs.strain1Stroke.h = gs.bkgColHSV.h + gs.bkgHueStrokeOffset;
+  if (gs.strain1Fill.h > 360) {gs.strain1Fill.h -= 360;}
+  if (gs.strain1Stroke.h > 360) {gs.strain1Stroke.h -= 360;}
+
 }
 
 

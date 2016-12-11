@@ -99,7 +99,8 @@ function Global_settings() { //These are the initial values, not the randomised 
   //colourMods---test
   this.globalSaturation=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
   this.globalBrightness=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
-  this.bkgHueOffset=180; // strain1Hue will be offset from bkgCol.h by this amount (0=off)
+  this.bkgHueFillOffset=random(3, 355); // strain1Fill.h will be offset from bkgCol.h by this amount
+  this.bkgHueStrokeOffset=random(3, 355); // strain1Stroke.h will be offset from bkgCol.h by this amount
 
   this.restart = function() {populateColony();}; // Action-button to respawn a new colony [R] key
   this.restartRandomized = function() {randomize(); populateColony();};
