@@ -10,6 +10,7 @@ Suspected BUGS: (needs investigation)
 
 Possible IMPROVEMENTS:
 ======================
+>> Maybe death on spawnCount >= 0 is a good thing (min spawncount = 1)
 
 The overall structure seems vastly overcomplicated!
 Colour > DNA > Colour etc. SIMPLIFY IT!

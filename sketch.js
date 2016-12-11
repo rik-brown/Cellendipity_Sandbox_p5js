@@ -103,7 +103,7 @@ var initGUI = function () {
   //  controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.stepSizeN = gs.stepSize; gs.trailMode = 3;}; populateColony();});
    controller.onChange(function(value) {if (gs.stepSize > 0) {gs.stepSizeN = gs.stepSize;} populateColony();});
   var controller = optionsMenu.addColor(gs, 'bkgColHSV').name('Agar colour').listen();
-    controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
+    controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); updateHueAllStrains(); populateColony();});
   var controller = optionsMenu.add(gs, 'centerSpawn').name('Centered [C]').listen();
     controller.onChange(function(value) {populateColony(); });
 
@@ -124,11 +124,11 @@ var initGUI = function () {
     var controller = strain1Menu.addColor(gs, 'strain1Fill').name('Cytoplasm').listen();
       controller.onChange(function(value) {colony.genepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
     var controller = strain1Menu.add(gs, 'bkgHueFillOffset', 0, 360).step(1).name('Agar offset').listen();
-      controller.onChange(function(value) {updateStrainAHue(); populateColony(); });
+      controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
     var controller = strain1Menu.addColor(gs, 'strain1Stroke').name('Membrane').listen();
       controller.onChange(function(value) {colony.genepool[0].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
     var controller = strain1Menu.add(gs, 'bkgHueStrokeOffset', 0, 360).step(1).name('Agar offset').listen();
-      controller.onChange(function(value) {updateStrainAHue(); populateColony(); });
+      controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
 
 
     var strain2Menu = gui.addFolder("Strain B");
@@ -164,6 +164,9 @@ var initGUI = function () {
       controller.onChange(function(value) {populateColony(); });
     var controller = fillColTweaksMenu.add(gs, 'fill_A', 0, 255).step(1).name('Transparency').listen();
       controller.onChange(function(value) {populateColony(); });
+    var controller = fillColTweaksMenu.add(gs, 'strainHueFillOffset', 0, 100).step(1).name('Hue Offset').listen();
+      controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
+
     // var controller = fillColTweaksMenu.add(gs, 'fill_ATwist', 0, 255).name('AlphaMod.').listen();
     //   controller.onChange(function(value) {populateColony(); });
     // var controller = fillColTweaksMenu.add(gs, 'fill_A_Min', 0, 255).step(1).name('fillAMin').listen();
@@ -180,6 +183,9 @@ var initGUI = function () {
       controller.onChange(function(value) {populateColony(); });
     var controller = strokeColTweaksMenu.add(gs, 'stroke_A', 0, 255).step(1).name('Transparency').listen();
       controller.onChange(function(value) {populateColony(); });
+    var controller = strokeColTweaksMenu.add(gs, 'strainHueStrokeOffset', 0, 100).step(1).name('Hue Offset').listen();
+      controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
+
     // var controller = strokeColTweaksMenu.add(gs, 'stroke_ATwist', 0, 255).name('AlphaMod').listen();
     //   controller.onChange(function(value) {populateColony(); });
     // var controller = strokeColTweaksMenu.add(gs, 'stroke_A_Min', 0, 255).step(1).name('strokeAMin').listen();
@@ -192,9 +198,9 @@ var initGUI = function () {
         controller.onChange(function(value) {populateColony(); });
       var controller = nucleusMenu.add(gs, 'stepSizeN', 0, 100).name('Step size').listen();
         controller.onChange(function(value) {populateColony(); });
-      var controller = nucleusMenu.addColor(gs, 'nucleusColHSVU').name('Immature').listen();
+      var controller = nucleusMenu.addColor(gs, 'nucleusColHSVU').name('Juvenile').listen();
         controller.onChange(function(value) {gs.nucleusColorU = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
-      var controller = nucleusMenu.addColor(gs, 'nucleusColHSVF').name('Mature').listen();
+      var controller = nucleusMenu.addColor(gs, 'nucleusColHSVF').name('Adult').listen();
         controller.onChange(function(value) {gs.nucleusColorF = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
 
       var dnaMenu = gui.addFolder("DNA mods");
@@ -204,7 +210,7 @@ var initGUI = function () {
         controller.onChange(function(value) {populateColony(); });
       // var controller = dnaMenu.add(gs, 'cellESMin', 1, 100).step(1).name('cellEndSizeMin').listen();
       //   controller.onChange(function(value) {populateColony(); });
-      var controller = dnaMenu.add(gs, 'cellESMax', 1, 100).step(1).name('Size (min)').listen();
+      var controller = dnaMenu.add(gs, 'cellESMax', 1, 100).step(1).name('Size (min%)').listen();
         controller.onChange(function(value) {populateColony(); });
       // var controller = dnaMenu.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMin').listen();
       //   controller.onChange(function(value) {populateColony(); });
@@ -247,6 +253,32 @@ function updateStrainAHue() { //update the gs.HSV color object for strain A so i
   gs.strain1Stroke.h = gs.bkgColHSV.h + gs.bkgHueStrokeOffset;
   if (gs.strain1Fill.h > 360) {gs.strain1Fill.h -= 360;}
   if (gs.strain1Stroke.h > 360) {gs.strain1Stroke.h -= 360;}
+}
+
+function updateHueAllStrains() { //update the gs.HSV color object for all strains
+  gs.strain1Fill.h = gs.bkgColHSV.h + gs.bkgHueFillOffset;
+  if (gs.strain1Fill.h > 360) {gs.strain1Fill.h -= 360;}
+
+  gs.strain1Stroke.h = gs.bkgColHSV.h + gs.bkgHueStrokeOffset;
+  if (gs.strain1Stroke.h > 360) {gs.strain1Stroke.h -= 360;}
+
+  gs.strain2Fill.h = gs.strain1Fill.h + (gs.strainHueFillOffset * 3.6/gs.numStrains);
+  if (gs.strain2Fill.h > 360) {gs.strain2Fill.h -= 360;}
+  gs.strain3Fill.h = gs.strain2Fill.h + (gs.strainHueFillOffset * 3.6/gs.numStrains);
+  if (gs.strain3Fill.h > 360) {gs.strain3Fill.h -= 360;}
+  gs.strain4Fill.h = gs.strain3Fill.h + (gs.strainHueFillOffset * 3.6/gs.numStrains);
+  if (gs.strain4Fill.h > 360) {gs.strain4Fill.h -= 360;}
+  gs.strain5Fill.h = gs.strain4Fill.h + (gs.strainHueFillOffset * 3.6/gs.numStrains);
+  if (gs.strain5Fill.h > 360) {gs.strain5Fill.h -= 360;}
+
+  gs.strain2Stroke.h = gs.strain1Stroke.h + (gs.strainHueStrokeOffset * 3.6/gs.numStrains);
+  if (gs.strain2Stroke.h > 360) {gs.strain2Stroke.h -= 360;}
+  gs.strain3Stroke.h = gs.strain2Stroke.h + (gs.strainHueStrokeOffset * 3.6/gs.numStrains);
+  if (gs.strain3Stroke.h > 360) {gs.strain3Stroke.h -= 360;}
+  gs.strain4Stroke.h = gs.strain3Stroke.h + (gs.strainHueStrokeOffset * 3.6/gs.numStrains);
+  if (gs.strain4Stroke.h > 360) {gs.strain4Stroke.h -= 360;}
+  gs.strain5Stroke.h = gs.strain4Stroke.h + (gs.strainHueStrokeOffset * 3.6/gs.numStrains);
+  if (gs.strain5Stroke.h > 360) {gs.strain5Stroke.h -= 360;}
 
 }
 
