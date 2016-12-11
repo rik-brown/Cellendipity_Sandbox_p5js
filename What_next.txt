@@ -42,6 +42,10 @@ Possible IMPROVEMENTS:
 
 If you change the colour of a strain (A-E) then that strain is the one you spawn with next mouseclick
 
+Shortcut 'G' for grayscale - executes a function which sets all saturation values to 0 & repopulates colony
+Might need a 'reverse' or opposite (full saturation)
+Or perhaps some global sliders?
+
 - Optimalisation: DNA genes that never change, could they be replaced by simple local variable in the cell? (or lookup to genepool?)
 Current examples: SpawnCount
 

@@ -221,6 +221,11 @@ var initGUI = function () {
       var controller = dnaMenu.add(gs, 'spawnCount', 0, 5).step(1).name('Children').listen();
         controller.onChange(function(value) {populateColony(); });
 
+      var colModsMenu = gui.addFolder("Colour mods");
+      var controller = colModsMenu.add(gs, 'globalSaturation', 0, 100).step(1).name('Saturation%').listen();
+        controller.onChange(function(value) {populateColony(); });
+      var controller = colModsMenu.add(gs, 'globalBrightness', 0, 100).step(1).name('Brightness%').listen();
+        controller.onChange(function(value) {populateColony(); });
 
   gui.add(gs, 'restart').name('Restart [space]');
   gui.add(gs, 'restartRandomized').name('Randomize [R]');

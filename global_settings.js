@@ -96,6 +96,10 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.fertility = 75;
   this.spawnCount = 3;
 
+  //colourMods---test
+  this.globalSaturation=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
+  this.globalBrightness=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
+
   this.restart = function() {populateColony();}; // Action-button to respawn a new colony [R] key
   this.restartRandomized = function() {randomize(); populateColony();};
   this.paused = false; // If true, colony will not be run on draw-cycle
