@@ -4,10 +4,19 @@ WHAT NEXT????
 Known BUGS:
 ===========
 
+Suspected BUGS: (needs investigation)
+=====================================
+
+
+Possible IMPROVEMENTS:
+======================
+
 The overall structure seems vastly overcomplicated!
 Colour > DNA > Colour etc. SIMPLIFY IT!
 Rather than each cell having their own dna, could they in theory pick up their local values directly from the genepool?
 (would require the genepool being additively populated as new combinations arise, which could be ineffective, but still maybe less inefficient than 1 dna per cell)
+Do I actually need the genepool once a population is running?
+Maybe colours can be moved out of the DNA and inherited more directly, to improve overall efficiency?
 Maybe there is a way to include a color variable directly in the DNA?
 
 One slider per variable to determine the 'middle value'
@@ -33,46 +42,20 @@ The expression of this 'variance' will be within the DNA constructor.
 Do I expect there to be some degree of random variation within a strain?
 If so, this will need to occur in the individual cell constructor.
 
-Suspected BUGS: (needs investigation)
-=====================================
+>>>>> If you change the colour of a strain (A-E) then that strain is the one you spawn with next mouseclick
 
-
-Possible IMPROVEMENTS:
-======================
-
-If you change the colour of a strain (A-E) then that strain is the one you spawn with next mouseclick
-
-Shortcut 'G' for grayscale - executes a function which sets all saturation values to 0 & repopulates colony
-Might need a 'reverse' or opposite (full saturation)
-Or perhaps some global sliders?
-
-- Optimalisation: DNA genes that never change, could they be replaced by simple local variable in the cell? (or lookup to genepool?)
-Current examples: SpawnCount
-
-- this.remoteness : Is it actually needed, or is this.maturity (mapped to range) sufficient?
 - gs.stepped - Is it needed, or is this covered by stepSize = 0? Should it be true to start with?
   I think I have fixed it now so it never becomes false, and all is running normally
   Remove at a later stage (in a fork)
 
-  Can remove 2 genes (20 & 21) since home is given directly from gs variables:
-  this.home = new p5.Vector(gs.homeX, gs.homeY); //cell has origin
-
-- Better alternative for Max/Min in GUI? Typed values?
-
-- GUI folders for DNA overrides
-  > Overrides could be 1-9) Setting value 0) "Diversity" "Variance" - scaling value for all DNA?
-  Would reduce the need for both Max & Min variables too :-)
-  Like http://rik-brown.github.io/Cellendipity/
-
-- Look at aybe_sea - it runs smooth, the GUI is not over-complex. Could I just rebuild that to make a 'mandala' pattern?
-- It has a nice 'randomize on restart' function
-
-REMEMBER! Scaling is important: use relative sizes IMPORTANT!!
-REMEMBER! populateColony() does not refresh Global_settings!!
+>>REMEMBER! Scaling is important: use relative sizes IMPORTANT!!
+>>REMEMBER! populateColony() does not refresh Global_settings!! (why might this be important?)
 
 Ideas for NEW FEATURES:
 =======================
 + Instead of specifying individual Strain colors, specify ANGULAR HUE OFFSET between strains?
+
++ Store PRESET colour settings by simply including multiple versions of gs?
 If (key = '1') {gs = new Global_settings_1}
 If (key = '2') {gs = new Global_settings_2}
 If (key = '3') {gs = new Global_settings_3}
@@ -81,9 +64,9 @@ To select a predefined set of global_settings
 
 TASKS:
 ======
-- Window resize?
-- Naming convention - what is this generator called?
+> Window resize?
+> Naming convention - what are the different preset generators called?
 
-How to go on from here towards being able to use the GUI to tweak the generators (& save presets to JSON?)
-
-This could potentially run as a standalone at Tomra....
+FUTURE:
+> How to go on from here towards being able to use the GUI to tweak the generators (& save presets to JSON?)
+> This could potentially run as a standalone at Tomra....

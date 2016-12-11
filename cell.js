@@ -114,7 +114,7 @@ function Cell(vel, dna) {
     this.home = new p5.Vector(gs.homeX, gs.homeY);
     this.toHome = p5.Vector.sub(this.home, this.position); // static vector pointing from cell to home
     this.range = this.toHome.mag();
-    this.remoteness = map(this.range, 0, this.lifespan, 0, 1);
+    // this.remoteness = map(this.range, 0, this.lifespan, 0, 1);
     this.maturity = map(this.range, 0, this.lifespan, 1, 0);
   }
 
@@ -274,7 +274,6 @@ function Cell(vel, dna) {
     //text("growth:" + this.growth, this.position.x, this.position.y + rowHeight*5);
     //text("maturity:" + this.maturity, this.position.x, this.position.y + rowHeight*5);
     //text("lifespan:" + this.lifespan, this.position.x, this.position.y + rowHeight*4);
-    //text("remoteness:" + this.remoteness, this.position.x, this.position.y + rowHeight*2);
     //text("range:" + this.range, this.position.x, this.position.y + rowHeight*3);
     //text("age:" + this.age, this.position.x, this.position.y + rowHeight*3);
     //text("fertility:" + this.fertility, this.position.x, this.position.y + rowHeight*4);

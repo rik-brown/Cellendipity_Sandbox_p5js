@@ -65,6 +65,10 @@ noiseMax 0-100
 //spiralMin -360-0
 spiralMax 0-360
 
+//colModsMenu---Colour modifiers
+globalSaturation
+globalBrightness
+
 //no folder
 restart
 restartRandomized
