@@ -154,7 +154,7 @@ function Cell(vel, dna) {
   this.dead = function() {
     //if (this.age >= this.lifespan) {return true;} // Death by old age (regardless of size, which may remain constant)
     if (this.r <= this.cellEndSize) {return true;} // Death by size (only when cell is shrinking)
-    if (this.spawnCount < 0) {return true;} // Death by too much babies
+    if (this.spawnCount <= 0) {return true;} // Death by too much babies
     //if (this.position.x > (((width+height)*0.5) + this.r*this.flatness) || this.position.x < (((width-height)*0.5)-this.r*this.flatness) || this.position.y > height + this.r*this.flatness || this.position.y < -this.r*this.flatness) {return true;} // Death if move beyond canvas boundary
     else {return false; }
   };

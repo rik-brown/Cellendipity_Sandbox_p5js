@@ -229,7 +229,7 @@ var initGUI = function () {
         controller.onChange(function(value) {populateColony(); });
       var controller = dnaMenu.add(gs, 'fertility', 0, 90).step(1).name('Fertility').listen();
         controller.onChange(function(value) {populateColony(); });
-      var controller = dnaMenu.add(gs, 'spawnCount', 0, 5).step(1).name('Children').listen();
+      var controller = dnaMenu.add(gs, 'spawnCount', 1, 5).step(1).name('Children').listen();
         controller.onChange(function(value) {populateColony(); });
 
       var colModsMenu = gui.addFolder("Colour mods");
@@ -238,9 +238,9 @@ var initGUI = function () {
       var controller = colModsMenu.add(gs, 'globalBrightness', 0, 100).step(1).name('Brightness%').listen();
         controller.onChange(function(value) {populateColony(); });
 
-  gui.add(gs, 'restart').name('Restart [space]');
-  gui.add(gs, 'restartRandomized').name('Randomize [R]');
-  gui.add(gs, 'paused').name('Pause [P]');
+  gui.add(gs, 'restart').name('Restart [space]').listen();
+  gui.add(gs, 'restartRandomized').name('Randomize [R]').listen();
+  gui.add(gs, 'paused').name('Pause [P]').listen();
   var controller = gui.add(gs, 'showInstructions').name('Instructions [ I ]').listen();
     controller.onChange(function(value) {populateColony(); });
   gui.add(gs, 'hide').name('Hide/show [H]');
