@@ -75,7 +75,7 @@ function Colony() {
   };
 
   this.inert = function() {
-    if (this.colonyAge <= (gs.colonyLifespan-gs.colonyDuration)) {return true;} // Duration has expired
+    if (this.colonyAge <= (gs.colonyLifespan-(gs.colonyLifespan * gs.colonyDuration * 0.01))) {return true;} // Duration has expired
     else {return false; }
   };
 

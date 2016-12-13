@@ -7,7 +7,7 @@ function Global_settings() { //These are the initial values, not the randomised 
 
   //optionsMenu---Experiment
   this.colonyLifespan = 4000;             // Max number of frames a colony can live for
-  this.colonyDuration = 2500;             // Max number of frames a colony is active for
+  this.colonyDuration = 60;             // Max number of frames a colony is active for
   this.stepped = true;
   this.stepSize = 0;
   this.stepSizeN = int(random(20, 50));
