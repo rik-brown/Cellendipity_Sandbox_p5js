@@ -10,7 +10,21 @@ Suspected BUGS: (needs investigation)
 
 Possible IMPROVEMENTS:
 ======================
->> Maybe death on spawnCount >= 0 is a good thing (min spawncount = 1)
+var initGUI_Boring = function () {
+var initGUI_Cellular = function () {
+
+1) Reordering menus
+'Boring' menu names
+Colour (basic)
+  Fill 1
+  Outline 1
+  Fill 2
+  Outline 2
+Colour (advanced)
+Size & Shape
+Movement
+Options / Settings
+Controls
 
 The overall structure seems vastly overcomplicated!
 Colour > DNA > Colour etc. SIMPLIFY IT!
