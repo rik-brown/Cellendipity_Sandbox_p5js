@@ -15,7 +15,11 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.bkgColHSV = { h: random(360), s: random(0.25, 0.5), v: random(0.5, 1) };
   this.bkgColor = color(this.bkgColHSV.h, this.bkgColHSV.s*255, this.bkgColHSV.v*255); // Background colour
 
-  this.bkgColor = color(this.bkgColHSV.h, this.bkgColHSV.s*255, this.bkgColHSV.v*255); // Background colour
+  this.bkgHueFillOffset=random(3, 355);   // strain1Fill.h will be offset from bkgCol.h by this amount
+  this.bkgHueStrokeOffset=random(3, 355); // strain1Stroke.h will be offset from bkgCol.h by this amount
+  this.strainHueFillOffset=random(1, 50);             // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
+  this.strainHueStrokeOffset=random(1, 50);             // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
+
   this.autoRestart = true;         // If true, will not wait for keypress before starting anew
   this.randomizeOnRestart = false; // If true, parameters will be randomized on restart
 
@@ -26,49 +30,66 @@ function Global_settings() { //These are the initial values, not the randomised 
   if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
 
   //strain1-5Menu---Strain A-E
-  this.fill_H_Min = 0;
-  this.fill_H_Max = 360;
   this.fill_S_Min = 0.5;
   this.fill_S_Max = 1;
   this.fill_B_Min = 0.8;
   this.fill_B_Max = 1;
 
-  this.strain1Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
-  this.strain2Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
-  this.strain3Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
-  this.strain4Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
-  this.strain5Fill = { h: random(this.fill_H_Min, this.fill_H_Max), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
 
-  this.stroke_H_Min = 0;
-  this.stroke_H_Max = 360;
-  this.stroke_S_Min = 0;
+  this.strain1Fill = { h: 0, s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain1Fill.h = this.bkgColHSV.h + this.bkgHueFillOffset;
+  if (this.strain1Fill.h > 360) {this.strain1Fill.h -= 360;}
+
+  this.strain2Fill = { h: random(360), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain3Fill = { h: random(360), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain4Fill = { h: random(360), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+  this.strain5Fill = { h: random(360), s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
+
+  this.strain2Fill.h = this.strain1Fill.h + (this.strainHueFillOffset * 3.6/this.numStrains);
+  if (this.strain2Fill.h > 360) {this.strain2Fill.h -= 360;}
+  this.strain3Fill.h = this.strain2Fill.h + (this.strainHueFillOffset * 3.6/this.numStrains);
+  if (this.strain3Fill.h > 360) {this.strain3Fill.h -= 360;}
+  this.strain4Fill.h = this.strain3Fill.h + (this.strainHueFillOffset * 3.6/this.numStrains);
+  if (this.strain4Fill.h > 360) {this.strain4Fill.h -= 360;}
+  this.strain5Fill.h = this.strain4Fill.h + (this.strainHueFillOffset * 3.6/this.numStrains);
+  if (this.strain5Fill.h > 360) {this.strain5Fill.h -= 360;}
+
+
+
+  this.stroke_S_Min = 0.5;
   this.stroke_S_Max = 1;
-  this.stroke_B_Min = 0;
+  this.stroke_B_Min = 0.8;
   this.stroke_B_Max = 1;
 
-  this.strain1Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
-  this.strain2Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
-  this.strain3Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
-  this.strain4Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
-  this.strain5Stroke = { h: random(this.stroke_H_Min, this.stroke_H_Max), s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+  this.strain1Stroke = { h: 0, s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+  this.strain1Stroke.h = this.bkgColHSV.h + this.bkgHueStrokeOffset;
+  if (this.strain1Stroke.h > 360) {this.strain1Stroke.h -= 360;}
+  this.strain2Stroke = { h: 0, s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+  this.strain3Stroke = { h: 0, s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+  this.strain4Stroke = { h: 0, s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+  this.strain5Stroke = { h: 0, s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
+
+  this.strain2Stroke.h = this.strain1Stroke.h + (this.strainHueStrokeOffset * 3.6/this.numStrains);
+  if (this.strain2Stroke.h > 360) {this.strain2Stroke.h -= 360;}
+  this.strain3Stroke.h = this.strain2Stroke.h + (this.strainHueStrokeOffset * 3.6/this.numStrains);
+  if (this.strain3Stroke.h > 360) {this.strain3Stroke.h -= 360;}
+  this.strain4Stroke.h = this.strain3Stroke.h + (this.strainHueStrokeOffset * 3.6/this.numStrains);
+  if (this.strain4Stroke.h > 360) {this.strain4Stroke.h -= 360;}
+  this.strain5Stroke.h = this.strain4Stroke.h + (this.strainHueStrokeOffset * 3.6/this.numStrains);
+  if (this.strain5Stroke.h > 360) {this.strain5Stroke.h -= 360;}
+
 
   //fillColTweaksMenu---Cytoplasm mods
   this.fill_HTwist = 0;
   this.fill_STwist = 0; // Last: 200
   this.fill_BTwist = 0;
-  // this.fill_A_Min = 5;
-  // this.fill_A_Max = 5;
   this.fill_A = 240;
-  // this.fill_ATwist = 0;
 
   //strokeColTweaksMenu---Membrane mods
   this.stroke_HTwist = 0;
   this.stroke_STwist = 0;
   this.stroke_BTwist = 0;
-  // this.stroke_A_Min = 5;
-  // this.stroke_A_Max = 5;
   this.stroke_A = 240;
-  // this.stroke_ATwist = 0;
 
   //nucleusMenu---Nucleus mods
   if (random(1) > 0.3) {this.nucleus = true;} else {this.nucleus = false;}
@@ -99,11 +120,6 @@ function Global_settings() { //These are the initial values, not the randomised 
   //colourMods---test
   this.globalSaturation=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
   this.globalBrightness=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
-  this.bkgHueFillOffset=random(3, 355);   // strain1Fill.h will be offset from bkgCol.h by this amount
-  this.bkgHueStrokeOffset=random(3, 355); // strain1Stroke.h will be offset from bkgCol.h by this amount
-  this.strainHueFillOffset=0;             // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
-  this.strainHueStrokeOffset=0;             // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
-
 
   this.restart = function() {populateColony();}; // Action-button to respawn a new colony [R] key
   this.restartRandomized = function() {randomize(); populateColony();};
