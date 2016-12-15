@@ -24,7 +24,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.randomizeOnRestart = false; // If true, parameters will be randomized on restart
 
   //seedMenu---Seed Cultures
-  this.numStrains = 3;
+  this.numStrains = 5;
   this.strainSize = int(random(6, 16)/this.numStrains); // Number of cells in a strain
   this.colonyMaxSize = 200; // Max number of cells in the colony
   if (random(1) > 0.5) {this.centerSpawn = true;} else {this.centerSpawn = false;}
@@ -54,8 +54,6 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.strain5Fill.h = this.strain4Fill.h + (this.strainHueFillOffset * 3.6/this.numStrains);
   if (this.strain5Fill.h > 360) {this.strain5Fill.h -= 360;}
 
-
-
   this.stroke_S_Min = 0.5;
   this.stroke_S_Max = 1;
   this.stroke_B_Min = 0.8;
@@ -83,13 +81,13 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.fill_HTwist = 0;
   this.fill_STwist = 0; // Last: 200
   this.fill_BTwist = 0;
-  this.fill_A = 240;
+  this.fill_A = 15;
 
   //strokeColTweaksMenu---Membrane mods
   this.stroke_HTwist = 0;
   this.stroke_STwist = 0;
   this.stroke_BTwist = 0;
-  this.stroke_A = 240;
+  this.stroke_A = 15;
 
   //nucleusMenu---Nucleus mods
   if (random(1) > 0.3) {this.nucleus = true;} else {this.nucleus = false;}
@@ -118,8 +116,11 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.spawnCount = 3;
 
   //colourMods---test
-  this.globalSaturation=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
-  this.globalBrightness=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
+  this.globalFillSaturation=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
+  this.globalFillBrightness=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
+  this.globalStrokeSaturation=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
+  this.globalStrokeBrightness=100; // 100 = 100% of current value? Reducing will be a %multiplier down to zero
+
 
   this.restart = function() {populateColony();}; // Action-button to respawn a new colony [R] key
   this.restartRandomized = function() {randomize(); populateColony();};

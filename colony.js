@@ -22,36 +22,36 @@ function Colony() {
   // }
   // else {this.genepool[0].genes[0] = gs.strain1Fill.h;}
   this.genepool[0].genes[0] = gs.strain1Fill.h;
-  this.genepool[0].genes[1] = gs.strain1Fill.s * 2.55 * gs.globalSaturation;
-  this.genepool[0].genes[2] = gs.strain1Fill.v * 2.55 * gs.globalBrightness;
+  this.genepool[0].genes[1] = gs.strain1Fill.s * 255;
+  this.genepool[0].genes[2] = gs.strain1Fill.v * 255;
   this.genepool[1].genes[0] = gs.strain2Fill.h;
-  this.genepool[1].genes[1] = gs.strain2Fill.s * 2.55 * gs.globalSaturation;
-  this.genepool[1].genes[2] = gs.strain2Fill.v * 2.55 * gs.globalBrightness;
+  this.genepool[1].genes[1] = gs.strain2Fill.s * 255;
+  this.genepool[1].genes[2] = gs.strain2Fill.v * 255;
   this.genepool[2].genes[0] = gs.strain3Fill.h;
-  this.genepool[2].genes[1] = gs.strain3Fill.s * 2.55 * gs.globalSaturation;
-  this.genepool[2].genes[2] = gs.strain3Fill.v * 2.55 * gs.globalBrightness;
+  this.genepool[2].genes[1] = gs.strain3Fill.s * 255;
+  this.genepool[2].genes[2] = gs.strain3Fill.v * 255;
   this.genepool[3].genes[0] = gs.strain4Fill.h;
-  this.genepool[3].genes[1] = gs.strain4Fill.s * 2.55 * gs.globalSaturation;
-  this.genepool[3].genes[2] = gs.strain4Fill.v * 2.55 * gs.globalBrightness;
+  this.genepool[3].genes[1] = gs.strain4Fill.s * 255;
+  this.genepool[3].genes[2] = gs.strain4Fill.v * 255;
   this.genepool[4].genes[0] = gs.strain5Fill.h;
-  this.genepool[4].genes[1] = gs.strain5Fill.s * 2.55 * gs.globalSaturation;
-  this.genepool[4].genes[2] = gs.strain5Fill.v * 2.55 * gs.globalBrightness;
+  this.genepool[4].genes[1] = gs.strain5Fill.s * 255;
+  this.genepool[4].genes[2] = gs.strain5Fill.v * 255;
 
   this.genepool[0].genes[4] = gs.strain1Stroke.h;
-  this.genepool[0].genes[5] = gs.strain1Stroke.s * 2.55 * gs.globalSaturation;
-  this.genepool[0].genes[6] = gs.strain1Stroke.v * 2.55 * gs.globalBrightness;
+  this.genepool[0].genes[5] = gs.strain1Stroke.s * 255;
+  this.genepool[0].genes[6] = gs.strain1Stroke.v * 255;
   this.genepool[1].genes[4] = gs.strain2Stroke.h;
-  this.genepool[1].genes[5] = gs.strain2Stroke.s * 2.55 * gs.globalSaturation;
-  this.genepool[1].genes[6] = gs.strain2Stroke.v * 2.55 * gs.globalBrightness;
+  this.genepool[1].genes[5] = gs.strain2Stroke.s * 255;
+  this.genepool[1].genes[6] = gs.strain2Stroke.v * 255;
   this.genepool[2].genes[4] = gs.strain3Stroke.h;
-  this.genepool[2].genes[5] = gs.strain3Stroke.s * 2.55 * gs.globalSaturation;
-  this.genepool[2].genes[6] = gs.strain3Stroke.v * 2.55 * gs.globalBrightness;
+  this.genepool[2].genes[5] = gs.strain3Stroke.s * 255;
+  this.genepool[2].genes[6] = gs.strain3Stroke.v * 255;
   this.genepool[3].genes[4] = gs.strain4Stroke.h;
-  this.genepool[3].genes[5] = gs.strain4Stroke.s * 2.55 * gs.globalSaturation;
-  this.genepool[3].genes[6] = gs.strain4Stroke.v * 2.55 * gs.globalBrightness;
+  this.genepool[3].genes[5] = gs.strain4Stroke.s * 255;
+  this.genepool[3].genes[6] = gs.strain4Stroke.v * 255;
   this.genepool[4].genes[4] = gs.strain5Stroke.h;
-  this.genepool[4].genes[5] = gs.strain5Stroke.s * 2.55 * gs.globalSaturation;
-  this.genepool[4].genes[6] = gs.strain5Stroke.v * 2.55 * gs.globalBrightness;
+  this.genepool[4].genes[5] = gs.strain5Stroke.s * 255;
+  this.genepool[4].genes[6] = gs.strain5Stroke.v * 255;
 
   // Create initial population of cells
   for (var i = 0; i < gs.numStrains; i++) {
