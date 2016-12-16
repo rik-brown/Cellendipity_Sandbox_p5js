@@ -432,10 +432,14 @@ var initGUI_simpleB = function () {
     controller.onChange(function(value) {populateColony(); });
   var controller = optionsMenu.add(gs, 'colonyDuration', 1, 100).step(1).name('Active %').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller =optionsMenu.add(gs, 'stepSize', 0, 100).name('Interval').listen();
+  var controller =optionsMenu.add(gs, 'stepSize', 0, 100).name('Step').listen();
   //  controller.onChange(function(value) {if (gs.stepSize==0) {gs.stepped=false} else {gs.stepped=true; gs.stepSizeN = gs.stepSize; gs.trailMode = 3;}; populateColony();});
    controller.onChange(function(value) {if (gs.stepSize > 0) {gs.stepSizeN = gs.stepSize;} populateColony();});
   var controller = optionsMenu.add(gs, 'centerSpawn').name('Centered [C]').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = optionsMenu.add(gs, 'nucleus').name('Show nucleus [N]').listen();
+    controller.onChange(function(value) {populateColony(); });
+  var controller = optionsMenu.add(gs, 'stepSizeN', 0, 100).name('Step - nucleus').listen();
     controller.onChange(function(value) {populateColony(); });
 
   var seedMenu = gui.addFolder('Cell Cultures');
@@ -476,8 +480,6 @@ var initGUI_simpleB = function () {
   var controller = colourBasicMenu.addColor(gs, 'nucleusColHSVF').name('Nucleus (adult)').listen();
     controller.onChange(function(value) {gs.nucleusColorF = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
 
-
-
   var fillColourOverridesMenu = gui.addFolder("Colour - Fill adjust");
   var controller = fillColourOverridesMenu.add(gs, 'bkgHueFillOffset', 0, 360).step(1).name('Hue shift (bkg)').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
@@ -502,7 +504,6 @@ var initGUI_simpleB = function () {
   var controller = strokeColourOverridesMenu.add(gs, 'stroke_A', 0, 255).step(1).name('Alpha').listen();
     controller.onChange(function(value) {populateColony(); });
 
-
 	var fillColTweaksMenu = gui.addFolder("Colour - Fill Modulate");
     var controller = fillColTweaksMenu.add(gs, 'fill_HTwist', 0, 360).step(1).name('Hue').listen();
       controller.onChange(function(value) {populateColony(); });
@@ -519,26 +520,19 @@ var initGUI_simpleB = function () {
     var controller = strokeColTweaksMenu.add(gs, 'stroke_BTwist', 0, 255).name('Brightness').listen();
       controller.onChange(function(value) {populateColony(); });
 
-  //   var nucleusMenu = gui.addFolder("Nucleus mods");
-  //     var controller = nucleusMenu.add(gs, 'nucleus').name('Show [N]').listen();
-  //       controller.onChange(function(value) {populateColony(); });
-  //     var controller = nucleusMenu.add(gs, 'stepSizeN', 0, 100).name('Step size').listen();
-  //       controller.onChange(function(value) {populateColony(); });
-  //
   //     var dnaMenu = gui.addFolder("DNA mods");
-  //     // var controller = dnaMenu.add(gs, 'cellSSMin', 1, 100).step(1).name('cellStartSizeMin').listen();
-  //     //   controller.onChange(function(value) {populateColony(); });
-  //     var controller = dnaMenu.add(gs, 'cellSSMax', 1, 100).step(1).name('Size (max)').listen();
-  //       controller.onChange(function(value) {populateColony(); });
-  //     // var controller = dnaMenu.add(gs, 'cellESMin', 1, 100).step(1).name('cellEndSizeMin').listen();
-  //     //   controller.onChange(function(value) {populateColony(); });
-  //     var controller = dnaMenu.add(gs, 'cellESMax', 1, 100).step(1).name('Size (min%)').listen();
-  //       controller.onChange(function(value) {populateColony(); });
+
+      var shapeMenu = gui.addFolder("Shape");
+      var controller = shapeMenu.add(gs, 'cellSSMax', 1, 100).step(1).name('Size (max)').listen();
+        controller.onChange(function(value) {populateColony(); });
+      var controller = shapeMenu.add(gs, 'cellESMax', 1, 100).step(1).name('Size (min%)').listen();
+        controller.onChange(function(value) {populateColony(); });
+      var controller = shapeMenu.add(gs, 'flatnessMax', 0, 100).step(1).name('Flatness').listen();
+        controller.onChange(function(value) {populateColony(); });
+
   //     // var controller = dnaMenu.add(gs, 'lifespanMin', 1, 100).step(1).name('lifespanMin').listen();
   //     //   controller.onChange(function(value) {populateColony(); });
   //     var controller = dnaMenu.add(gs, 'lifespanMax', 1, 100).step(1).name('Range').listen();
-  //       controller.onChange(function(value) {populateColony(); });
-  //     var controller = dnaMenu.add(gs, 'flatnessMax', 0, 100).step(1).name('Flatness').listen();
   //       controller.onChange(function(value) {populateColony(); });
   //
   //     // var controller = dnaMenu.add(gs, 'noiseMin', 0, 100).step(1).name('noise%Min').listen();
@@ -553,9 +547,7 @@ var initGUI_simpleB = function () {
   //       controller.onChange(function(value) {populateColony(); });
   //     var controller = dnaMenu.add(gs, 'spawnCount', 1, 5).step(1).name('Children').listen();
   //       controller.onChange(function(value) {populateColony(); });
-  //
-  //     var colModsMenu = gui.addFolder("Colour mods");
-  //
+
   var controlsMenu = gui.addFolder("Controls");
     controlsMenu.add(gs, 'restart').name('Restart [space]').listen();
     controlsMenu.add(gs, 'restartRandomized').name('Randomize [R]').listen();

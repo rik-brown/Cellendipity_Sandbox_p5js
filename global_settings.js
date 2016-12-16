@@ -35,7 +35,6 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.fill_B_Min = 0.8;
   this.fill_B_Max = 1;
 
-
   this.strain1Fill = { h: 0, s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
   this.strain1Fill.h = this.bkgColHSV.h + this.bkgHueFillOffset;
   if (this.strain1Fill.h > 360) {this.strain1Fill.h -= 360;}
@@ -75,7 +74,6 @@ function Global_settings() { //These are the initial values, not the randomised 
   if (this.strain4Stroke.h > 360) {this.strain4Stroke.h -= 360;}
   this.strain5Stroke.h = this.strain4Stroke.h + (this.strainHueStrokeOffset * 3.6/this.numStrains);
   if (this.strain5Stroke.h > 360) {this.strain5Stroke.h -= 360;}
-
 
   //fillColTweaksMenu---Cytoplasm mods
   this.fill_HTwist = 0;
