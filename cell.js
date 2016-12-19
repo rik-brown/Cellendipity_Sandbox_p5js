@@ -160,24 +160,30 @@ function Cell(vel, dna) {
       if (gs.nucleus && this.drawStepN < 1) {
         if (this.fertile) {
           noStroke(); fill(gs.nucleusColorF); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          pop(); // Endpoint A
         }
         else {
           noStroke; fill(gs.nucleusColorU); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          pop(); // Endpoint B
         }
       }
+      else {pop();} // Endpoint C
     }
     else if (this.drawStep < 1) { // stepped=true, step-counter is active for cell, draw only when counter=0
       ellipse(0, 0, this.r, this.r*this.flatness);
       if (gs.nucleus && this.drawStepN < 1) { // Nucleus is always drawn when cell is drawn (no step-counter for nucleus)
         if (this.fertile) {
           noStroke(); fill(gs.nucleusColorF); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          pop(); // Endpoint D
         }
         else {
           noStroke(); fill(gs.nucleusColorU); ellipse(0, 0, this.cellEndSize, this.cellEndSize * this.flatness);
+          pop(); // Endpoint E
         }
       }
+      else {pop();} // Endpoint F
     }
-    pop();
+    else {pop();} // Endpoint G
   };
 
   this.checkCollision = function(other) { // Method receives a Cell object 'other' to get the required info about the collidee
