@@ -183,10 +183,10 @@ var initGUI = function () {
     controlsMenu.add(gs, 'restart').name('Restart [space]').listen();
     controlsMenu.add(gs, 'restartRandomized').name('Randomize [R]').listen();
     controlsMenu.add(gs, 'randomizeOnRestart').name('Random@restart');
+    controlsMenu.add(gs, 'autoRestart').name('Auto-restart');
     var controller = controlsMenu.add(gs, 'showInstructions').name('Instructions [ I ]').listen();
       controller.onChange(function(value) {populateColony(); });
     controlsMenu.add(gs, 'hide').name('Hide/show [H]');
-    // optionsMenu.add(gs, 'autoRestart').name('Auto-restart');
 
   gui.close(); // GUI starts in closed state
 }
