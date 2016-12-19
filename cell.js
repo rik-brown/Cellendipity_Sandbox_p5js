@@ -2,32 +2,29 @@
 function Cell(vel, dna) {
 
   //  Objects
-
   this.dna = dna;
 
-  // DNA gene mapping (22 genes)
-  // 0 = fill Hue (0-360)
-  // 1 = fill Saturation (0-255)
-  // 2 = fill Brightness (0-255)
-  // 3 = fill Alpha (0-255)
-  // 4 = stroke Hue (0-360)
-  // 5 = stroke Saturation (0-255)
-  // 6 = stroke Brightness (0-255)
-  // 7 = stroke Alpha (0-255)
-  // 8 = cellStartSize (10-50) (cellendipity/one uses 0-200)
-  // 9 = cellEndSize (5 - 20 %) (cellendipity/one uses 0-50)
-  // 10 = lifespan (200-1000)
-  // 11 = flatness (50-200 %)
-  // 12 = spiral screw (-75 - +75 %)
-  // 13 = fertility (70-90%)
-  // 14 = spawnCount (1-5)
-  // 15 = vMax (Noise) (0-4)
-  // 16 = step (Noise) (1 - 6 * 0.001)
-  // 17 = noisePercent (0-100%)
-  // 18 = seedPosX (0-width)
-  // 19 = seedPosY (0-height)
-  // 20 = originX (0-width)
-  // 21 = originY (0-height)
+  // DNA gene mapping (20 genes)
+  // 0 = fill Hue           (0-360)         gs.strainNFill.h
+  // 1 = fill Saturation    (0-255)         gs.strainNFill.s * 255
+  // 2 = fill Brightness    (0-255)         gs.strainNFill.v * 255
+  // 3 = fill Alpha         (0-255)         gs.fill_A
+  // 4 = stroke Hue         (0-360)         gs.strainNStroke.h
+  // 5 = stroke Saturation  (0-255)         gs.strainNStroke.s * 255
+  // 6 = stroke Brightness  (0-255)         gs.strainNStroke.v * 255
+  // 7 = stroke Alpha       (0-255)         gs.stroke_A
+  // 8 = cellStartSize      (1-25% height)  gs.cellSSMax
+  // 9 = cellEndSize        (1-100% cellSS) gs.cellESMax
+  // 10 = lifespan          (1-100% height) gs.lifespanMax
+  // 11 = flatness          (100-200%)      gs.flatnessMax
+  // 12 = spiral screw      (0-180 deg)     gs.spiralMax
+  // 13 = fertility         (0-90%)         gs.fertility
+  // 14 = spawnCount        (1-5)           gs.spawnCount
+  // 15 = vMax (Noise)      (0-4)
+  // 16 = step (Noise)      (1-6 * 0.001)
+  // 17 = noisePercent      (0-100%)        gs.noiseMax
+  // 18 = seedPosX          (0-width)
+  // 19 = seedPosY          (0-height)
 
   // BOOLEAN
   this.fertile = false; // A new cell always starts of infertile
@@ -41,19 +38,15 @@ function Cell(vel, dna) {
   // SIZE AND SHAPE
   this.cellStartSize = this.dna.genes[8];
   this.cellEndSize = this.cellStartSize * this.dna.genes[9] * 0.01;
-  //this.r = this.cellStartSize; // Initial value for radius
+  //this.r = this.cellStartSize; // Initial value for radius (not in use since r is now mapped in updatePosition() )
   this.flatness = this.dna.genes[11] * 0.01; // To make circles into ellipses. range 0.5 - 1.5
   this.growth = (this.cellStartSize-this.cellEndSize)/this.lifespan; // Should work for both large>small and small>large
   this.drawStep = 1;
   this.drawStepN = 1;
 
   // MOVEMENT
-  //this.position = pos.copy(); //cell has position
   this.position =new p5.Vector(this.dna.genes[18], this.dna.genes[19]); //cell has position
   this.home = new p5.Vector(gs.homeX, gs.homeY); //cell has origin
-  //this.range = 0;
-  //this.remoteness = 0;
-
   this.velocityLinear = vel.copy(); //cell has unique basic velocity component
   this.noisePercent = this.dna.genes[17] * 0.01; // How much influence on velocity does Perlin noise have?
   this.spiral = this.dna.genes[12] * 0.01; // Spiral screw amount
@@ -90,7 +83,7 @@ function Cell(vel, dna) {
 
   this.live = function() {
     this.age += 1;
-    //this.maturity = map(this.age, 0, this.lifespan, 1, 0);
+    //this.maturity = map(this.age, 0, this.lifespan, 1, 0); // Moved to updatePosition()
     this.drawStep--;
     this.drawStepStart = map(gs.stepSize, 0, 100, 0 , (this.r *2 + this.growth));
     if (this.drawStep < 0) {this.drawStep = this.drawStepStart;}
@@ -106,23 +99,17 @@ function Cell(vel, dna) {
     this.xoff += this.step; // increment x offset for next vx value
     this.yoff += this.step; // increment x offset for next vy value
     this.velocity = p5.Vector.lerp(this.velocityLinear, velocityNoise, this.noisePercent);
-    var screwAngle = map(this.maturity, 0, 1, 0, this.spiral * TWO_PI); //swapped size with maturity
-    //if (this.dna.genes[11] >= 0.5) {screwAngle *= -1;}
+    var screwAngle = map(this.maturity, 0, 1, 0, this.spiral * TWO_PI); //Originally mapped to size, swapped with maturity
+    //if (this.dna.genes[11] >= 0.5) {screwAngle *= -1;} //keeping in case I want to try this again sometime
     this.velocity.rotate(screwAngle);
     this.position.add(this.velocity);
-    //line(this.position.x, this.position.y, this.home.x, this.home.y);
     this.home = new p5.Vector(gs.homeX, gs.homeY);
     this.toHome = p5.Vector.sub(this.home, this.position); // static vector pointing from cell to home
     this.range = this.toHome.mag();
-    // this.remoteness = map(this.range, 0, this.lifespan, 0, 1);
     this.maturity = map(this.range, 0, this.lifespan, 1, 0);
   }
 
   this.updateSize = function() {
-    //this.r = ((sin(map(this.maturity, 1, 0, 0, PI)))+0)*this.cellStartSize
-    //this.r = ((cos(map(this.maturity, 1, 0, PI, PI*3)))+1)*this.cellStartSize
-    //this.r -= this.growth;
-    //this.r = map(this.remoteness, 0, 1, this.cellStartSize, this.cellEndSize);
     this.r = map(this.maturity, 1, 0, this.cellStartSize, this.cellEndSize);
   }
 
@@ -134,7 +121,6 @@ function Cell(vel, dna) {
   this.updateColor = function() {
     if (gs.fill_STwist > 0) {this.fill_S = map(this.maturity, 1, 0, (255-gs.fill_STwist), 255); this.fillColor = color(this.fill_H, this.fill_S, this.fill_B);} // Modulate fill saturation by radius
     if (gs.fill_BTwist > 0) {this.fill_B = map(this.maturity, 1, 0, (255-gs.fill_BTwist), 255); this.fillColor = color(this.fill_H, this.fill_S, this.fill_B);} // Modulate fill brightness by radius
-    // if (gs.fill_ATwist > 0) {this.fillAlpha = map(this.maturity, 0, 1, (255-gs.fill_ATwist), 255);} // Modulate fill Alpha by radius
     if (gs.fill_HTwist > 0) { // Modulate fill hue by radius. Does not change original hue value but replaces it with a 'twisted' version
       this.fill_Htwisted = map(this.maturity, 1, 0, this.fill_H, this.fill_H+gs.fill_HTwist);
       if (this.fill_Htwisted > 360) {this.fill_Htwisted -= 360;}
@@ -142,7 +128,6 @@ function Cell(vel, dna) {
     }
     if (gs.stroke_STwist > 0) {this.stroke_S = map(this.maturity, 1, 0, (255-gs.stroke_STwist), 255); this.strokeColor = color(this.stroke_H, this.stroke_S, this.stroke_B);} // Modulate stroke saturation by radius
     if (gs.stroke_BTwist > 0) {this.stroke_B = map(this.maturity, 1, 0, (255-gs.stroke_BTwist), 255); this.strokeColor = color(this.stroke_H, this.stroke_S, this.stroke_B);} // Modulate stroke brightness by radius
-    // if (gs.stroke_ATwist > 0) {this.strokeAlpha = map(this.maturity, 0, 1, (255-gs.stroke_ATwist), 255);} // Modulate stroke Alpha by radius
     if (gs.stroke_HTwist > 0) { // Modulate stroke hue by radius
       this.stroke_Htwisted = map(this.maturity, 1, 0, this.stroke_H, this.stroke_H+gs.stroke_HTwist);
       if (this.stroke_Htwisted > 360) {this.stroke_Htwisted -= 360;}
@@ -153,8 +138,8 @@ function Cell(vel, dna) {
   // Cell Death
   this.dead = function() {
     //if (this.age >= this.lifespan) {return true;} // Death by old age (regardless of size, which may remain constant)
-    if (this.r <= this.cellEndSize) {return true;} // Death by size (only when cell is shrinking)
-    if (this.spawnCount <= 0) {return true;} // Death by too much babies
+    if (this.r <= this.cellEndSize) {return true;}  // Death by lack of size
+    if (this.spawnCount <= 0) {return true;}        // Death by too much babies
     //if (this.position.x > (((width+height)*0.5) + this.r*this.flatness) || this.position.x < (((width-height)*0.5)-this.r*this.flatness) || this.position.y > height + this.r*this.flatness || this.position.y < -this.r*this.flatness) {return true;} // Death if move beyond canvas boundary
     else {return false; }
   };
@@ -233,9 +218,10 @@ function Cell(vel, dna) {
     childDNA.genes[18] = this.position.x; // Child starts at mother's current position
     childDNA.genes[19] = this.position.y; // Child starts at mother's current position
 
-    //childDNA.genes[20] = this.dna.genes[20]; // Child remembers origin of the mother
-    //childDNA.genes[21] = this.dna.genes[21]; // Child remembers origin of the mother
-    //childDNA.mutate(0.01); // Child DNA can mutate. HACKED! Mutation is temporarily disabled!
+    //childDNA.genes[20] = this.dna.genes[20]; // Child remembers origin of the mother - not in use
+    //childDNA.genes[21] = this.dna.genes[21]; // Child remembers origin of the mother - not in use
+
+    //childDNA.mutate(0.01); // Child DNA can mutate. Cannot be used, mutation is temporarily disabled! (see dna.js)
 
     colony.spawn(spawnVel, childDNA);
 
@@ -247,12 +233,12 @@ function Cell(vel, dna) {
     other.fertile = false;
   }
 
-  this.cellDebugger = function() { // Displays cell parameters as text (for debug only)
+  this.cellDebugger = function() { // Displays chosen cell parameters as text (for debug only)
     var rowHeight = 15;
     fill(0);
     textSize(rowHeight);
     // RADIUS
-    //text("r:" + this.r, this.position.x, this.position.y + rowHeight*1);
+    // text("r:" + this.r, this.position.x, this.position.y + rowHeight*1);
     // text("cellStartSize:" + this.cellStartSize, this.position.x, this.position.y + rowHeight*0);
     // text("cellEndSize:" + this.cellEndSize, this.position.x, this.position.y + rowHeight*1);
 
@@ -269,13 +255,13 @@ function Cell(vel, dna) {
 
     // GROWTH
     //text("growth:" + this.growth, this.position.x, this.position.y + rowHeight*5);
-    //text("maturity:" + this.maturity, this.position.x, this.position.y + rowHeight*5);
-    //text("lifespan:" + this.lifespan, this.position.x, this.position.y + rowHeight*4);
+    text("maturity:" + this.maturity, this.position.x, this.position.y + rowHeight*0);
+    text("lifespan:" + this.lifespan, this.position.x, this.position.y + rowHeight*1);
     //text("range:" + this.range, this.position.x, this.position.y + rowHeight*3);
     //text("age:" + this.age, this.position.x, this.position.y + rowHeight*3);
-    //text("fertility:" + this.fertility, this.position.x, this.position.y + rowHeight*4);
-    //text("fertile:" + this.fertile, this.position.x, this.position.y + rowHeight*3);
-    //text("spawnCount:" + this.spawnCount, this.position.x, this.position.y + rowHeight*4);
+    //text("fertility:" + this.fertility, this.position.x, this.position.y + rowHeight*2);
+    text("fertile:" + this.fertile, this.position.x, this.position.y + rowHeight*3);
+    text("spawnCount:" + this.spawnCount, this.position.x, this.position.y + rowHeight*2);
 
     // MOVEMENT
     //text("vel.x:" + this.velocity.x, this.position.x, this.position.y + rowHeight*4);
@@ -285,9 +271,9 @@ function Cell(vel, dna) {
     //text("screw amount:" + gs.spiral, this.position.x, this.position.y + rowHeight*2);
 
     // DNA
-    text("gene [0]:" + this.dna.genes[0], this.position.x, this.position.y + rowHeight*0);
-    text("gene [1]:" + this.dna.genes[1], this.position.x, this.position.y + rowHeight*1);
-    text("gene [2]:" + this.dna.genes[2], this.position.x, this.position.y + rowHeight*2);
+    // text("gene [0]:" + this.dna.genes[0], this.position.x, this.position.y + rowHeight*0);
+    // text("gene [1]:" + this.dna.genes[1], this.position.x, this.position.y + rowHeight*1);
+    // text("gene [2]:" + this.dna.genes[2], this.position.x, this.position.y + rowHeight*2);
   }
 
 }

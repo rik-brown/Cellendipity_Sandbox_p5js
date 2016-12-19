@@ -16,11 +16,6 @@ function Colony() {
   }
   // Now the genes for fillColor and strokeColor need to be overwritten according to the GUI settings.
   // This is a very messy solution! Needs replacing with a more efficient solution later....
-  // if (gs.bkgHueOffset >0) {
-  //   this.genepool[0].genes[0] = gs.bkgColHSV.h + gs.bkgHueOffset;
-  //   if (this.genepool[0].genes[0] > 360) {this.genepool[0].genes[0] -= 360;}
-  // }
-  // else {this.genepool[0].genes[0] = gs.strain1Fill.h;}
   this.genepool[0].genes[0] = gs.strain1Fill.h;
   this.genepool[0].genes[1] = gs.strain1Fill.s * 255;
   this.genepool[0].genes[2] = gs.strain1Fill.v * 255;
@@ -69,16 +64,16 @@ function Colony() {
 
   // Colony Death
   this.dead = function() {
-    if (this.colonyAge <= 0) {return true;} // Death by old age
+    if (this.colonyAge <= 0) {return true;}      // Death by old age
     if (this.cells.length === 0 ) {return true;} // Death by no living cells
     else {return false; }
   };
 
+// Colony Inactive -  once the 'active' timer has expired
   this.inert = function() {
     if (this.colonyAge <= (gs.colonyLifespan-(gs.colonyLifespan * gs.colonyDuration * 0.01))) {return true;} // Duration has expired
     else {return false; }
   };
-
 
   // Run the colony
   this.run = function() {
@@ -102,7 +97,7 @@ function Colony() {
 
   this.colonyDebugger = function() { // Displays some values as text at the top left corner (for debug only)
     fill(0);
-    rect(0,0,300,20);
+    rect(0,0,300,25);
     fill(360);
     textSize(16);
     text("Nr. cells: " + this.cells.length + " MaxLimit:" + gs.colonyMaxSize + " Age:" + this.colonyAge, 10, 18);

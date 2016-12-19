@@ -1,76 +1,72 @@
-//optionsMenu---Experiment
+// Experiment
   colonyLifespan  100-10 000
-  colonyDuration  100-10 000
-  stepSize 0-100
+  colonyDuration  1-100%
+  stepSize        0-100
+  centerSpawn     50/50 true/false
+
+// Cells
+  numStrains     1-5
+  strainSize     1-40
+  colonyMaxSize 10-400
+  variance       0-100
+
+// Colour
   bkgColHSV { h: random(360), s: random(64, 128), v: random(128, 255) }
-  centerSpawn 50/50
-  autoRestart true
-  randomizeOnRestart false
+  nucleusColHSVU { h: random(0, 360), s: random(0, 255), v: random(0, 255) } (360,0,1)
+  nucleusColHSVF { h: random(0, 360), s: random(0, 255), v: random(0, 255) } (360,1,0)
 
-//seedMenu---Seed Cultures
-  numStrains 1-5
-  strainSize 1-40
-  colonyMaxSize 10-500
-  variance
-
-
-//strain1Menu---Strain A
+// Colour - fill
   strain1Fill   { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
-  strain1Stroke { h: random(0, 360), s: random(0, 255), v: random(0, 255) }
+  strain2Fill   { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
+  strain3Fill   { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
+  strain4Fill   { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
+  strain5Fill   { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
+  bkgHueFillOffset     0-360
+  strainHueFillOffset  0-180
+  globalFillSaturation 0-100
+  globalFillBrightness 0-100
+  fill_A               0-255
 
-//strain2Menu---Strain B
-  strain2Fill
-  strain2Stroke
+// Colour - line
+  strain1Stroke { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
+  strain2Stroke { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
+  strain4Stroke { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
+  strain4Stroke { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
+  strain5Stroke { h: random(0, 360), s: random(128, 255), v: random(196, 255) }
+  bkgHueStrokeOffset     0-360
+  strainHueStrokeOffset  0-180
+  globalStrokeSaturation 0-100
+  globalStrokeBrightness 0-100
+  stroke_A               0-255
 
-//strain3Menu---Strain C
-  strain3Fill
-  strain4Stroke
-
-//strain4Menu---Strain D
-  strain4Fill
-  strain4Stroke
-
-//strain5Menu---Strain E
-  strain5Fill
-  strain5Stroke
-
-//fillColTweaksMenu---Cytoplasm mods
-  fill_HTwist 0-360
-  fill_STwist 0-255
-  fill_BTwist 0-255
-  fill_A      0-255
-
-//strokeColTweaksMenu---Membrane mods
+// Colour - transform
+  fill_HTwist   0-360
+  fill_STwist   0-255
+  fill_BTwist   0-255
   stroke_HTwist 0-360
   stroke_STwist 0-255
   stroke_BTwist 0-255
-  stroke_A      0-255
 
 //nucleusMenu---Nucleus mods
+
+// Shape
+  cellSSMax 1-100
+  cellESMax 1-100
+  flatnessMax 50-200
   nucleus 70/30
   stepSizeN 0-100
-  nucleusColHSVU { h: random(0, 360), s: random(0, 255), v: random(0, 255) }
-  nucleusColHSVF { h: random(0, 360), s: random(0, 255), v: random(0, 255) }
 
-//dnaMenu---Behavioral modifiers
-//cellSSMin 1-100
-cellSSMax 1-100
-//cellESMin 1-100
-cellESMax 1-100
-//lifespanMin 1-100
-lifespanMax 1-100
-flatnessMax 50-200
-//noiseMin 0-100
-noiseMax 0-100
-//spiralMin -360-0
-spiralMax 0-360
+// Behaviour
+  lifespanMax 1-100
+  noiseMax    0-100
+  spiralMax   0-360
+  fertility   0-90
+  spawnCount  1-5
 
-//colModsMenu---Colour modifiers
-globalSaturation
-globalBrightness
-
-//no folder
-restart
-restartRandomized
-paused
-showInstructions
+// Controls
+  paused [P]
+  restart [space]
+  restartRandomized [R]
+  randomizeOnRestart false
+  showInstructions [I] false
+  autoRestart true
