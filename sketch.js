@@ -438,10 +438,10 @@ var initGUI_simpleB = function () {
   var controller = optionsMenu.add(gs, 'centerSpawn').name('Centered [C]').listen();
     controller.onChange(function(value) {populateColony(); });
 
-  var seedMenu = gui.addFolder('Cell Cultures');
+  var seedMenu = gui.addFolder('Cells');
   var controller = seedMenu.add(gs, 'numStrains', 1, 5).step(1).name('Strains').listen();
 	  controller.onChange(function(value) {populateColony(); });
-  var controller = seedMenu.add(gs, 'strainSize', 1, 40).step(1).name('Cells in strain').listen();
+  var controller = seedMenu.add(gs, 'strainSize', 1, 40).step(1).name('Seed cells').listen();
     controller.onChange(function(value) {populateColony(); });
   var controller = seedMenu.add(gs, 'colonyMaxSize', 10, 400).step(10).name('Max. alive').listen();
 	  controller.onChange(function(value) {populateColony(); });
@@ -451,32 +451,44 @@ var initGUI_simpleB = function () {
   var colourBasicMenu = gui.addFolder("Colours");
   var controller = colourBasicMenu.addColor(gs, 'bkgColHSV').name('Background').listen();
     controller.onChange(function(value) {gs.bkgColor = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain1Fill').name('Fill 1').listen();
-    controller.onChange(function(value) {colony.genepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain1Stroke').name('Line 1').listen();
-    controller.onChange(function(value) {colony.genepool[0].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain2Fill').name('Fill 2').listen();
-    controller.onChange(function(value) {colony.genepool[1].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain2Stroke').name('Line 2').listen();
-    controller.onChange(function(value) {colony.genepool[1].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain3Fill').name('Fill 3').listen();
-    controller.onChange(function(value) {colony.genepool[2].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain3Stroke').name('Line 3').listen();
-    controller.onChange(function(value) {colony.genepool[2].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain4Fill').name('Fill 4').listen();
-    controller.onChange(function(value) {colony.genepool[3].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain4Stroke').name('Line 4').listen();
-    controller.onChange(function(value) {colony.genepool[3].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain5Fill').name('Fill 5').listen();
-    controller.onChange(function(value) {colony.genepool[4].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
-  var controller = colourBasicMenu.addColor(gs, 'strain5Stroke').name('Line 5').listen();
-    controller.onChange(function(value) {colony.genepool[4].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain1Fill').name('Fill 1').listen();
+  //   controller.onChange(function(value) {colony.genepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain1Stroke').name('Line 1').listen();
+  //   controller.onChange(function(value) {colony.genepool[0].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain2Fill').name('Fill 2').listen();
+  //   controller.onChange(function(value) {colony.genepool[1].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain2Stroke').name('Line 2').listen();
+  //   controller.onChange(function(value) {colony.genepool[1].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain3Fill').name('Fill 3').listen();
+  //   controller.onChange(function(value) {colony.genepool[2].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain3Stroke').name('Line 3').listen();
+  //   controller.onChange(function(value) {colony.genepool[2].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain4Fill').name('Fill 4').listen();
+  //   controller.onChange(function(value) {colony.genepool[3].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain4Stroke').name('Line 4').listen();
+  //   controller.onChange(function(value) {colony.genepool[3].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain5Fill').name('Fill 5').listen();
+  //   controller.onChange(function(value) {colony.genepool[4].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+  // var controller = colourBasicMenu.addColor(gs, 'strain5Stroke').name('Line 5').listen();
+  //   controller.onChange(function(value) {colony.genepool[4].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
   var controller = colourBasicMenu.addColor(gs, 'nucleusColHSVU').name('Nucleus (young)').listen();
     controller.onChange(function(value) {gs.nucleusColorU = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
   var controller = colourBasicMenu.addColor(gs, 'nucleusColHSVF').name('Nucleus (adult)').listen();
     controller.onChange(function(value) {gs.nucleusColorF = color(value.h, value.s*255, value.v*255); background(gs.bkgColor); populateColony();});
 
-  var fillColourOverridesMenu = gui.addFolder("Colour - Fill adjust");
+    var colourFBasicMenu = gui.addFolder("Fill colours");
+    var controller = colourFBasicMenu.addColor(gs, 'strain1Fill').name('Strain 1').listen();
+      controller.onChange(function(value) {colony.genepool[0].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+    var controller = colourFBasicMenu.addColor(gs, 'strain2Fill').name('Strain 2').listen();
+      controller.onChange(function(value) {colony.genepool[1].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+    var controller = colourFBasicMenu.addColor(gs, 'strain3Fill').name('Strain 3').listen();
+      controller.onChange(function(value) {colony.genepool[2].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+    var controller = colourFBasicMenu.addColor(gs, 'strain4Fill').name('Strain 4').listen();
+      controller.onChange(function(value) {colony.genepool[3].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+    var controller = colourFBasicMenu.addColor(gs, 'strain5Fill').name('Strain 5').listen();
+      controller.onChange(function(value) {colony.genepool[4].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
+
+  var fillColourOverridesMenu = gui.addFolder("Fill adjust");
   var controller = fillColourOverridesMenu.add(gs, 'bkgHueFillOffset', 0, 360).step(1).name('Hue shift (bkg)').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
   var controller = fillColourOverridesMenu.add(gs, 'strainHueFillOffset', 0, 100).step(1).name('Hue shift (strain)').listen();
@@ -488,7 +500,28 @@ var initGUI_simpleB = function () {
   var controller = fillColourOverridesMenu.add(gs, 'fill_A', 0, 255).step(1).name('Alpha').listen();
     controller.onChange(function(value) {populateColony(); });
 
-  var strokeColourOverridesMenu = gui.addFolder("Colour - Line adjust");
+    var fillColTweaksMenu = gui.addFolder("Fill transfrom");
+      var controller = fillColTweaksMenu.add(gs, 'fill_HTwist', 0, 360).step(1).name('Hue').listen();
+        controller.onChange(function(value) {populateColony(); });
+      var controller = fillColTweaksMenu.add(gs, 'fill_STwist', 0, 255).name('Saturation').listen();
+        controller.onChange(function(value) {populateColony(); });
+      var controller = fillColTweaksMenu.add(gs, 'fill_BTwist', 0, 255).name('Brightness').listen();
+        controller.onChange(function(value) {populateColony(); });
+
+
+    var colourSBasicMenu = gui.addFolder("Line colours");
+    var controller = colourSBasicMenu.addColor(gs, 'strain1Stroke').name('Strain 1').listen();
+      controller.onChange(function(value) {colony.genepool[0].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+    var controller = colourSBasicMenu.addColor(gs, 'strain2Stroke').name('Strain 2').listen();
+      controller.onChange(function(value) {colony.genepool[1].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+    var controller = colourSBasicMenu.addColor(gs, 'strain3Stroke').name('Strain 3').listen();
+      controller.onChange(function(value) {colony.genepool[2].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+    var controller = colourSBasicMenu.addColor(gs, 'strain4Stroke').name('Strain 4').listen();
+      controller.onChange(function(value) {colony.genepool[3].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+    var controller = colourSBasicMenu.addColor(gs, 'strain5Stroke').name('Strain 5').listen();
+      controller.onChange(function(value) {colony.genepool[4].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
+
+  var strokeColourOverridesMenu = gui.addFolder("Line adjust");
   var controller = strokeColourOverridesMenu.add(gs, 'bkgHueStrokeOffset', 0, 360).step(1).name('Hue shift (bkg)').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
   var controller = strokeColourOverridesMenu.add(gs, 'strainHueStrokeOffset', 0, 100).step(1).name('Hue shift (strain)').listen();
@@ -500,15 +533,7 @@ var initGUI_simpleB = function () {
   var controller = strokeColourOverridesMenu.add(gs, 'stroke_A', 0, 255).step(1).name('Alpha').listen();
     controller.onChange(function(value) {populateColony(); });
 
-	var fillColTweaksMenu = gui.addFolder("Colour - Fill Modulate");
-    var controller = fillColTweaksMenu.add(gs, 'fill_HTwist', 0, 360).step(1).name('Hue').listen();
-      controller.onChange(function(value) {populateColony(); });
-    var controller = fillColTweaksMenu.add(gs, 'fill_STwist', 0, 255).name('Saturation').listen();
-      controller.onChange(function(value) {populateColony(); });
-    var controller = fillColTweaksMenu.add(gs, 'fill_BTwist', 0, 255).name('Brightness').listen();
-      controller.onChange(function(value) {populateColony(); });
-
-  var strokeColTweaksMenu = gui.addFolder("Colour - Line Modulate");
+  var strokeColTweaksMenu = gui.addFolder("Line transform");
   	var controller = strokeColTweaksMenu.add(gs, 'stroke_HTwist', 0, 360).step(1).name('Hue').listen();
       controller.onChange(function(value) {populateColony(); });
     var controller = strokeColTweaksMenu.add(gs, 'stroke_STwist', 0, 255).name('Saturation').listen();
@@ -533,7 +558,7 @@ var initGUI_simpleB = function () {
     controller.onChange(function(value) {populateColony(); });
   var controller = behaviourMenu.add(gs, 'noiseMax', 0, 100).step(1).name('Random').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = behaviourMenu.add(gs, 'spiralMax', 0, 360).step(5).name('Swirl').listen();
+  var controller = behaviourMenu.add(gs, 'spiralMax', 0, 180).step(0.5).name('Swirl').listen();
     controller.onChange(function(value) {populateColony(); });
   var controller = behaviourMenu.add(gs, 'fertility', 0, 90).step(1).name('Fertility').listen();
     controller.onChange(function(value) {populateColony(); });

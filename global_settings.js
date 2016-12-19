@@ -17,8 +17,8 @@ function Global_settings() { //These are the initial values, not the randomised 
 
   this.bkgHueFillOffset=random(3, 355);   // strain1Fill.h will be offset from bkgCol.h by this amount
   this.bkgHueStrokeOffset=random(3, 355); // strain1Stroke.h will be offset from bkgCol.h by this amount
-  this.strainHueFillOffset=random(1, 50);             // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
-  this.strainHueStrokeOffset=random(1, 50);             // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
+  this.strainHueFillOffset=random(3, 50);             // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
+  this.strainHueStrokeOffset=random(3, 50);             // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
 
   this.autoRestart = true;         // If true, will not wait for keypress before starting anew
   this.randomizeOnRestart = false; // If true, parameters will be randomized on restart
@@ -109,7 +109,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.noiseMin = 0;
   this.noiseMax = 70;
   this.spiralMin = 0;
-  this.spiralMax = 90;
+  this.spiralMax = int(random(20, 110));
   this.fertility = 75;
   this.spawnCount = 3;
 

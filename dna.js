@@ -61,7 +61,8 @@ function DNA(newgenes) {
     // if (random(1)>0.5) {this.genes[11] = 100;} else {this.genes[11] = random(75, 150);}                  // 11 = flatness (75-150 %)
     this.genes[11] = (gs.flatnessMax * (1-(random(gs.variance*0.01)))) + 100;
 
-    if (random(1)>0.6) {this.genes[12] = 0;} else {this.genes[12] = gs.spiralMax * (1-(random(gs.variance*0.01)));} // 12 = spiral screw (-75 - +75 %)
+    // if (random(1)>0.6) {this.genes[12] = 0;} else {this.genes[12] = gs.spiralMax * (1-(random(gs.variance*0.01)));} // 12 = spiral screw (-75 - +75 %)
+    this.genes[12] = gs.spiralMax * (1-(random(gs.variance*0.01)));
     // if (random(1)>0.6) {this.genes[12] = 0;} else {this.genes[12] = random(gs.spiralMin, gs.spiralMax);} // 12 = spiral screw (-75 - +75 %)
 
     //this.genes[13] = 75;                                                           // 13 = fertility (70-90%)

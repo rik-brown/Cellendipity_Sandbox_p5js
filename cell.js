@@ -141,7 +141,7 @@ function Cell(vel, dna) {
       this.fillColor = color(this.fill_Htwisted, this.fill_S, this.fill_B); //fill colour is updated with new hue value
     }
     if (gs.stroke_STwist > 0) {this.stroke_S = map(this.maturity, 1, 0, (255-gs.stroke_STwist), 255); this.strokeColor = color(this.stroke_H, this.stroke_S, this.stroke_B);} // Modulate stroke saturation by radius
-    if (gs.stroke_BTwist > 0) {this.stroke_B = map(this.maturity, 0, 1, (255-gs.stroke_BTwist), 255); this.strokeColor = color(this.stroke_H, this.stroke_S, this.stroke_B);} // Modulate stroke brightness by radius
+    if (gs.stroke_BTwist > 0) {this.stroke_B = map(this.maturity, 1, 0, (255-gs.stroke_BTwist), 255); this.strokeColor = color(this.stroke_H, this.stroke_S, this.stroke_B);} // Modulate stroke brightness by radius
     if (gs.stroke_ATwist > 0) {this.strokeAlpha = map(this.maturity, 0, 1, (255-gs.stroke_ATwist), 255);} // Modulate stroke Alpha by radius
     if (gs.stroke_HTwist > 0) { // Modulate stroke hue by radius
       this.stroke_Htwisted = map(this.maturity, 1, 0, this.stroke_H, this.stroke_H+gs.stroke_HTwist);
