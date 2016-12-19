@@ -133,8 +133,8 @@ function Cell(vel, dna) {
 
   this.updateColor = function() {
     if (gs.fill_STwist > 0) {this.fill_S = map(this.maturity, 1, 0, (255-gs.fill_STwist), 255); this.fillColor = color(this.fill_H, this.fill_S, this.fill_B);} // Modulate fill saturation by radius
-    if (gs.fill_BTwist > 0) {this.fill_B = map(this.maturity, 0, 1, (255-gs.fill_BTwist), 255); this.fillColor = color(this.fill_H, this.fill_S, this.fill_B);} // Modulate fill brightness by radius
-    if (gs.fill_ATwist > 0) {this.fillAlpha = map(this.maturity, 0, 1, (255-gs.fill_ATwist), 255);} // Modulate fill Alpha by radius
+    if (gs.fill_BTwist > 0) {this.fill_B = map(this.maturity, 1, 0, (255-gs.fill_BTwist), 255); this.fillColor = color(this.fill_H, this.fill_S, this.fill_B);} // Modulate fill brightness by radius
+    // if (gs.fill_ATwist > 0) {this.fillAlpha = map(this.maturity, 0, 1, (255-gs.fill_ATwist), 255);} // Modulate fill Alpha by radius
     if (gs.fill_HTwist > 0) { // Modulate fill hue by radius. Does not change original hue value but replaces it with a 'twisted' version
       this.fill_Htwisted = map(this.maturity, 1, 0, this.fill_H, this.fill_H+gs.fill_HTwist);
       if (this.fill_Htwisted > 360) {this.fill_Htwisted -= 360;}
@@ -142,7 +142,7 @@ function Cell(vel, dna) {
     }
     if (gs.stroke_STwist > 0) {this.stroke_S = map(this.maturity, 1, 0, (255-gs.stroke_STwist), 255); this.strokeColor = color(this.stroke_H, this.stroke_S, this.stroke_B);} // Modulate stroke saturation by radius
     if (gs.stroke_BTwist > 0) {this.stroke_B = map(this.maturity, 1, 0, (255-gs.stroke_BTwist), 255); this.strokeColor = color(this.stroke_H, this.stroke_S, this.stroke_B);} // Modulate stroke brightness by radius
-    if (gs.stroke_ATwist > 0) {this.strokeAlpha = map(this.maturity, 0, 1, (255-gs.stroke_ATwist), 255);} // Modulate stroke Alpha by radius
+    // if (gs.stroke_ATwist > 0) {this.strokeAlpha = map(this.maturity, 0, 1, (255-gs.stroke_ATwist), 255);} // Modulate stroke Alpha by radius
     if (gs.stroke_HTwist > 0) { // Modulate stroke hue by radius
       this.stroke_Htwisted = map(this.maturity, 1, 0, this.stroke_H, this.stroke_H+gs.stroke_HTwist);
       if (this.stroke_Htwisted > 360) {this.stroke_Htwisted -= 360;}
@@ -230,7 +230,6 @@ function Cell(vel, dna) {
     childDNA.genes[6] = brightness(childStrokeColor); // Get the  lerped hue value and map it back to gene-range
 
     childDNA.genes[8] = (this.r + other.r) * 0.5; // Child cellStartSize is set at average of parents current radii
-
     childDNA.genes[18] = this.position.x; // Child starts at mother's current position
     childDNA.genes[19] = this.position.y; // Child starts at mother's current position
 
@@ -238,8 +237,6 @@ function Cell(vel, dna) {
     //childDNA.genes[21] = this.dna.genes[21]; // Child remembers origin of the mother
     //childDNA.mutate(0.01); // Child DNA can mutate. HACKED! Mutation is temporarily disabled!
 
-    // Call spawn method (in Colony) with the new parameters for position, velocity, colour & starting radius)
-    // Note: Currently no combining of parent DNA
     colony.spawn(spawnVel, childDNA);
 
 

@@ -51,7 +51,7 @@ function DNA(newgenes) {
     this.genes[7] = gs.stroke_A;                                 // 7 = stroke Alpha (0-255)
 
     //this.genes[8] = random(height*0.05, height*0.12);                   // 8 = cellStartSize (10-50)  (cellendipity/one uses 0-200)
-    this.genes[8] = gs.cellSSMax * (1-(random(gs.variance*0.01)));        // 8 = cellStartSize (1-100)  (cellendipity/one uses 0-200)
+    this.genes[8] = gs.cellSSMax * (1-(random(gs.variance*0.01))) * 0.01 * height * 0.25;        // 8 = cellStartSize (1-100)  (cellendipity/one uses 0-200)
     this.genes[9] = gs.cellESMax * (1-(random(gs.variance*0.01)));        // 9 = cellEndSize   (1-100%) (cellendipity/one uses 0-50)
 
     //this.genes[10] = random(height*0.3,  height*0.7);                          // 10 = lifespan (200-1000)

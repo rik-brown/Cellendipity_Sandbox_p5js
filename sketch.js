@@ -13,7 +13,7 @@ function setup() {
   gs = new Global_settings();
   gui = new dat.GUI();
   // initGUI();
-  initGUI_simpleB();
+  initGUI_simple();
   background(gs.bkgColor);
   if (gs.debug) {frameRate(10);}
   colony = new Colony(gs.colonySize);
@@ -263,22 +263,22 @@ function updateHueAllStrains() { //update the gs.HSV color object for all strain
   gs.strain1Stroke.h = gs.bkgColHSV.h + gs.bkgHueStrokeOffset;
   if (gs.strain1Stroke.h > 360) {gs.strain1Stroke.h -= 360;}
 
-  gs.strain2Fill.h = gs.strain1Fill.h + (gs.strainHueFillOffset * 3.6/gs.numStrains);
+  gs.strain2Fill.h = gs.strain1Fill.h + (gs.strainHueFillOffset);
   if (gs.strain2Fill.h > 360) {gs.strain2Fill.h -= 360;}
-  gs.strain3Fill.h = gs.strain2Fill.h + (gs.strainHueFillOffset * 3.6/gs.numStrains);
+  gs.strain3Fill.h = gs.strain2Fill.h + (gs.strainHueFillOffset);
   if (gs.strain3Fill.h > 360) {gs.strain3Fill.h -= 360;}
-  gs.strain4Fill.h = gs.strain3Fill.h + (gs.strainHueFillOffset * 3.6/gs.numStrains);
+  gs.strain4Fill.h = gs.strain3Fill.h + (gs.strainHueFillOffset);
   if (gs.strain4Fill.h > 360) {gs.strain4Fill.h -= 360;}
-  gs.strain5Fill.h = gs.strain4Fill.h + (gs.strainHueFillOffset * 3.6/gs.numStrains);
+  gs.strain5Fill.h = gs.strain4Fill.h + (gs.strainHueFillOffset);
   if (gs.strain5Fill.h > 360) {gs.strain5Fill.h -= 360;}
 
-  gs.strain2Stroke.h = gs.strain1Stroke.h + (gs.strainHueStrokeOffset * 3.6/gs.numStrains);
+  gs.strain2Stroke.h = gs.strain1Stroke.h + (gs.strainHueStrokeOffset);
   if (gs.strain2Stroke.h > 360) {gs.strain2Stroke.h -= 360;}
-  gs.strain3Stroke.h = gs.strain2Stroke.h + (gs.strainHueStrokeOffset * 3.6/gs.numStrains);
+  gs.strain3Stroke.h = gs.strain2Stroke.h + (gs.strainHueStrokeOffset);
   if (gs.strain3Stroke.h > 360) {gs.strain3Stroke.h -= 360;}
-  gs.strain4Stroke.h = gs.strain3Stroke.h + (gs.strainHueStrokeOffset * 3.6/gs.numStrains);
+  gs.strain4Stroke.h = gs.strain3Stroke.h + (gs.strainHueStrokeOffset);
   if (gs.strain4Stroke.h > 360) {gs.strain4Stroke.h -= 360;}
-  gs.strain5Stroke.h = gs.strain4Stroke.h + (gs.strainHueStrokeOffset * 3.6/gs.numStrains);
+  gs.strain5Stroke.h = gs.strain4Stroke.h + (gs.strainHueStrokeOffset);
   if (gs.strain5Stroke.h > 360) {gs.strain5Stroke.h -= 360;}
 
 }
@@ -426,9 +426,9 @@ function instructions() { // Displays some brief guidelines about the menu & key
   text("© Richard Brown, December 9th 2016", 10, 500);
 }
 
-var initGUI_simpleB = function () {
+var initGUI_simple = function () {
   var optionsMenu = gui.addFolder("Experiment");
-  var controller = optionsMenu.add(gs, 'colonyLifespan', 100, 10000).step(100).name('Total duration').listen();
+  var controller = optionsMenu.add(gs, 'colonyLifespan', 100, 10000).step(100).name('Duration').listen();
     controller.onChange(function(value) {populateColony(); });
   var controller = optionsMenu.add(gs, 'colonyDuration', 1, 100).step(1).name('Active %').listen();
     controller.onChange(function(value) {populateColony(); });
@@ -441,9 +441,9 @@ var initGUI_simpleB = function () {
   var seedMenu = gui.addFolder('Cells');
   var controller = seedMenu.add(gs, 'numStrains', 1, 5).step(1).name('Strains').listen();
 	  controller.onChange(function(value) {populateColony(); });
-  var controller = seedMenu.add(gs, 'strainSize', 1, 40).step(1).name('Seed cells').listen();
+  var controller = seedMenu.add(gs, 'strainSize', 1, 40).step(1).name('Seeds').listen();
     controller.onChange(function(value) {populateColony(); });
-  var controller = seedMenu.add(gs, 'colonyMaxSize', 10, 400).step(10).name('Max. alive').listen();
+  var controller = seedMenu.add(gs, 'colonyMaxSize', 10, 400).step(10).name('Maximum').listen();
 	  controller.onChange(function(value) {populateColony(); });
   var controller = seedMenu.add(gs, 'variance', 0, 100).step(1).name('Diversity').listen();
     controller.onChange(function(value) {populateColony(); });
@@ -471,7 +471,7 @@ var initGUI_simpleB = function () {
   // var fillColourOverridesMenu = gui.addFolder("Fill adjust");
   var controller = colourFBasicMenu.add(gs, 'bkgHueFillOffset', 0, 360).step(1).name('Bkground offset').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
-  var controller = colourFBasicMenu.add(gs, 'strainHueFillOffset', 0, 100).step(1).name('Strain offset').listen();
+  var controller = colourFBasicMenu.add(gs, 'strainHueFillOffset', 0, 180).step(1).name('Strain offset').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
   var controller = colourFBasicMenu.add(gs, 'globalFillSaturation', 0, 100).step(1).name('Saturation').listen();
     controller.onChange(function(value) {updateSatAllStrains(); populateColony(); });
@@ -495,7 +495,7 @@ var initGUI_simpleB = function () {
   // var strokeColourOverridesMenu = gui.addFolder("Line adjust");
   var controller = colourSBasicMenu.add(gs, 'bkgHueStrokeOffset', 0, 360).step(1).name('Bkground offset').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
-  var controller = colourSBasicMenu.add(gs, 'strainHueStrokeOffset', 0, 100).step(1).name('Strain offset').listen();
+  var controller = colourSBasicMenu.add(gs, 'strainHueStrokeOffset', 0, 180).step(1).name('Strain offset').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
   var controller = colourSBasicMenu.add(gs, 'globalStrokeSaturation', 0, 100).step(1).name('Saturation').listen();
     controller.onChange(function(value) {updateSatAllStrains(); populateColony(); });
