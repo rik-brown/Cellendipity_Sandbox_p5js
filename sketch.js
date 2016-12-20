@@ -107,13 +107,17 @@ var initGUI = function () {
     controller.onChange(function(value) {colony.genepool[3].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
   var controller = colourFillMenu.addColor(gs, 'strain5Fill').name('Strain 5').listen();
     controller.onChange(function(value) {colony.genepool[4].genes[0] = value.h; colony.genepool[0].genes[1] = value.s*255; colony.genepool[0].genes[2] =value.v*255; populateColony();});
-  var controller = colourFillMenu.add(gs, 'bkgHueFillOffset', 0, 360).step(1).name('Bkground offset').listen();
+  var controller = colourFillMenu.add(gs, 'bkgHueFillOffset', 0, 360).step(1).name('Bkg. hue offset').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
-  var controller = colourFillMenu.add(gs, 'strainHueFillOffset', 0, 180).step(1).name('Strain offset').listen();
+  var controller = colourFillMenu.add(gs, 'strainHueFillOffset', 0, 180).step(1).name('Hue offset').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
   var controller = colourFillMenu.add(gs, 'globalFillSaturation', 0, 100).step(1).name('Saturation').listen();
     controller.onChange(function(value) {updateSatAllStrains(); populateColony(); });
+  var controller = colourFillMenu.add(gs, 'strainSatFillOffset', 0, 100).step(1).name('Sat. offset').listen();
+    controller.onChange(function(value) {updateSatAllStrains(); populateColony(); });
   var controller = colourFillMenu.add(gs, 'globalFillBrightness', 0, 100).step(1).name('Brightness').listen();
+    controller.onChange(function(value) {updateBrightAllStrains(); populateColony(); });
+  var controller = colourFillMenu.add(gs, 'strainBriFillOffset', 0, 100).step(1).name('Bright. offset').listen();
     controller.onChange(function(value) {updateBrightAllStrains(); populateColony(); });
   var controller = colourFillMenu.add(gs, 'fill_A', 0, 255).step(1).name('Alpha').listen();
     controller.onChange(function(value) {populateColony(); });
@@ -129,13 +133,17 @@ var initGUI = function () {
     controller.onChange(function(value) {colony.genepool[3].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
   var controller = colourLineMenu.addColor(gs, 'strain5Stroke').name('Strain 5').listen();
     controller.onChange(function(value) {colony.genepool[4].genes[4] = value.h; colony.genepool[0].genes[5] = value.s*255; colony.genepool[0].genes[6] =value.v*255; populateColony();});
-  var controller = colourLineMenu.add(gs, 'bkgHueStrokeOffset', 0, 360).step(1).name('Bkground offset').listen();
+  var controller = colourLineMenu.add(gs, 'bkgHueStrokeOffset', 0, 360).step(1).name('Bkg. hue offset').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
-  var controller = colourLineMenu.add(gs, 'strainHueStrokeOffset', 0, 180).step(1).name('Strain offset').listen();
+  var controller = colourLineMenu.add(gs, 'strainHueStrokeOffset', 0, 180).step(1).name('Hue offset').listen();
     controller.onChange(function(value) {updateHueAllStrains(); populateColony(); });
   var controller = colourLineMenu.add(gs, 'globalStrokeSaturation', 0, 100).step(1).name('Saturation').listen();
     controller.onChange(function(value) {updateSatAllStrains(); populateColony(); });
+  var controller = colourLineMenu.add(gs, 'strainSatStrokeOffset', 0, 100).step(1).name('Sat. offset').listen();
+    controller.onChange(function(value) {updateSatAllStrains(); populateColony(); });
   var controller = colourLineMenu.add(gs, 'globalStrokeBrightness', 0, 100).step(1).name('Brightness').listen();
+    controller.onChange(function(value) {updateBrightAllStrains(); populateColony(); });
+  var controller = colourLineMenu.add(gs, 'strainBriStrokeOffset', 0, 100).step(1).name('Bright. offset').listen();
     controller.onChange(function(value) {updateBrightAllStrains(); populateColony(); });
   var controller = colourLineMenu.add(gs, 'stroke_A', 0, 255).step(1).name('Alpha').listen();
     controller.onChange(function(value) {populateColony(); });
@@ -215,36 +223,38 @@ function updateHueAllStrains() { //update the gs.HSV color object for all strain
   if (gs.strain4Stroke.h > 360) {gs.strain4Stroke.h -= 360;}
   gs.strain5Stroke.h = gs.strain4Stroke.h + (gs.strainHueStrokeOffset);
   if (gs.strain5Stroke.h > 360) {gs.strain5Stroke.h -= 360;}
-
 }
 
 function updateSatAllStrains() { //update the gs.HSV color object for all strains
-  gs.strain1Fill.s = gs.globalFillSaturation * 0.01; // THIS IS NOT THE CORRECT WAY TO CHANGE THIS VALUE!!
-  gs.strain2Fill.s = gs.globalFillSaturation * 0.01;
-  gs.strain3Fill.s = gs.globalFillSaturation * 0.01;
-  gs.strain4Fill.s = gs.globalFillSaturation * 0.01;
-  gs.strain5Fill.s = gs.globalFillSaturation * 0.01;
+  gs.strain1Fill.s = gs.globalFillSaturation * 0.01;
+  this.s_offset = gs.strainSatFillOffset * 0.0025 * (1-gs.strain1Fill.s);
+  gs.strain2Fill.s = gs.strain1Fill.s + this.s_offset; // (0-100%)*(1-gs.strain1Fill.s)*0.2
+  gs.strain3Fill.s = gs.strain2Fill.s + this.s_offset;
+  gs.strain4Fill.s = gs.strain3Fill.s + this.s_offset;
+  gs.strain5Fill.s = gs.strain4Fill.s + this.s_offset;
 
   gs.strain1Stroke.s = gs.globalStrokeSaturation * 0.01;
-  gs.strain2Stroke.s = gs.globalStrokeSaturation * 0.01;
-  gs.strain3Stroke.s = gs.globalStrokeSaturation * 0.01;
-  gs.strain4Stroke.s = gs.globalStrokeSaturation * 0.01;
-  gs.strain5Stroke.s = gs.globalStrokeSaturation * 0.01;
+  this.s_offset = gs.strainSatStrokeOffset * 0.0025 * (1-gs.strain1Stroke.s);
+  gs.strain2Stroke.s = gs.strain1Stroke.s + this.s_offset;
+  gs.strain3Stroke.s = gs.strain2Stroke.s + this.s_offset;
+  gs.strain4Stroke.s = gs.strain3Stroke.s + this.s_offset;
+  gs.strain5Stroke.s = gs.strain4Stroke.s + this.s_offset;
 }
-
 
 function updateBrightAllStrains() { //update the gs.HSV color object for all strains
   gs.strain1Fill.v = gs.globalFillBrightness * 0.01;
-  gs.strain2Fill.v = gs.globalFillBrightness * 0.01;
-  gs.strain3Fill.v = gs.globalFillBrightness * 0.01;
-  gs.strain4Fill.v = gs.globalFillBrightness * 0.01;
-  gs.strain5Fill.v = gs.globalFillBrightness * 0.01;
+  this.b_offset = gs.strainBriFillOffset * 0.0025 * (1-gs.strain1Fill.v);
+  gs.strain2Fill.v = gs.strain1Fill.v + this.b_offset;
+  gs.strain3Fill.v = gs.strain2Fill.v + this.b_offset;
+  gs.strain4Fill.v = gs.strain3Fill.v + this.b_offset;
+  gs.strain5Fill.v = gs.strain4Fill.v + this.b_offset;
 
   gs.strain1Stroke.v = gs.globalStrokeBrightness * 0.01;
-  gs.strain2Stroke.v = gs.globalStrokeBrightness * 0.01;
-  gs.strain3Stroke.v = gs.globalStrokeBrightness * 0.01;
-  gs.strain4Stroke.v = gs.globalStrokeBrightness * 0.01;
-  gs.strain5Stroke.v = gs.globalStrokeBrightness * 0.01;
+  this.b_offset = gs.strainBriStrokeOffset * 0.0025 * (1-gs.strain1Stroke.v);
+  gs.strain2Stroke.v = gs.strain1Stroke.v + this.b_offset;
+  gs.strain3Stroke.v = gs.strain2Stroke.v + this.b_offset;
+  gs.strain4Stroke.v = gs.strain3Stroke.v + this.b_offset;
+  gs.strain5Stroke.v = gs.strain4Stroke.v + this.b_offset;
 }
 
 function randomize() { // Parameters are randomized (more than in the initial configuration)

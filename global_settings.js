@@ -21,7 +21,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.variance = 0;    // 0-100 where 100 = 100% or max. variance
 
   // Colour
-  this.bkgColHSV = { h: random(360), s: random(0.25, 0.5), v: random(0.5, 1) };
+  this.bkgColHSV = { h: random(360), s: random(0.25, 0.5), v: 0 };
   this.bkgColor = color(this.bkgColHSV.h, this.bkgColHSV.s*255, this.bkgColHSV.v*255); // Background colour
 
   this.nucleusColHSVU = { h: 360, s: 0, v: 1 };  // White
@@ -35,9 +35,11 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.fill_B_Min = 0.8;
   this.fill_B_Max = 1;
   this.bkgHueFillOffset=random(3, 355);   // strain1Fill.h will be offset from bkgCol.h by this amount
-  this.strainHueFillOffset=random(3, 50); // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
-  this.globalFillSaturation=100;          // Overrides all strains if changed
-  this.globalFillBrightness=100;          // Overrides all strains if changed
+  this.strainHueFillOffset=random(3, 50); // strain(n+1)Fill.h will be offset from strain(n)Stroke.h by this amount
+  this.strainSatFillOffset=random(0, 10); // strain(n+1)Fill.s will be offset from strain(n)Stroke.h by this amount
+  this.strainBriFillOffset=random(0, 10); // strain(n+1)Fill.v will be offset from strain(n)Stroke.h by this amount
+  this.globalFillSaturation=0;          // Overrides all strains if changed
+  this.globalFillBrightness=0;          // Overrides all strains if changed
   this.fill_A = 15;
 
   this.strain1Fill = { h: 0, s: random(this.fill_S_Min, this.fill_S_Max), v: random(this.fill_B_Min, this.fill_B_Max) };
@@ -65,8 +67,10 @@ function Global_settings() { //These are the initial values, not the randomised 
   this.stroke_B_Max = 1;
   this.bkgHueStrokeOffset=random(3, 355);   // strain1Stroke.h will be offset from bkgCol.h by this amount
   this.strainHueStrokeOffset=random(3, 50); // strain(n+1)Stroke.h will be offset from strain(n)Stroke.h by this amount
-  this.globalStrokeSaturation=100;          // Overrides all strains if changed
-  this.globalStrokeBrightness=100;          // Overrides all strains if changed
+  this.strainSatStrokeOffset=random(0, 10); // strain(n+1)Stroke.s will be offset from strain(n)Stroke.h by this amount
+  this.strainBriStrokeOffset=random(0, 10); // strain(n+1)Stroke.v will be offset from strain(n)Stroke.h by this amount
+  this.globalStrokeSaturation=0;          // Overrides all strains if changed
+  this.globalStrokeBrightness=0;          // Overrides all strains if changed
   this.stroke_A = 15;
 
   this.strain1Stroke = { h: 0, s: random(this.stroke_S_Min, this.stroke_S_Max), v: random(this.stroke_B_Min, this.stroke_B_Max) };
