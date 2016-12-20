@@ -102,7 +102,7 @@ function Global_settings() { //These are the initial values, not the randomised 
   if (random(1) > 0.3) {this.nucleus = true;} else {this.nucleus = false;}
 
   // Behaviour
-  this.lifespanMax = int(random(50,70));
+  this.lifespanMax = int(random(40,60));
   this.noiseMax = int(random(50,70));
   this.spiralMax = int(random(20, 110));
   this.fertility = 75;
